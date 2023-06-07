@@ -413,10 +413,11 @@ function ListarDiscrepancias(Formulario){
 
 
     for(let i=0;i<Tabelas.length;i++){
-        var PlacaTXT=Placas[i].options[Placas[i].selectedIndex].value;
-        var DescricaoTXT=Descricao[i].value;
+        if(Descricao[i].value.length>0){
+            var PlacaTXT=Placas[i].options[Placas[i].selectedIndex].value;
+            var DescricaoTXT=Descricao[i].value;
 
-        if(PlacaTXT.length>0&&DescricaoTXT.length>0){
+            if(PlacaTXT.length>0&&DescricaoTXT.length>0){
             let DIVDiscrepancia=document.createElement("div");
             DIVDiscrepancia.setAttribute('name','Discrepancia');
             Discrepancias.appendChild(DIVDiscrepancia);
@@ -430,6 +431,7 @@ function ListarDiscrepancias(Formulario){
             Input2.setAttribute('name', 'Descricao[]')
             Input2.setAttribute('value', DescricaoTXT);
             DIVDiscrepancia.appendChild(Input2);
+        }
         }
 
         
@@ -574,7 +576,6 @@ function Salvar(){
     }else{
         alert('Todas as causas são obrigatórias.');
     }
-
     
 
 }

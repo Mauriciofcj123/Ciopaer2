@@ -1,0 +1,158 @@
+*{
+    padding: 0%;
+    margin: 0;
+    box-sizing: border-box;
+}
+.LogTexto{
+    position: relative;
+    width: fit-content;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    float: right;
+    margin-top: 20px;
+}
+.Sair{
+    position: absolute;
+    float: right;
+    right: 10px;
+    margin-top: 10px;
+    color: rgb(0, 68, 255);
+    font-weight: bold;
+    padding: 10px;
+    border: 2px rgb(0, 68, 255) solid;
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cabecalho{
+    position: relative;
+    height: 100px;
+    width: 100%;
+    background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+}
+.cabecalho img{
+    position: absolute;
+    height: 60px;
+    left: 10%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 5px;
+}
+.Menu{
+    position: relative;
+    background-color: rgb(0, 132, 255);
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    transition-duration: 1s;
+
+}
+.Menu ol{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Menu li{
+    display: inline-block;
+    margin-left: 15px;
+    transition-duration: 1s;
+    cursor: pointer;
+    font-weight: bold;
+}
+.Menu a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.Menu li:hover{
+    padding: 5px;
+    transform: scale(1.2);
+    color: rgb(255, 251, 0);
+    background-color: rgb(0, 68, 255);
+    border-radius: 5px;
+}
+.Selecionado{
+    padding: 10px;
+    border-radius: 10px;
+
+    border: 2px solid rgb(0, 255, 42);
+    background-color: rgb(255, 255, 255);
+}
+.Selecionado a{
+    color: rgb(0, 255, 42);
+}
+.Data{
+    position: relative;
+    display: inline-flex;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+.Data img{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.Data input{
+    width: 200px;
+    padding: 2px;
+    text-align: center;
+    color: rgb(123,202,255);
+    font-weight: bold;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 0.5px;
+    font-size: 25px;
+    background-color: rgba(255, 255, 255,0);
+    border: none;
+}
+.Tabela{
+    position: relative;
+    width: 90%;
+    left: 50%;
+    margin-top: 10px;
+    transform: translateX(-50%);
+    padding: 10px;
+    border: 1px rgb(0, 183, 255) solid; 
+    border-radius: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(0, 183, 255);
+    -webkit-text-stroke: 0.5px black;
+}
+.Tabela tr{
+    text-align: center;
+}
+
+.Tabela img{
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.Espaco{
+    height: 50px;
+}
+.Titulo td:nth-child(2){
+    text-align: center;
+}
+.Titulo td:nth-child(1){
+    text-align: left;
+}
+.Titulo td:nth-child(3){
+    text-align: right;
+}
+.Botao{
+    height: 30px;
+    text-align: center;
+}
+.Botao img{
+    height: 20px;
+}
+.Parte{
+    position: relative;
+    width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+}

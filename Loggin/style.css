@@ -1,0 +1,65 @@
+*{
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+
+}
+.Logo{
+    position: relative;
+    width: fit-content;
+    text-align: center;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+}
+.Box{
+    text-align: center;
+    width:40%;
+    height: 500px;
+    position: absolute;
+    padding: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-image: url('Imgs/5177180.jpg');
+    background-size: cover;
+    border: 1px solid black;
+}
+.Campo{
+    position: relative;
+    margin-bottom: 5px;
+    height: 50px;
+    width: 50%;
+    text-align: center;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+}
+.LogarBTN{
+    height: 50px;
+    width: 50%;
+    margin-bottom: 20px;
+    background-color: rgb(0, 255, 21);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: rgb(155, 155, 155) 1px solid;
+    border-radius: 5px;
+    transition-duration: 1s;
+}
+.LogarBTN:hover{
+    transform: scale(1.1);
+}
+.CriarBTN{
+    height: 50px;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border: rgb(0, 255, 21) 2px solid;
+    font-weight:bold;
+    color: rgb(0, 255, 21);
+    font-size: 15px;
+    border-radius: 5px ;
+    transition-duration: 1s;
+}
+.CriarBTN:hover{
+    transform: scale(1.1);
+}

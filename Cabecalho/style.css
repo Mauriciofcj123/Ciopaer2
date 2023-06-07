@@ -1,0 +1,93 @@
+.LogTexto{
+    position: relative;
+    width: fit-content;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    float: right;
+    margin-top: 20px;
+}
+.Sair{
+    position: absolute;
+    float: right;
+    right: 10px;
+    margin-top: 10px;
+    color: rgb(0, 68, 255);
+    font-weight: bold;
+    padding: 10px;
+    border: 2px rgb(0, 68, 255) solid;
+    background-color: rgb(255, 255, 255);
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cabecalho{
+    position: relative;
+    height: 100px;
+    width: 100%;
+    background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+}
+.cabecalho img{
+    position: absolute;
+    height: 60px;
+    left: 10%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 5px;
+}
+.Menu{
+    position: relative;
+    width: 100%;
+    background-color: rgb(0, 132, 255);
+    text-align: center;
+    transition-duration: 1s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.Menu ul li{
+    background-color: rgb(0, 132, 255);
+    position: relative;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    border: 1px white solid;
+    list-style: none;
+}
+.Menu ul li:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 68, 255);
+    border-radius: 5px;
+}
+.Menu a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.Menu ul ul{
+    display: none;
+    transition-duration: 1s;
+    position: absolute;
+    background-color: rgb(0, 68, 255);
+    z-index: 3;
+}
+.Menu ul li:hover>ul{
+    display: block;
+}
+
+.Selecionado{
+    padding: 10px;
+    border-radius: 10px;
+
+    border: 2px solid rgb(0, 255, 42);
+    background-color: rgb(255, 255, 255);
+}
+.Selecionado a{
+    color: rgb(0, 255, 42);
+}

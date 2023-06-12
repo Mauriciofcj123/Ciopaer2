@@ -27,6 +27,7 @@
     height: 100px;
     width: 100%;
     background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+    z-index: 5;
 }
 .cabecalho img{
     position: absolute;
@@ -48,7 +49,7 @@
     align-items: center;
 }
 .Menu ul li{
-    background-color: rgb(0, 132, 255);
+    backdrop-filter: blur(5px);
     position: relative;
     width: 200px;
     height: 50px;
@@ -63,7 +64,8 @@
 }
 .Menu ul li:hover{
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 68, 255);
+    background-color: rgba(0, 17, 255, 0.80);
+    backdrop-filter: blur(5px);
     border-radius: 5px;
 }
 .Menu a{
@@ -74,7 +76,8 @@
     display: none;
     transition-duration: 1s;
     position: absolute;
-    background-color: rgb(0, 68, 255);
+    background-color: rgba(0, 132, 255, 0.80);
+    backdrop-filter: blur(5px);
     z-index: 3;
 }
 .Menu ul li:hover>ul{

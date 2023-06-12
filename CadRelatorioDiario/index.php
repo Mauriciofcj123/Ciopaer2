@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id='body'>
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
@@ -19,6 +19,21 @@
         }
 
         if(isset($_SESSION['Data'])){
+            echo '<div class="NomeMec">';
+            echo '<select id="MecanicoDia">';
+            $Mecanicos='SELECT * FROM operacional';
+            $MecanicosReq=mysqli_query($mysqli,$Mecanicos);
+            while($MecanicosArray=$MecanicosReq->fetch_assoc()){
+                if($MecanicosArray['Patente']=="Sem Patente"){
+                        echo "<option>".$MecanicosArray['Nome']." ".$MecanicosArray['Sobrenome']."</option>";
+                }else{
+                        echo "<option>".$MecanicosArray['Patente']." ".$MecanicosArray['Sobrenome']."</option>";
+                }
+                        
+            }
+        echo '</select>';
+        echo '</div>';
+        
         $Data=date('dd/mm/YY');
         echo '<div class="Data"><input type="date" id="DataTXT" value="'.date('Y-m-d').'"></div>';
 
@@ -31,7 +46,7 @@
         }
         echo '</select>';
 
-                $SQL='SELECT * FROM aeronavescadastradas';
+        $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
         
 
@@ -60,27 +75,27 @@
             if($Disponibilidade['Status']=='Disponível'){
                 
                 echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponivel\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
                 <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" class="Selecionada" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
                 echo '<div id="Causa'.$i.'" style="visibility : hidden; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
                 
             }else if($Disponibilidade['Status']=='Indisponível'){
                 echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponivel\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" class="Selecionada" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" class="Selecionada" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
                 <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
                 echo '<div id="Causa'.$i.'" style="visibility : visible; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" value="'.$Disponibilidade['Causa'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
                 
-            }else if($Disponibilidade['Status']=='Disponível/Despachada'){
+            }else if($Disponibilidade['Status']=='Despachada'){
                 echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" class="Selecionada" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponivel\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
                 <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
                 echo '<div id="Causa'.$i.'" style="visibility : visible; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" value="'.$Disponibilidade['Causa'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
             }
 
-            echo '<input type="text" name="Status" id="Status" value="'.$Disponibilidade['Status'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); visibility: hidden; width: 80%;"><br>';
+            echo '<input type="text" name="Status[]" id="Status" value="'.$Disponibilidade['Status'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); visibility: hidden; width: 80%;"><br>';
 
             echo'</div>';
 
@@ -247,7 +262,7 @@
 
                     while($Mecanicos=$Requisicao1->fetch_assoc()){
                         if($Mecanicos['Patente']==="Sem Patente"){
-                            echo '<tr name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
+                            echo '<tr disabled name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
                                 <td>
                                     <button onClick="AdicionarMecanico(\''. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'</button>
                                 </td>
@@ -279,9 +294,9 @@
         </select>
 
         <textarea name="CaixaTexto" id="CaixaTexto" class="DescIntervencao" cols="30" rows="10" placeholder="Descrição da Intervenção" maxlength="120"></textarea><p id='Caracteres'>0/120</p><br>
-        <input type="number" class="Tempo" name="Tempo" id="Hora" min="0"><label class="Legenda">Hrs.</label>
-        <input type="number" class="Tempo" name="Tempo" id="Minuto" max="59" min="0"><label class="Legenda">Min.</label>
-        <input type="number" class="Tempo" name="Tempo" id="Segundo" max="59" min="0"><label class="Legenda">Seg.</label>
+        <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
+        <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>
+        <input type="number" class="Tempo" id="Segundo" max="59" min="0" value=0><label class="Legenda">Seg.</label>
         <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN"><img src="Imgs/Confirmar.png" alt=""></button>
         <button onClick='FecharModalIntervencao()' class="FecharBTN"><img src="Imgs/Fechar.png" alt=""></button>
             </div>

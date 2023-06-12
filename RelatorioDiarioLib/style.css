@@ -3,114 +3,211 @@
     margin: 0;
     box-sizing: border-box;
 }
-.LogTexto{
-    position: relative;
-    width: fit-content;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    float: right;
-    margin-top: 20px;
-}
-.Sair{
-    position: absolute;
-    float: right;
-    right: 10px;
-    margin-top: 10px;
-    color: rgb(0, 68, 255);
-    font-weight: bold;
-    padding: 10px;
-    border: 2px rgb(0, 68, 255) solid;
-    background-color: rgb(255, 255, 255);
-    text-decoration: none;
-    border-radius: 10px;
-    cursor: pointer;
+@media (min-width: 580px) {
+    .Pesquisa{
+        width: 100%;
+        height: 100px;
+        padding-top: 10px;
+        text-align: center;
+    }
+    .PesquisaTXT{
+        width: 30%;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid rgb(105, 0, 153);
+        outline: none;
+        font-size: 15px;
+    }
+    .PesquisaData{
+        width: 10%;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid rgb(105, 0, 153);
+        outline: none;
+        font-size: 15px;
+        margin-top: 5px;
+    }
+    .PesquisaBTN{
+        background-color: white;
+        border: none;
+        text-align: center;
+        align-items: center;
+        vertical-align: middle;
+    }
+    .PesquisaBTN img{
+        height: 30px;
+        margin: 0px;
+    }
+    .Botoes{
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+        height: 300px;
+        text-align: center;
+    
+    }
+    .Botoes button{
+        background-color: white;
+        border: none;
+        margin-top: 10px;
+        transition-duration: 500ms;
+    }
+    .Botoes button:hover{
+        transform: scale(1.1);
+    }
+    .Botoes img{
+        width:40px;
+    }
+    .Erro{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        color: rgb(255, 0, 0);
+    }
+    .TabelaDIV{
+        position: relative;
+        margin-top: 100px;
+        width: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .Tabela{
+        position: relative;
+        width: 100%;
+        border: rgb(174, 0, 255) 1px solid;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    
+    }
+    .Tabela td{
+        width: 50%;
+        color: rgb(100, 0, 171);
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+    .Tabela button{
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+    }
+    .Tabela img{
+        height: 80px;
+        border-radius: 80px;
+        cursor: pointer;
+        transition-duration: 1s;
+    }
+    .Tabela img:hover{
+        transform: translate(10px);
+    }
 }
 
-.cabecalho{
-    position: relative;
-    height: 100px;
-    width: 100%;
-    background-image: linear-gradient(to right,rgb(0, 195, 255),white);
-}
-.cabecalho img{
-    position: absolute;
-    height: 60px;
-    left: 10%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    padding: 5px;
-}
-.Menu{
-    position: relative;
-    background-color: rgb(0, 132, 255);
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    transition-duration: 1s;
+@media (max-width:580px) {
+    .Pesquisa{
+        width: 100%;
+        height: 100px;
+        padding-top: 10px;
+        text-align: center;
+    }
+    .PesquisaTXT{
+        width: 70%;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid rgb(105, 0, 153);
+        outline: none;
+        font-size: 15px;
+    }
+    .PesquisaData{
+        width: 40%;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid rgb(105, 0, 153);
+        outline: none;
+        font-size: 15px;
+        margin-top: 5px;
+    }
+    .PesquisaBTN{
+        background-color: white;
+        border: none;
+        text-align: center;
+        align-items: center;
+        vertical-align: middle;
+    }
+    .PesquisaBTN img{
+        height: 30px;
+        margin: 0px;
+    }
+    .Botoes{
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+        height: 300px;
+        text-align: center;
+    
+    }
+    .Botoes button{
+        background-color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 50%;
+        margin-top: 10px;
+        transition-duration: 500ms;
+    }
+    .Botoes button:hover{
+        transform: scale(1.1);
+    }
+    .Botoes img{
+        width:60px;
+    }
+    .Erro{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        color: rgb(255, 0, 0);
 
-}
-.Menu ol{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.Menu li{
-    display: inline-block;
-    margin-left: 15px;
-    transition-duration: 1s;
-    cursor: pointer;
-    font-weight: bold;
-}
-.Menu a{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-
-.Menu li:hover{
-    padding: 5px;
-    transform: scale(1.2);
-    color: rgb(255, 251, 0);
-    background-color: rgb(0, 68, 255);
-    border-radius: 5px;
-}
-.Selecionado{
-    padding: 10px;
-    border-radius: 10px;
-
-    border: 2px solid rgb(0, 255, 42);
-    background-color: rgb(255, 255, 255);
-}
-.Selecionado a{
-    color: rgb(0, 255, 42);
-}
-.Tabela{
-    position: relative;
-    width: 50%;
-    left: 50%;
-    top: 10px;
-    transform: translateX(-50%);
-    border: rgb(174, 0, 255) 1px solid;
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-.Tabela td{
-    width: 50%;
-    color: rgb(100, 0, 171);
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-}
-.Tabela button{
-    background-color: rgba(255, 255, 255,0);
-    border: none;
-}
-.Tabela img{
-    height: 80px;
-    border-radius: 80px;
-    cursor: pointer;
-    transition-duration: 1s;
-}
-.Tabela img:hover{
-    transform: translate(10px);
+    }
+    .TabelaDIV{
+        position: relative;
+        margin-top: 100px;
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .Tabela{
+        position: relative;
+        width: 100%;
+        height: 150px;
+        border: rgb(174, 0, 255) 1px solid;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    
+    }
+    .Tabela td{
+        width: 50%;
+        color: rgb(100, 0, 171);
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+    .Tabela button{
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+    }
+    .Tabela img{
+        height: 100px;
+        border-radius: 80px;
+        cursor: pointer;
+        transition-duration: 1s;
+    }
+    .Tabela img:hover{
+        transform: translate(10px);
+    }
 }

@@ -1,3 +1,9 @@
+document.addEventListener('keydown',function (e){
+    let PesquisatBTN=document.getElementById('PesquisarBTN');
+    if(e.key=='Enter'){
+        PesquisatBTN.click();
+    }
+});
 function Sair(){
     window.location.href="Sair.php";
 }
@@ -14,4 +20,7 @@ function VerRelatorio2(Data){
     console.log('Teste');
 
     IDRelatorioTXT.value=Data;
+}
+function CriarRelatorio(){
+    window.location.href='../CadRelatorioDiario/index.php'
 }

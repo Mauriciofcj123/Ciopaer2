@@ -10,12 +10,18 @@ document.addEventListener('keydown',function (e){
     }
 });
 
+document.addEventListener('keyup', function (e){
+    let Caracteres=document.getElementById('Caracteres');
+    let CaixaTexto=document.getElementById('CaixaTexto');
+    Caracteres.innerHTML=(CaixaTexto.value.length)+"/120";
+});
+
 
 
 function Ativar(id,Nome,Valor){
     let Botoes=document.getElementsByName('Botao'+id);
     let Selecionado=document.getElementById(Nome+id);
-    let Status=document.getElementsByName('Status');
+    let Status=document.getElementsByName('Status[]');
     let Causa=document.getElementById('Causa'+id);
     let CausaTXT=Causa.children;
 
@@ -161,35 +167,54 @@ function RemoverOBS(){
         }
     }
 }
+function ResetarModal(){
+    let Responsavel=document.getElementsByName('CartãoMec');
+    let Mecanicos=document.getElementById('MecanicosTB');
+    let Aeronave=document.getElementById('Aeronave');
+    let Tipo=document.getElementById('Tipo');
 
+    Aeronave.value=Aeronave.options[0].value;
+    Tipo.value=Tipo.options[0].value;
+    for(i=0;i<Responsavel.length;i++){
+        let NumeroLinhas = Mecanicos.rows.length;
+        let Linha=Mecanicos.insertRow(NumeroLinhas);
+        let Celula=Linha.insertCell(0);
+
+        Linha.id=Responsavel[i].id;
+        Linha.setAttribute('name','Cartão');
+
+        Celula.innerHTML="<button onClick=\"AdicionarMecanico('"+Responsavel[i].id+"')\">"+Responsavel[i].id+"</button>";
+        
+    }
+    for(i=0;i<Responsavel.length;){
+        Responsavel[i].remove();
+    }
+
+    let Caracteres=document.getElementById('Caracteres');
+    let CaixaTexto=document.getElementById('CaixaTexto');
+    CaixaTexto.value="";
+    Caracteres.innerHTML="0/120";
+
+    
+}
 function AbrirModalIntervencao(){
-   let Modal=document.getElementById('ModalInt');
-   let DIVS=document.getElementsByTagName('DIV');
+    ResetarModal();
+   var Modal=document.getElementById('ModalInt');
 
-   for(let i=0;i<DIVS.length-4;i++){
-    //DIVS[i].style.filter='blur(1px)';
-   }
-
-    Modal.style.visibility='visible';
-
+   Modal.style.visibility='visible';
 }
 
 function FecharModalIntervencao(){
    let Modal=document.getElementById('ModalInt');
 
-   let DIVS=document.getElementsByTagName('DIV');
-
-   for(let i=0;i<DIVS.length-4;i++){
-    //DIVS[i].style.filter='none';
-   }
    Modal.style.visibility='hidden';
 }
 
 function ContarMecanicos(){
     let IntervencaoTB=document.getElementById('ResponsavelTB');
     let NumeroLinhas=IntervencaoTB.rows.length;
-    let Responsaveis;
-    let Mecanicos;
+    let Responsaveis="";
+    let Mecanicos="";
     let Celulas=IntervencaoTB.getElementsByTagName('td');
     for(let i=0;i<NumeroLinhas-1;i++){
         if(Mecanicos==undefined){
@@ -248,27 +273,28 @@ function ConfirmarIntervencao(){
    
     if(VerificarTempo()){
         let Hora=document.getElementById('Hora').value;
-            if(Hora=''){
-                Hora='0';
-            }
+        let HoraTXT;
             if(Hora<10){
-            Hora='0'+Hora;
+            HoraTXT='0'+Hora;
+           }else{
+            HoraTXT=Hora;
            }
         let Minutos=document.getElementById('Minuto').value;
-            if(Minutos=''){
-                Minutos='0';
-            }
+        let MinutoTXT;
            if(Minutos<10){
-            Minutos='0'+Minutos;
+            MinutoTXT='0'+Minutos;
+           }else{
+            MinutoTXT=Minutos;
            }
         let Segundos=document.getElementById('Segundo').value;
-            if(Segundos=''){
-                Segundos='0';
-            }
+        let SegundosTXT;
            if(Segundos<10){
-            Segundos='0'+Segundos;
+            SegundosTXT='0'+Segundos;
+           }else{
+            SegundosTXT=Segundos;
            }
-           Tempo=Hora+':'+Minutos+':'+Segundos;
+
+           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
     }else{
         Aprovado=false;
         alert('Por favor informe a duração do serviço.');
@@ -304,9 +330,9 @@ function ConfirmarIntervencao(){
 }
 
 function AdicionarMecanico(Texto){
-    let Mecanicos=document.getElementById('MecanicosTB');
     let Responsavel=document.getElementById('ResponsavelTB');
     let Cartões=document.getElementsByName('Cartão');
+    console.log(Cartões.length);
 
     let NumeroLinhas = Responsavel.rows.length;
     let Linha=Responsavel.insertRow(NumeroLinhas);
@@ -326,9 +352,7 @@ function AdicionarMecanico(Texto){
 
 function RemoverMecanico(Texto){
     let Mecanicos=document.getElementById('MecanicosTB');
-    let Responsavel=document.getElementById('ResponsavelTB');
     let CartõesMec=document.getElementsByName('CartãoMec');
-    console.log(CartõesMec.length);
 
     let NumeroLinhas = Mecanicos.rows.length;
     let Linha=Mecanicos.insertRow(NumeroLinhas);
@@ -348,7 +372,7 @@ function RemoverMecanico(Texto){
 }
 function ListarDisponibilidade(Formulario){
     let Filhos = document.getElementById('AeronavesDIV').children;
-    let Status=document.getElementsByName('Status');
+    let Status=document.getElementsByName('Status[]');
     let Causa=document.getElementsByName('Causa[]');
 
     let Disponibilidade=document.createElement("div");
@@ -385,7 +409,7 @@ function ListarDisponibilidade(Formulario){
     }
 }
 function VerificarDisponibilidade(){
-    let Status=document.getElementsByName('Status');
+    let Status=document.getElementsByName('Status[]');
     let Causa=document.getElementsByName('Causa[]');
     let Valido=true;
 
@@ -417,7 +441,6 @@ function ListarDiscrepancias(Formulario){
             var PlacaTXT=Placas[i].options[Placas[i].selectedIndex].value;
             var DescricaoTXT=Descricao[i].value;
 
-            if(PlacaTXT.length>0&&DescricaoTXT.length>0){
             let DIVDiscrepancia=document.createElement("div");
             DIVDiscrepancia.setAttribute('name','Discrepancia');
             Discrepancias.appendChild(DIVDiscrepancia);
@@ -431,7 +454,6 @@ function ListarDiscrepancias(Formulario){
             Input2.setAttribute('name', 'Descricao[]')
             Input2.setAttribute('value', DescricaoTXT);
             DIVDiscrepancia.appendChild(Input2);
-        }
         }
 
         
@@ -566,6 +588,12 @@ function Salvar(){
     InputData.setAttribute('value',Data.value);
     Formulario.appendChild(InputData);
 
+    let MecanicoDia=document.getElementById('MecanicoDia');
+    let InputMec=document.createElement('input');
+    InputMec.setAttribute('name','MecanicoDia');
+    InputMec.setAttribute('value',MecanicoDia.options[MecanicoDia.selectedIndex].value);
+    Formulario.appendChild(InputMec);
+
     let Submit=document.createElement('input');
     Submit.setAttribute('type','submit');
     Submit.setAttribute('name','SalvarBTN');
@@ -580,12 +608,7 @@ function Salvar(){
 
 }
 
-document.addEventListener('keyup', function (e){
-    let Caracteres=document.getElementById('Caracteres');
-    let CaixaTexto=document.querySelector('#CaixaTexto');
-    Caracteres.innerHTML=(CaixaTexto.value.length)+"/120";
-    console.log();
-});
+
 
 
 

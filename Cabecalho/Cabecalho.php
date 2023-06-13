@@ -17,6 +17,7 @@
         if(isset($_SESSION["Nome"]) && isset($_SESSION['ADM'])){
             if($_SESSION['ADM']==1){
                 echo '<div class="Menu">
+                <button id="MenuBTN">Menu</button>
                 <ul>
                     <li><a href="../Inicial/index.php">Inicio</a></li>
                     <li><a href= "../MapaComponentes/MapaComponente.php">Mapa de Componentes</a></li>

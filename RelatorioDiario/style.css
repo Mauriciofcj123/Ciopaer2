@@ -10,6 +10,7 @@
         left: 50%;
         top: 10px;
         transform: translateX(-50%);
+        z-index: 1;
     }
     .Data img{
         margin-left: 10px;
@@ -30,6 +31,7 @@
     .Data button{
         background-color: white;
         border: none;
+        cursor: pointer;
     }
     .Tabela{
         position: relative;
@@ -69,6 +71,7 @@
     .Botao{
         height: 30px;
         text-align: center;
+        cursor: pointer;
     }
     .Botao img{
         height: 20px;
@@ -109,6 +112,7 @@
     .Data button{
         background-color: white;
         border: none;
+        cursor: pointer;
     }
     .Tabela{
         position: relative;
@@ -149,6 +153,7 @@
         height: 30px;
         text-align: center;
         background-color: aqua;
+        cursor: pointer;
     }
     .Botao img{
         height: 10px;

@@ -1,96 +1,207 @@
-.LogTexto{
-    position: relative;
-    width: fit-content;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    float: right;
-    margin-top: 20px;
+@media (min-width: 580px) {
+    .LogTexto{
+        position: relative;
+        width: fit-content;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        float: right;
+        margin-top: 20px;
+    }
+    .Sair{
+        position: absolute;
+        float: right;
+        right: 10px;
+        margin-top: 10px;
+        color: rgb(0, 68, 255);
+        font-weight: bold;
+        padding: 10px;
+        border: 2px rgb(0, 68, 255) solid;
+        background-color: rgb(255, 255, 255);
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    .cabecalho{
+        position: relative;
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+        z-index: 2;
+    }
+    .cabecalho img{
+        position: absolute;
+        height: 60px;
+        left: 10%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        padding: 5px;
+    }
+    .Menu{
+        position: relative;
+        width: 100%;
+        background-color: rgb(0, 132, 255);
+        text-align: center;
+        transition-duration: 1s;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .Menu ul li{
+        backdrop-filter: blur(5px);
+        position: relative;
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        float: left;
+        cursor: pointer;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        border: 1px white solid;
+        list-style: none;
+    }
+    .Menu ul li:hover{
+        color: rgb(255, 255, 255);
+        background-color: rgba(0, 17, 255, 0.80);
+        backdrop-filter: blur(5px);
+        border-radius: 5px;
+    }
+    .Menu a{
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+    .Menu ul ul{
+        display: none;
+        transition-duration: 1s;
+        position: absolute;
+        background-color: rgba(0, 132, 255, 0.80);
+        backdrop-filter: blur(5px);
+        z-index: 3;
+    }
+    .Menu ul li:hover>ul{
+        display: block;
+    }
+    
+    .Selecionado{
+        padding: 10px;
+        border-radius: 10px;
+    
+        border: 2px solid rgb(0, 255, 42);
+        background-color: rgb(255, 255, 255);
+    }
+    .Selecionado a{
+        color: rgb(0, 255, 42);
+    }
 }
-.Sair{
-    position: absolute;
-    float: right;
-    right: 10px;
-    margin-top: 10px;
-    color: rgb(0, 68, 255);
-    font-weight: bold;
-    padding: 10px;
-    border: 2px rgb(0, 68, 255) solid;
-    background-color: rgb(255, 255, 255);
-    text-decoration: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.cabecalho{
-    position: relative;
-    height: 100px;
-    width: 100%;
-    background-image: linear-gradient(to right,rgb(0, 195, 255),white);
-    z-index: 5;
-}
-.cabecalho img{
-    position: absolute;
-    height: 60px;
-    left: 10%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    padding: 5px;
-}
-.Menu{
-    position: relative;
-    width: 100%;
-    background-color: rgb(0, 132, 255);
-    text-align: center;
-    transition-duration: 1s;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.Menu ul li{
-    backdrop-filter: blur(5px);
-    position: relative;
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    float: left;
-    cursor: pointer;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    border: 1px white solid;
-    list-style: none;
-}
-.Menu ul li:hover{
-    color: rgb(255, 255, 255);
-    background-color: rgba(0, 17, 255, 0.80);
-    backdrop-filter: blur(5px);
-    border-radius: 5px;
-}
-.Menu a{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-.Menu ul ul{
-    display: none;
-    transition-duration: 1s;
-    position: absolute;
-    background-color: rgba(0, 132, 255, 0.80);
-    backdrop-filter: blur(5px);
-    z-index: 3;
-}
-.Menu ul li:hover>ul{
-    display: block;
-}
-
-.Selecionado{
-    padding: 10px;
-    border-radius: 10px;
-
-    border: 2px solid rgb(0, 255, 42);
-    background-color: rgb(255, 255, 255);
-}
-.Selecionado a{
-    color: rgb(0, 255, 42);
+@media (max-width: 580px) {
+    .LogTexto{
+        position: relative;
+        width: 50%;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        float: right;
+        margin-top: 20px;
+    }
+    .Sair{
+        position: absolute;
+        float: right;
+        right: 10px;
+        top: 50%;
+        color: rgb(0, 68, 255);
+        font-weight: bold;
+        padding: 10px;
+        border: 2px rgb(0, 68, 255) solid;
+        background-color: rgb(255, 255, 255);
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    .cabecalho{
+        position: relative;
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+        z-index: 2;
+    }
+    .cabecalho img{
+        position: relative;
+        height: 40px;
+        left: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .Menu{
+        position: relative;
+        width: 100%;
+        height: 260px;
+        min-height: 50px;
+        background-color: rgb(0, 132, 255);
+        transition-duration: 1s;
+    }
+    #MenuBTN{
+        position: absolute;
+        padding: 10px;
+        color: white;
+        font-weight: bold;
+        border: 1px rgb(255, 255, 255) solid;
+        cursor: pointer;
+        top: 5px;
+        left: 1%;
+        background-color: rgba(255, 255, 255, 0)
+  
+    }
+    .Menu ul li{
+        position: relative;
+        top: 50px;
+        width: 50%;
+        height: 40px;
+        line-height: 50px;
+        list-style: none;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        border: 1px white solid;
+        cursor: pointer;
+        list-style: none;
+        z-index: 3;
+        display: block;
+        background-color: rgba(0, 0, 255, 0.80);
+    }
+    .Menu ul li:hover{
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 17, 255);
+    }
+    .Menu a{
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+    .Menu ul ul{
+        position: absolute;
+        display: none;
+        transition-duration: 1s;
+        background-color: rgba(0, 132, 255, 0.80);
+        backdrop-filter: blur(5px);
+        width: 400px;
+        z-index: 3;
+        left: 210px;
+        top: -50px;
+    }
+    .Menu ul li:hover>ul{
+        display: block;
+    }
+    
+    .Selecionado{
+        padding: 10px;
+        border-radius: 10px;
+    
+        border: 2px solid rgb(0, 255, 42);
+        background-color: rgb(255, 255, 255);
+    }
+    .Selecionado a{
+        color: rgb(0, 255, 42);
+    }
 }

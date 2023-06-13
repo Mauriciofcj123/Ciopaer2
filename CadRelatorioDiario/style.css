@@ -3,593 +3,1180 @@
     margin: 0;
     box-sizing: border-box;
 }
-.Data{
-    position: relative;
-    width: 100%;
-    height: 50px;
-    text-align: center;
-}
-.Data img{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.Data input{
-    width: 200px;
-    padding: 2px;
-    text-align: center;
-    color: rgb(123,202,255);
-    font-weight: bold;
-    -webkit-text-stroke-color: black;
-    -webkit-text-stroke-width: 0.5px;
-    font-size: 25px;
-    background-color: rgba(255, 255, 255,0);
-    border: none;
-}
-.NomeMec{
-    width: 100%;
-    text-align: center;
-    padding: 2px;
-    box-shadow: 0px 5px 6px rgba(0, 217, 255, 0.103);
-}
-.NomeMec select{
-    height: 50px;
-    width: 250px;
-    text-align: center;
-    border: 1px rgb(123,202,255) solid;
-    background-color: white;
-    color: rgb(123,202,255);
-    font-weight: bold;
-    font-size: 15px;
-}
-.NomeMec select option{
-    color: rgb(123,202,255);
-    font-weight: bold;
-    font-size: 15px;
-}
-.Part1{
-    width: 100%;
-    height: 700px;
-    display: inline-block;
-}
-.Aeronaves{
-    position: relative;
-    width: 30%;
-    height: 100%;
-    float: left;
-    left: 5%;
-    padding: 5px;
-    margin: 10px 0px;
-    border: 1px rgb(0, 195, 255) solid;
-    border-radius: 15px;
-    font-weight: bold;
-    color: rgb(0, 195, 255);
-    text-align: start;
+@media (min-width : 580px) {
+    .Data{
+        position: relative;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+    }
+    .Data img{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .Data input{
+        width: 200px;
+        padding: 2px;
+        text-align: center;
+        color: rgb(123,202,255);
+        font-weight: bold;
+        -webkit-text-stroke-color: black;
+        -webkit-text-stroke-width: 0.5px;
+        font-size: 25px;
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+    }
+    .NomeMec{
+        width: 100%;
+        text-align: center;
+        padding: 2px;
+        box-shadow: 0px 5px 6px rgba(0, 217, 255, 0.103);
+    }
+    .NomeMec select{
+        height: 50px;
+        width: 250px;
+        text-align: center;
+        border: 1px rgb(123,202,255) solid;
+        background-color: white;
+        color: rgb(123,202,255);
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .NomeMec select option{
+        color: rgb(123,202,255);
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .Part1{
+        width: 100%;
+        height: 700px;
+        display: inline-block;
+    }
+    .Aeronaves{
+        position: relative;
+        width: 30%;
+        height: 100%;
+        float: left;
+        left: 5%;
+        padding: 5px;
+        margin: 10px 0px;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        font-weight: bold;
+        color: rgb(0, 195, 255);
+        text-align: start;
+        
+    }
+    .Aeronaves img{
+        height: 25px;
+        margin-left: 5px;
+        margin-bottom: 20px;
+        vertical-align: middle;
+        transition-duration: 1s;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.404);
     
-}
-.Aeronaves img{
-    height: 25px;
-    margin-left: 5px;
-    margin-bottom: 20px;
-    vertical-align: middle;
-    transition-duration: 1s;
-    cursor: pointer;
-    border-radius: 50%;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.404);
-
-}
-.AeronaveTXT{
-    width: 100px;
-    font-size: 15px;
-    text-align: center;
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    border: none;
-}
-.Aeronaves input{
-    width: 100px;
-    height: 20px;
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    border: none;
-    background-color: white;
-}
-.Aeronaves button{
-    background-color: rgba(255, 255, 255,0);
-    z-index: 3;
-    height: 25px;
-    width: 25px;
-    align-items: center;
-    border: none;
-}
-.Discrepancias{
-    position: relative;
-    width: 50%;
-    height: 100%;
-    float: right;
-    right: 5%;
-    border: 1px rgb(0, 195, 255) solid;
-    border-radius: 15px;
-    padding: 10px;
-    overflow-y: auto;
-
-}
-.DiscrepanciasTB{
-    width: 100%;
-    border: 1px rgb(0, 195, 255) solid;
-    border-radius: 15px;
-    margin: 5px 0px;
-}
-.DiscrepanciasTB select{
-    text-align: center;
-    color: rgb(255, 60, 0);
-    font-weight: bold;
-    font-size: 18px;
-    text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
-    background: none;
-    border: none;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.DiscrepanciasTB img{
-    width: 30px;
-}
-.DiscrepanciasTB input{
-    width: 100%;
-    border-radius: 15px;
-}
-.TituloDiscrepancia{
-    width: 100%;
-}
-.TituloDiscrepancia input{
-    text-align: center;
-    color: rgb(255, 60, 0);
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-    font-size: 18px;
-    text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
-    border: none;
-    background: none;
-}
-.TituloDiscrepancia select{
-    position: relative;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    color: rgb(255, 136, 0);
-    font-weight: bold;
-    font-size: 18px;
-    text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
-    border: none;
-    background: none;
-    margin-top: 10px;
-    left: 51%;
-    transform: translate(-50%);
-}
-.DiscrepanciaTXT{
-    width: 100%;
-}
-.DiscrepanciaTXT textarea{
-    width: 100%;
-    height: 60px;
-    text-align: left;
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    font-size: 15px;
-    border: 0.5px rgb(162, 233, 255) dashed;
-    border-radius: 15px;
-    padding: 5px
-}
-.MenuDiscrepancias{
-    width: 100%;
-}
-.MenuDiscrepancias img{
-    height: 40px;
-}
-.MenuDiscrepancias button{
-    margin: 0px 10px 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.Selecionada{
-    transform: scale(1.2);
-    transition-duration: 1s;
-
-}
-.Deselecionada{
-    transform: scale(1);
-    transition-duration: 1s;
-}
-.Deselecionada:hover{
-    transform: scale(1.2);
-}
-.Over{
-    transform: scale(1.2);
-    filter: none;
-}
-
-.Part2{
-    width: 100%;
-    height: 330px;
-    margin-top: 20px;
-}
-.Acessorios{
-    position: relative;
-    left: 5%;
-    width: 30%;
-    height: 300px;
-    padding: 10px;
-    border: 1px rgb(0, 195, 255) solid;
-    border-radius: 15px;
-    float: left;
-    overflow: auto;
-}
-.Acessorios input{
-    font-weight: bold;
-    color: rgb(0, 195, 255);
-    height: 30px;
-    border: rgb(228, 228, 228) 1px solid;
-}
-.Objeto{
-    height: 40px;
-}
-.Objeto img{
-    height: 40px;
-    border: 1px rgb(0, 195, 255) solid;
-    padding: 5px;
-    border-radius: 10px;
-    margin-left: 20px;
-    vertical-align: middle;
-    margin: 0 10px;
-}
-.MenuAcessorio{
-    width: 100%;
-    height: 50px;
-    margin-bottom: 50px;
-}
-.MenuAcessorio button{
-    background-color: rgba(255, 255, 255,0);
-    border: none;
-    width: 60px;
-}
-.MenuCautela{
-    position: relative;
-    height: 50px;
-    vertical-align: middle;
-    cursor: pointer;
-}
-.TituloCautela{
-    position: relative;
-    width: 30%;
-    left: 100px;
-    text-align: center;
-    color: rgb(0, 195, 255);
-    -webkit-text-stroke: 1px rgb(0, 154, 201);
-}
-.Intervencao{
-    position: relative;
-    width: 50%;
-    height: 300px;
-    right: 5%;
-    float: right;
-    border: 1px rgb(0, 195, 255) solid;
-    border-radius: 15px;
-    padding: 10px;
-    overflow-y: auto;
-}
-.MenuIntervencao{
-    width: 100%;
-}
-.MenuIntervencao img{
-    height: 40px;
-}
-.MenuIntervencao button{
-    margin: 0px 10px 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-.IntervencaoTB input{
-    width: 100%;
-}
-.IntervencaoTB textarea{
-    width: 100%;
-}
-.Responsavel input{
-    width: 100%;
-    text-align: center;
-    color: rgb(255, 186, 96);
-    font-weight: bold;
-    font-size: 15px;
-    -webkit-text-stroke: 1px black;
-    background-color: none;
-    border: none;
-    background-color: white;
-}
-.CamposInt td{
-    height: 20px;
-}
-.CamposInt input{
-    color: rgb(0, 195, 255);
-    height: 100%;
-    font-weight: bold;
-    font-size: 13px;
-    background: none;
-    border: none;
-}
-.CamposInt textarea{
-    position: relative;
-    color: rgb(0, 195, 255);
-    height: 100%;
-    width: 100%;
-    font-weight: bold;
-    font-size: 13px;
-    background: none;
-    border: none;
-    text-align: center;
-}
-.CamposInt td:nth-child(1){
-    width: 10%;
-}
-.CamposInt td:nth-child(2){
-    width: 60%;
-}
-.CamposInt td:nth-child(3){
-    width: 20%;
-}
-.CamposInt td:nth-child(4){
-    width: 10%;
-}
-.Observacoes{
-    position: relative;
-    width: 80%;
-    z-index: 2;
-    left: 50%;
-    transform: translate(-50%,50%);
-    border: 1px solid rgb(0, 195, 255);
-    border-radius: 15px;
-
-}
-.ObservacoesDIV{
-    width: 100%;
-    height: 200px;
-    overflow-y: auto;
-}
-.MenuObservacao{
-    width: 100%;
-    height: 50px;
-    text-align: center;
-}
-.MenuObservacao img{
-    height: 40px;
-}
-.MenuObservacao button{
-    background: none;
-    border: none;
-    cursor: pointer;
-
-}
-.ObservacoesTB{
-    width: 100%;
-}
-.ObservacoesTB td:nth-child(1){
-    width: 2%;
-}
-.ObservacoesTB td:nth-child(2){
-    width: 5%;
-}
-.ObservacoesTB td:nth-child(3){
-    width: 93%;
-}
-
-.ObservacoesTB textarea{
-    position: relative;
-    color: rgb(0, 195, 255);
-    width: 100%;
-    height: 50px;
-    font-weight: bold;
-    font-size: 13px;
-    background: none;
-    border: none;
-    text-align: center;
-    overflow-y: auto;
-    margin: 5px 0px;
-    border-bottom: 1px rgb(0, 195, 255) solid;
-    border-top: 1px rgb(0, 195, 255) solid;
-}
-.ObservacoesTB img{
-    height: 40px;
-}
-.Modal{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display:flex;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.322);
-    z-index: 3;
-}
-.Relatorio{
-    position: relative;
-    width: 50%;
-    height: 95%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-image: linear-gradient(-45deg,rgba(255, 238, 215, 0.63),rgba(255, 238, 215, 0.63),rgba(255, 255, 255, 0.76),rgba(255, 238, 215, 0.63));
-    display: flex;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.253);
+    }
+    .AeronaveTXT{
+        width: 100px;
+        font-size: 15px;
+        text-align: center;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        border: none;
+    }
+    .Aeronaves input{
+        width: 100px;
+        height: 20px;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        border: none;
+        background-color: white;
+    }
+    .Aeronaves button{
+        background-color: rgba(255, 255, 255,0);
+        z-index: 3;
+        height: 25px;
+        width: 25px;
+        align-items: center;
+        border: none;
+    }
+    .Discrepancias{
+        position: relative;
+        width: 50%;
+        height: 100%;
+        float: right;
+        right: 5%;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        padding: 10px;
+        overflow-y: auto;
     
+    }
+    .DiscrepanciasTB{
+        width: 100%;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        margin: 5px 0px;
+    }
+    .DiscrepanciasTB select{
+        text-align: center;
+        color: rgb(255, 60, 0);
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        background: none;
+        border: none;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .DiscrepanciasTB img{
+        width: 30px;
+    }
+    .DiscrepanciasTB input{
+        width: 100%;
+        border-radius: 15px;
+    }
+    .TituloDiscrepancia{
+        width: 100%;
+    }
+    .TituloDiscrepancia input{
+        text-align: center;
+        color: rgb(255, 60, 0);
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        border: none;
+        background: none;
+    }
+    .TituloDiscrepancia select{
+        position: relative;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        color: rgb(255, 136, 0);
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        border: none;
+        background: none;
+        margin-top: 10px;
+        left: 51%;
+        transform: translate(-50%);
+    }
+    .DiscrepanciaTXT{
+        width: 100%;
+    }
+    .DiscrepanciaTXT textarea{
+        width: 100%;
+        height: 60px;
+        text-align: left;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        border: 0.5px rgb(162, 233, 255) dashed;
+        border-radius: 15px;
+        padding: 5px
+    }
+    .MenuDiscrepancias{
+        width: 100%;
+    }
+    .MenuDiscrepancias img{
+        height: 40px;
+    }
+    .MenuDiscrepancias button{
+        margin: 0px 10px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .Selecionada{
+        transform: scale(1.2);
+        transition-duration: 1s;
+    
+    }
+    .Deselecionada{
+        transform: scale(1);
+        transition-duration: 1s;
+    }
+    .Deselecionada:hover{
+        transform: scale(1.2);
+    }
+    .Over{
+        transform: scale(1.2);
+        filter: none;
+    }
+    
+    .Part2{
+        width: 100%;
+        height: 330px;
+        margin-top: 20px;
+    }
+    .Acessorios{
+        position: relative;
+        left: 5%;
+        width: 30%;
+        height: 300px;
+        padding: 10px;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        float: left;
+        overflow: auto;
+    }
+    .Acessorios input{
+        font-weight: bold;
+        color: rgb(0, 195, 255);
+        height: 30px;
+        border: rgb(228, 228, 228) 1px solid;
+    }
+    .Objeto{
+        height: 40px;
+    }
+    .Objeto img{
+        height: 40px;
+        border: 1px rgb(0, 195, 255) solid;
+        padding: 5px;
+        border-radius: 10px;
+        margin-left: 20px;
+        vertical-align: middle;
+        margin: 0 10px;
+    }
+    .MenuAcessorio{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 50px;
+    }
+    .MenuAcessorio button{
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+        width: 60px;
+    }
+    .MenuCautela{
+        position: relative;
+        height: 50px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .TituloCautela{
+        position: relative;
+        width: 30%;
+        left: 100px;
+        text-align: center;
+        color: rgb(0, 195, 255);
+        -webkit-text-stroke: 1px rgb(0, 154, 201);
+    }
+    .Intervencao{
+        position: relative;
+        width: 50%;
+        height: 300px;
+        right: 5%;
+        float: right;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        padding: 10px;
+        overflow-y: auto;
+    }
+    .MenuIntervencao{
+        width: 100%;
+    }
+    .MenuIntervencao img{
+        height: 40px;
+    }
+    .MenuIntervencao button{
+        margin: 0px 10px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .IntervencaoTB input{
+        width: 100%;
+    }
+    .IntervencaoTB textarea{
+        width: 100%;
+    }
+    .Responsavel input{
+        width: 100%;
+        text-align: center;
+        color: rgb(255, 186, 96);
+        font-weight: bold;
+        font-size: 15px;
+        -webkit-text-stroke: 1px black;
+        background-color: none;
+        border: none;
+        background-color: white;
+    }
+    .CamposInt td{
+        height: 20px;
+    }
+    .CamposInt input{
+        color: rgb(0, 195, 255);
+        height: 100%;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+    }
+    .CamposInt textarea{
+        position: relative;
+        color: rgb(0, 195, 255);
+        height: 100%;
+        width: 100%;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+        text-align: center;
+    }
+    .CamposInt td:nth-child(1){
+        width: 10%;
+    }
+    .CamposInt td:nth-child(2){
+        width: 60%;
+    }
+    .CamposInt td:nth-child(3){
+        width: 20%;
+    }
+    .CamposInt td:nth-child(4){
+        width: 10%;
+    }
+    .Observacoes{
+        position: relative;
+        width: 80%;
+        z-index: 2;
+        left: 50%;
+        transform: translate(-50%,50%);
+        border: 1px solid rgb(0, 195, 255);
+        border-radius: 15px;
+    
+    }
+    .ObservacoesDIV{
+        width: 100%;
+        height: 200px;
+        overflow-y: auto;
+    }
+    .MenuObservacao{
+        width: 100%;
+        height: 50px;
+        text-align: center;
+    }
+    .MenuObservacao img{
+        height: 40px;
+    }
+    .MenuObservacao button{
+        background: none;
+        border: none;
+        cursor: pointer;
+    
+    }
+    .ObservacoesTB{
+        width: 100%;
+    }
+    .ObservacoesTB td:nth-child(1){
+        width: 2%;
+    }
+    .ObservacoesTB td:nth-child(2){
+        width: 5%;
+    }
+    .ObservacoesTB td:nth-child(3){
+        width: 93%;
+    }
+    
+    .ObservacoesTB textarea{
+        position: relative;
+        color: rgb(0, 195, 255);
+        width: 100%;
+        height: 50px;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+        text-align: center;
+        overflow-y: auto;
+        margin: 5px 0px;
+        border-bottom: 1px rgb(0, 195, 255) solid;
+        border-top: 1px rgb(0, 195, 255) solid;
+    }
+    .ObservacoesTB img{
+        height: 40px;
+    }
+    .Modal{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display:flex;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        visibility: hidden;
+        background-color: rgba(0, 0, 0, 0.322);
+        z-index: 3;
+    }
+    .Relatorio{
+        position: relative;
+        width: 50%;
+        height: 95%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-image: linear-gradient(-45deg,rgba(255, 238, 215, 0.63),rgba(255, 238, 215, 0.63),rgba(255, 255, 255, 0.76),rgba(255, 238, 215, 0.63));
+        display: flex;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.253);
+        
+    }
+    .Relatorio select{
+        position: relative;
+        height: 50px;
+        width: 50%;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    .Relatorio option{
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+    .Relatorio textarea{
+        position: relative;
+        height: 10%;
+        width: 80%;
+        margin-top: 10px;
+    }
+    .CardBoxs{
+        width: 100%;
+        height: 50%;
+    }
+    .CardBox{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        padding: 5px;
+        border: 1px rgb(119, 119, 119) solid;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        float: left;
+        left: 5%;
+    }
+    .CardBox button{
+        background-color: rgb(221, 221, 221);
+        width: 80%;
+        height: 30px;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-weight: bold;
+        cursor: pointer;
+        color: rgb(0, 0, 0);
+    }
+    .CardBox button:hover{
+        background-color: rgb(51, 255, 0);
+        transform: scale(1.05);
+        color: white;
+    }
+    .CardBox thead{
+        position: relative;
+        top: 10px;
+        color: rgb(82, 82, 82);
+    }
+    .formulario{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    .responsavelDIV{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        padding: 5px;
+        border: 1px rgb(119, 119, 119) solid;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        float: right;
+        right: 5%;
+    }
+    .responsavelDIV button{
+        background-color: rgb(221, 221, 221);
+        width: 80%;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-weight: bold;
+        cursor: pointer;
+        color: rgb(59, 59, 59);
+    }
+    .responsavelDIV button:hover{
+        background-color: rgb(255, 96, 96);
+        transform: scale(1.05);
+        color: white;
+    }
+    .responsavelDIV thead{
+        position: relative;
+        top: 5px;
+        color: rgb(82, 82, 82);
+    }
+    .DescIntervencao{
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+    .Tempo{
+        position: relative;
+        height: 50px;
+        width: 70px;
+        -webkit-text-stroke: 1px rgb(54, 175, 255);
+        padding: 10px;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 25px;
+        border-radius: 10px;
+        border: 0.5px black solid;
+    }
+    .Legenda{
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 25px;
+        -webkit-text-stroke: 0.5px rgb(0, 119, 255);
+    }
+    .FecharBTN{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 20px;
+        bottom: 20px;
+        background: none;
+        border: none;
+    }
+    .FecharBTN img{
+        width: 100%;
+        height: 100%;
+    }
+    .ConfirmarBTN{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: none;
+        border: none;
+        right: 20px;
+        bottom: 20px;
+    }
+    .ConfirmarBTN img{
+        width: 100%;
+        height: 100%;
+    }
+    .Botoes{
+        position: relative;
+        width: 100%;
+        height: 200px;
+    
+    }
+    .SalvarBTN{
+        position: absolute;
+        float: right;
+        bottom: 10px;
+        right: 1%;
+        height: 50px;
+        width: 80px;
+        margin: 10px 0px;
+        border: 1px black solid;
+        color: white;
+        font-weight: bold;
+        background-color: rgb(0, 206, 0);
+    }
 }
-.Relatorio select{
-    position: relative;
-    height: 50px;
-    width: 50%;
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    font-size: 15px;
-    margin-top: 20px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-.Relatorio option{
-    font-weight: bold;
-    font-size: 15px;
-    text-align: center;
-}
-.Relatorio textarea{
-    position: relative;
-    height: 10%;
-    width: 80%;
-    margin-top: 10px;
-}
-.CardBoxs{
-    width: 100%;
-    height: 50%;
-}
-.CardBox{
-    position: relative;
-    width: 40%;
-    height: 100%;
-    padding: 5px;
-    border: 1px rgb(119, 119, 119) solid;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    float: left;
-    left: 5%;
-}
-.CardBox button{
-    background-color: rgb(221, 221, 221);
-    width: 80%;
-    height: 30px;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: 1px solid black;
-    font-weight: bold;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-}
-.CardBox button:hover{
-    background-color: rgb(51, 255, 0);
-    transform: scale(1.05);
-    color: white;
-}
-.CardBox thead{
-    position: relative;
-    top: 10px;
-    color: rgb(82, 82, 82);
-}
-.formulario{
-    position: relative;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-}
-.responsavelDIV{
-    position: relative;
-    width: 40%;
-    height: 100%;
-    padding: 5px;
-    border: 1px rgb(119, 119, 119) solid;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    float: right;
-    right: 5%;
-}
-.responsavelDIV button{
-    background-color: rgb(221, 221, 221);
-    width: 80%;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 10px;
-    border: 1px solid black;
-    font-weight: bold;
-    cursor: pointer;
-    color: rgb(59, 59, 59);
-}
-.responsavelDIV button:hover{
-    background-color: rgb(255, 96, 96);
-    transform: scale(1.05);
-    color: white;
-}
-.responsavelDIV thead{
-    position: relative;
-    top: 5px;
-    color: rgb(82, 82, 82);
-}
-.DescIntervencao{
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    font-size: 15px;
-    text-align: center;
-}
-.Tempo{
-    position: relative;
-    height: 50px;
-    width: 70px;
-    -webkit-text-stroke: 1px rgb(54, 175, 255);
-    padding: 10px;
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    font-size: 25px;
-    border-radius: 10px;
-    border: 0.5px black solid;
-}
-.Legenda{
-    color: rgb(0, 195, 255);
-    font-weight: bold;
-    font-size: 25px;
-    -webkit-text-stroke: 0.5px rgb(0, 119, 255);
-}
-.FecharBTN{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    left: 20px;
-    bottom: 20px;
-    background: none;
-    border: none;
-}
-.FecharBTN img{
-    width: 100%;
-    height: 100%;
-}
-.ConfirmarBTN{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: none;
-    border: none;
-    right: 20px;
-    bottom: 20px;
-}
-.ConfirmarBTN img{
-    width: 100%;
-    height: 100%;
-}
-.Botoes{
-    position: relative;
-    width: 100%;
-    height: 200px;
+@media (max-width:580px) {
+    .Data{
+        position: relative;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+    }
+    .Data img{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .Data input{
+        width: 200px;
+        padding: 2px;
+        text-align: center;
+        color: rgb(123,202,255);
+        font-weight: bold;
+        -webkit-text-stroke-color: black;
+        -webkit-text-stroke-width: 0.5px;
+        font-size: 25px;
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+    }
+    .NomeMec{
+        width: 100%;
+        text-align: center;
+        padding: 2px;
+        box-shadow: 0px 5px 6px rgba(0, 217, 255, 0.103);
+    }
+    .NomeMec select{
+        height: 50px;
+        width: 250px;
+        text-align: center;
+        border: 1px rgb(123,202,255) solid;
+        background-color: white;
+        color: rgb(123,202,255);
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .NomeMec select option{
+        color: rgb(123,202,255);
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .Part1{
+        width: 100%;
+    }
+    .Aeronaves{
+        position: relative;
+        width: 90%;
+        height: 100%;
+        float: left;
+        left: 5%;
+        padding: 5px;
+        margin: 10px 0px;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        font-weight: bold;
+        color: rgb(0, 195, 255);
+        text-align: start;
+        
+    }
+    .Aeronaves img{
+        height: 35px;
+        margin-bottom: 20px;
+        vertical-align: middle;
+        transition-duration: 1s;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.404);
+    
+    }
+    .AeronaveTXT{
+        width: 100px;
+        font-size: 15px;
+        text-align: center;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        border: none;
+    }
+    .Aeronaves input{
+        width: 100px;
+        height: 20px;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        border: none;
+        background-color: white;
+    }
+    .Aeronaves button{
+        background-color: rgba(255, 255, 255,0);
+        z-index: 3;
+        height: 30px;
+        width: 30px;
+        align-items: center;
+        border: none;
+        margin-left: 10px;
+    }
+    .Discrepancias{
+        position: relative;
+        width: 90%;
+        height: 100%;
+        float: right;
+        right: 5%;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        padding: 10px;
+        overflow-y: auto;
+    
+    }
+    .DiscrepanciasTB{
+        width: 100%;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        margin: 5px 0px;
+    }
+    .DiscrepanciasTB select{
+        text-align: center;
+        color: rgb(255, 60, 0);
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        background: none;
+        border: none;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .DiscrepanciasTB img{
+        width: 30px;
+    }
+    .DiscrepanciasTB input{
+        width: 100%;
+        border-radius: 15px;
+    }
+    .TituloDiscrepancia{
+        width: 100%;
+    }
+    .TituloDiscrepancia input{
+        text-align: center;
+        color: rgb(255, 60, 0);
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        border: none;
+        background: none;
+    }
+    .TituloDiscrepancia select{
+        position: relative;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        color: rgb(255, 136, 0);
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: rgba(0, 0, 0,0.2) 2px 2px 2px;
+        border: none;
+        background: none;
+        margin-top: 10px;
+        left: 51%;
+        transform: translate(-50%);
+    }
+    .DiscrepanciaTXT{
+        width: 100%;
+    }
+    .DiscrepanciaTXT textarea{
+        width: 100%;
+        height: 60px;
+        text-align: left;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        border: 0.5px rgb(162, 233, 255) dashed;
+        border-radius: 15px;
+        padding: 5px
+    }
+    .MenuDiscrepancias{
+        width: 100%;
+    }
+    .MenuDiscrepancias img{
+        height: 40px;
+    }
+    .MenuDiscrepancias button{
+        margin: 0px 10px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .Selecionada{
+        transform: scale(1.2);
+        transition-duration: 1s;
+    
+    }
+    .Deselecionada{
+        transform: scale(1);
+        transition-duration: 1s;
+    }
+    .Deselecionada:hover{
+        transform: scale(1.2);
+    }
+    .Over{
+        transform: scale(1.2);
+        filter: none;
+    }
+    
+    .Part2{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .Acessorios{
+        position: relative;
+        left: 5%;
+        width: 90%;
+        height: 300px;
+        padding: 10px;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        float: left;
+        overflow: auto;
+    }
+    .Acessorios input{
+        font-weight: bold;
+        color: rgb(0, 195, 255);
+        height: 30px;
+        border: rgb(228, 228, 228) 1px solid;
+    }
+    .Objeto{
+        height: 40px;
+    }
+    .Objeto img{
+        height: 40px;
+        border: 1px rgb(0, 195, 255) solid;
+        padding: 5px;
+        border-radius: 10px;
+        margin-left: 20px;
+        vertical-align: middle;
+        margin: 0 10px;
+    }
+    .MenuAcessorio{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 50px;
+    }
+    .MenuAcessorio button{
+        background-color: rgba(255, 255, 255,0);
+        border: none;
+        width: 60px;
+    }
+    .MenuCautela{
+        position: relative;
+        height: 50px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .TituloCautela{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        color: rgb(0, 195, 255);
+        -webkit-text-stroke: 1px rgb(0, 154, 201);
+    }
+    .Intervencao{
+        position: relative;
+        margin-top: 20px;
+        width: 90%;
+        height: 300px;
+        right: 5%;
+        float: right;
+        border: 1px rgb(0, 195, 255) solid;
+        border-radius: 15px;
+        padding: 10px;
+        overflow-y: auto;
 
-}
-.SalvarBTN{
-    position: absolute;
-    float: right;
-    bottom: 10px;
-    right: 1%;
-    height: 50px;
-    width: 80px;
-    margin: 10px 0px;
-    border: 1px black solid;
-    color: white;
-    font-weight: bold;
-    background-color: rgb(0, 206, 0);
+    }
+    .MenuIntervencao{
+        width: 100%;
+    }
+    .MenuIntervencao img{
+        height: 40px;
+    }
+    .MenuIntervencao button{
+        margin: 0px 10px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .IntervencaoTB input{
+        width: 100%;
+    }
+    .IntervencaoTB textarea{
+        width: 100%;
+    }
+    .Responsavel input{
+        width: 100%;
+        text-align: center;
+        color: rgb(255, 186, 96);
+        font-weight: bold;
+        font-size: 15px;
+        -webkit-text-stroke: 1px black;
+        background-color: none;
+        border: none;
+        background-color: white;
+    }
+    .CamposInt td{
+        height: 20px;
+    }
+    .CamposInt input{
+        color: rgb(0, 195, 255);
+        height: 100%;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+    }
+    .CamposInt textarea{
+        position: relative;
+        color: rgb(0, 195, 255);
+        height: 100%;
+        width: 100%;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+        text-align: center;
+    }
+    .CamposInt td:nth-child(1){
+        width: 10%;
+    }
+    .CamposInt td:nth-child(2){
+        width: 60%;
+    }
+    .CamposInt td:nth-child(3){
+        width: 20%;
+    }
+    .CamposInt td:nth-child(4){
+        width: 10%;
+    }
+    .Observacoes{
+        position: relative;
+        width: 90%;
+        height: 500px;
+        border: 1px solid rgb(0, 195, 255);
+        border-radius: 15px;
+        overflow-y: auto;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: aqua;
+    }
+    .MenuObservacao{
+        position: relative;
+        width: 90%;
+        height: 50px;
+        top: 10px;
+        text-align: center;
+    }
+    .MenuObservacao img{
+        height: 40px;
+    }
+    .MenuObservacao button{
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .ObservacoesTB{
+        width: 100%;
+    }
+    .ObservacoesTB td:nth-child(1){
+        width: 2%;
+    }
+    .ObservacoesTB td:nth-child(2){
+        width: 5%;
+    }
+    .ObservacoesTB td:nth-child(3){
+        width: 93%;
+    }
+    
+    .ObservacoesTB textarea{
+        color: rgb(0, 195, 255);
+        width: 100%;
+        height: 100px;
+        font-weight: bold;
+        font-size: 13px;
+        background: none;
+        border: none;
+        text-align: center;
+        overflow-y: auto;
+        margin: 5px 0px;
+        border-bottom: 1px rgb(0, 195, 255) solid;
+        border-top: 1px rgb(0, 195, 255) solid;
+    }
+    .ObservacoesTB img{
+        height: 40px;
+    }
+    .Modal{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display:flex;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        visibility: hidden;
+        background-color: rgba(0, 0, 0, 0.322);
+        z-index: 3;
+    }
+    .Relatorio{
+        position: relative;
+        width: 50%;
+        height: 95%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-image: linear-gradient(-45deg,rgba(255, 238, 215, 0.63),rgba(255, 238, 215, 0.63),rgba(255, 255, 255, 0.76),rgba(255, 238, 215, 0.63));
+        display: flex;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.253);
+        
+    }
+    .Relatorio select{
+        position: relative;
+        height: 50px;
+        width: 50%;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    .Relatorio option{
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+    .Relatorio textarea{
+        position: relative;
+        height: 10%;
+        width: 80%;
+        margin-top: 10px;
+    }
+    .CardBoxs{
+        width: 100%;
+        height: 50%;
+    }
+    .CardBox{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        padding: 5px;
+        border: 1px rgb(119, 119, 119) solid;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        float: left;
+        left: 5%;
+    }
+    .CardBox button{
+        background-color: rgb(221, 221, 221);
+        width: 80%;
+        height: 30px;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-weight: bold;
+        cursor: pointer;
+        color: rgb(0, 0, 0);
+    }
+    .CardBox button:hover{
+        background-color: rgb(51, 255, 0);
+        transform: scale(1.05);
+        color: white;
+    }
+    .CardBox thead{
+        position: relative;
+        top: 10px;
+        color: rgb(82, 82, 82);
+    }
+    .formulario{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    .responsavelDIV{
+        position: relative;
+        width: 40%;
+        height: 100%;
+        padding: 5px;
+        border: 1px rgb(119, 119, 119) solid;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        float: right;
+        right: 5%;
+    }
+    .responsavelDIV button{
+        background-color: rgb(221, 221, 221);
+        width: 80%;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-weight: bold;
+        cursor: pointer;
+        color: rgb(59, 59, 59);
+    }
+    .responsavelDIV button:hover{
+        background-color: rgb(255, 96, 96);
+        transform: scale(1.05);
+        color: white;
+    }
+    .responsavelDIV thead{
+        position: relative;
+        top: 5px;
+        color: rgb(82, 82, 82);
+    }
+    .DescIntervencao{
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+    .Tempo{
+        position: relative;
+        height: 50px;
+        width: 70px;
+        -webkit-text-stroke: 1px rgb(54, 175, 255);
+        padding: 10px;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 25px;
+        border-radius: 10px;
+        border: 0.5px black solid;
+    }
+    .Legenda{
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        font-size: 25px;
+        -webkit-text-stroke: 0.5px rgb(0, 119, 255);
+    }
+    .FecharBTN{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 20px;
+        bottom: 20px;
+        background: none;
+        border: none;
+    }
+    .FecharBTN img{
+        width: 100%;
+        height: 100%;
+    }
+    .ConfirmarBTN{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: none;
+        border: none;
+        right: 20px;
+        bottom: 20px;
+    }
+    .ConfirmarBTN img{
+        width: 100%;
+        height: 100%;
+    }
+    .Botoes{
+        position: relative;
+        width: 100%;
+        height: 200px;
+    
+    }
+    .SalvarBTN{
+        position: absolute;
+        float: right;
+        bottom: 2px;
+        right: 1%;
+        height: 50px;
+        width: 80px;
+        margin: 10px 0px;
+        border: 1px black solid;
+        color: white;
+        font-weight: bold;
+        background-color: rgb(0, 206, 0);
+    }
 }
 
 

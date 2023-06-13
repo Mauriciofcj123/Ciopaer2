@@ -85,7 +85,6 @@ function RemoverAcessorio(){
     let Checkbox=document.getElementsByName('CheckboxAcessorio');
     let Objetos=document.getElementsByClassName('Objeto');
     let Selecionados=0;
-    console.log(Checkbox.length);
 
     for(let i=0;i<Checkbox.length;i++){
         if(Checkbox[i].checked){
@@ -141,7 +140,6 @@ function AdicionarDiscrepancia(){
     Celula4.innerHTML="<textarea name='DescricaoDisc'/>";
     Celula4.colSpan=2;
     Celula4.classList.add('DiscrepanciaTXT');
-    console.log(document.getElementsByName('DescricaoDisc')[12]);
 }
 function AdicionarOBS(){
     let Tabela=document.getElementById('ObservacoesTB');
@@ -238,14 +236,12 @@ function EditarInt(id){
         AdicionarMecanico(Mecanicos[Mec]);
    }
 
-
-
+   Hora.value=HoraTXT.replace('0','');
+   Minuto.value=MinutosTXT;
+   Segundo.value=SegundosTXT;
    Aeronave.value=AeronaveTXT;
    Tipo.value=TipoTXT;
    CaixaTexto.value=Descricao;
-   Hora.value=HoraTXT;
-   Minuto.value=MinutosTXT;
-   Segundo.value=SegundosTXT;
 
    Modal.style.visibility='visible';
 }
@@ -296,9 +292,88 @@ function VerificarTempo(){
     }else{
         Aprovado=false;
     }
-    console.log(Hora+Minutos+Segundos);
     return Aprovado;
 }
+function ConfirmarIntervencao(){
+   let Aprovado=true;
+   let Aeronave=document.getElementById('Aeronave').value;
+   let Responsáveis=ContarMecanicos();
+   let Tempo;
+   let Tipo=document.getElementById('Tipo').value;
+   let Descricao=document.getElementById('CaixaTexto').value;
+
+   if(Responsáveis==''||Responsáveis==undefined){
+        Aprovado=false;
+        alert('Por favor selecione os responsáveis pelo serviço.');
+   }
+
+   if(Descricao.length<10){
+        Aprovado=false;
+        alert('Por favor descreva o que foi realizado na intervenção.');
+   }
+   
+    if(VerificarTempo()){
+        let Hora=document.getElementById('Hora').value;
+        let HoraTXT;
+        if(Hora<10){
+            HoraTXT='0'+Hora;
+           }else{
+            HoraTXT=Hora;
+           }
+        let Minutos=document.getElementById('Minuto').value;
+        let MinutoTXT;
+           if(Minutos<10){
+            MinutoTXT='0'+Minutos;
+           }else{
+            MinutoTXT=Minutos;
+           }
+        let Segundos=document.getElementById('Segundo').value;
+        let SegundosTXT;
+           if(Segundos<10){
+            SegundosTXT='0'+Segundos;
+           }else{
+            SegundosTXT=Segundos;
+           }
+
+           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
+    }else{
+        Aprovado=false;
+        alert('Por favor informe a duração do serviço.');
+    }
+
+    if(Aprovado){
+        let IntervencaoTB=document.getElementById('IntervencaoTB');
+        let NumeroLinhas=IntervencaoTB.getElementsByTagName('tr');
+
+
+        let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
+        Linha2.classList.add('CamposInt');
+        let Celula2=Linha2.insertCell(0);
+        let Celula3=Linha2.insertCell(1);
+        let Celula4=Linha2.insertCell(2);
+        let Celula5=Linha2.insertCell(3);
+        let Celula6=Linha2.insertCell(4);
+        let Celula7=Linha2.insertCell(5);
+        Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
+        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
+        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
+        Celula4.colSpan=2;
+        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
+        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
+        Celula7.innerHTML="<button onClick='EditarInt("+(NumeroLinhas/2+1)+")'><img src='Imgs/editar.png'></button></img>";
+
+        let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
+        Linha1.classList.add('Responsavel');
+        let Celula1=Linha1.insertCell(0);
+        Celula1.colSpan=7;
+        Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
+
+        console.log(IntervencaoTB.rows.length);
+        FecharModalIntervencao();
+
+    }
+}
+
 function ConfirmarIntervencao(){
    let Aprovado=true;
    let Aeronave=document.getElementById('Aeronave').value;
@@ -349,85 +424,6 @@ function ConfirmarIntervencao(){
     if(Aprovado){
         let IntervencaoTB=document.getElementById('IntervencaoTB');
         let NumeroLinhas=IntervencaoTB.rows.length;
-        console.log(NumeroLinhas);
-
-        let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
-        Linha2.classList.add('CamposInt');
-        let Celula2=Linha2.insertCell(0);
-        let Celula3=Linha2.insertCell(1);
-        let Celula4=Linha2.insertCell(2);
-        let Celula5=Linha2.insertCell(3);
-        let Celula6=Linha2.insertCell(4);
-        let Celula7=Linha2.insertCell(5);
-        Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
-        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
-        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
-        Celula4.colSpan=2;
-        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
-        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt("+(NumeroLinhas/2+1)+")'><img src='Imgs/editar.png'></button></img>";
-
-        let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
-        Linha1.classList.add('Responsavel');
-        let Celula1=Linha1.insertCell(0);
-        Celula1.colSpan=7;
-        Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
-
-        FecharModalIntervencao();
-
-    }
-}
-
-function ConfirmarIntervencao(){
-   let Aprovado=true;
-   let Aeronave=document.getElementById('Aeronave').value;
-   let Responsáveis=ContarMecanicos();
-   let Tempo;
-   let Tipo=document.getElementById('Tipo').value;
-   let Descricao=document.getElementById('CaixaTexto').value;
-
-   if(Responsáveis==''||Responsáveis==undefined){
-        Aprovado=false;
-        alert('Por favor selecione os responsáveis pelo serviço.');
-   }
-
-   if(Descricao.length<10){
-        Aprovado=false;
-        alert('Por favor descreva o que foi realizado na intervenção.');
-   }
-   
-    if(VerificarTempo()){
-        let Hora=document.getElementById('Hora').value;
-        let HoraTXT;
-            if(Hora<10){
-            HoraTXT='0'+Hora;
-           }else{
-            HoraTXT=Hora;
-           }
-        let Minutos=document.getElementById('Minuto').value;
-        let MinutoTXT;
-           if(Minutos<10){
-            MinutoTXT='0'+Minutos;
-           }else{
-            MinutoTXT=Minutos;
-           }
-        let Segundos=document.getElementById('Segundo').value;
-        let SegundosTXT;
-           if(Segundos<10){
-            SegundosTXT='0'+Segundos;
-           }else{
-            SegundosTXT=Segundos;
-           }
-
-           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
-    }else{
-        Aprovado=false;
-        alert('Por favor informe a duração do serviço.');
-    }
-
-    if(Aprovado){
-        let IntervencaoTB=document.getElementById('IntervencaoTB');
-
         let Linha2=IntervencaoTB.insertRow(idGlobal);
         Linha2.classList.add('CamposInt');
         let Celula2=Linha2.insertCell(0);
@@ -447,7 +443,7 @@ function ConfirmarIntervencao(){
         let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
         Linha1.classList.add('Responsavel');
         let Celula1=Linha1.insertCell(0);
-        Celula1.colSpan=7;
+        Celula1.colSpan=6;
         Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
 
         FecharModalIntervencao();
@@ -470,7 +466,6 @@ function RemoverIntervencao(){
 function AdicionarMecanico(Texto){
     let Responsavel=document.getElementById('ResponsavelTB');
     let Cartões=document.getElementsByName('Cartão');
-    console.log(Cartões.length);
 
     let NumeroLinhas = Responsavel.rows.length;
     let Linha=Responsavel.insertRow(NumeroLinhas);
@@ -552,7 +547,6 @@ function VerificarDisponibilidade(){
     let Valido=true;
 
     for(i=0;i<Status.length;i++){
-        console.log(Causa[i].value.length+"---"+Status[i].value);
 
         if(Causa[i].value.length<=0 && Status[i].value=='Indisponivel'){
             Valido=false;

@@ -214,7 +214,6 @@
                 <button onClick='RemoverOBS()'><img src='Imgs/lixo.png' title='Remover Observação'></button>
             </div>";
 
-        echo "<div class='ObservacoesDIV'>";
         echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
         while($Observacoes=$Requisicao->fetch_assoc()){
             echo "<tr name='LinhaOBS'>
@@ -224,7 +223,6 @@
                 </tr>";
         }
         echo "</table>";
-        echo "</div>";
 
         echo "</div>";
     }

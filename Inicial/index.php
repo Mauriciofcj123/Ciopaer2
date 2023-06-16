@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src="script.js"></script>
+    <script src="../Cabecalho/script.js" defer></script>
 
 </head>
 <body>

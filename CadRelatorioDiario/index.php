@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="../Cabecalho/script.js" defer></script>
 </head>
 <body id='body'>
     <?php
@@ -225,11 +226,12 @@
         echo "</table>";
 
         echo "</div>";
+
+        echo '<div class="Botoes">
+        <button class="SalvarBTN" onclick="Salvar()">Salvar</button>
+        </div>';
     }
     ?>
-    <div class="Botoes">
-    <button class="SalvarBTN" onclick="Salvar()">Salvar</button>
-    </div>
     <div id='FormularioDIV'></div>
     
     <div class="Modal" id='ModalInt'>

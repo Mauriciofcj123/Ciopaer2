@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="../Cabecalho/script.js" defer></script>
 </head>
 <body id='body'>
     <?php
@@ -20,7 +21,7 @@
 
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
-            echo '<select id="MecanicoDia">';
+            echo '<select id="MecanicoDia" disabled>';
             $Mecanicos='SELECT * FROM operacional';
             $MecanicosReq=mysqli_query($mysqli,$Mecanicos);
             while($MecanicosArray=$MecanicosReq->fetch_assoc()){
@@ -35,7 +36,7 @@
         echo '</div>';
         
         $Data=date('Y-m-d',strtotime($_SESSION['Data']));
-        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'"></div>';
+        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'" disabled></div>';
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
@@ -237,11 +238,12 @@
         echo "</div>";
 
         echo "</div>";
+
+        echo '<div class="Botoes">
+        <button class="SalvarBTN" onclick="Salvar()">Salvar</button>
+        </div>';
     }
     ?>
-    <div class="Botoes">
-    <button class="SalvarBTN" onclick="Salvar()">Salvar</button>
-    </div>
     <div id='FormularioDIV'></div>
     
     <div class="Modal" id='ModalInt'>
@@ -307,7 +309,7 @@
         <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
         <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>
         <input type="number" class="Tempo" id="Segundo" max="59" min="0" value=0><label class="Legenda">Seg.</label>
-        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN"><img src="Imgs/Confirmar.png" alt=""></button>
+        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN" id='BTNSalvar'><img src="Imgs/Confirmar.png" alt=""></button>
         <button onClick='FecharModalIntervencao()' class="FecharBTN"><img src="Imgs/Fechar.png" alt=""></button>
             </div>
         </div>

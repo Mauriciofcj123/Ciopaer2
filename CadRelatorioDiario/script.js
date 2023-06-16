@@ -217,7 +217,7 @@ function ContarMecanicos(){
     let Mecanicos="";
     let Celulas=IntervencaoTB.getElementsByTagName('td');
     for(let i=0;i<NumeroLinhas-1;i++){
-        if(Mecanicos==undefined){
+        if(Mecanicos==undefined||Mecanicos==""||Mecanicos==null){
             Mecanicos=Celulas[i].textContent;
         }else{
             Mecanicos+='/ '+Celulas[i].textContent;
@@ -310,8 +310,6 @@ function ConfirmarIntervencao(){
         let Celula3=Linha2.insertCell(1);
         let Celula4=Linha2.insertCell(2);
         let Celula5=Linha2.insertCell(3);
-        let Celula6=Linha2.insertCell(4);
-        let Celula7=Linha2.insertCell(5);
         Celula2.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
         Celula3.colSpan=3;
         Celula3.innerHTML='<textarea name="DescricaoInt" disabled>'+Descricao+'</textarea>';

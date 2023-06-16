@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script src="../Cabecalho/script.js" defer></script>
 
 </head>
 <body>
@@ -63,7 +65,7 @@
             } else if($Status['Status']=='Indisponível'){
                 $StatusImagem='Imgs/cancelar.png';
                 $Texto='Causa: '.$Status['Causa'];
-            }else if($Status['Status']=='Disponível/Despachada'){
+            }else if($Status['Status']=='Despachada'){
                 $StatusImagem='Imgs/Despachada.png';
                 $Texto=$Status['Causa'];
             }
@@ -92,7 +94,8 @@
                     <td colspan="3"><img src="Imgs/manutencao.png"><label>'.$Intervencao['DescIntervencao'].'</label></td>
                 </tr>';
                 echo '<tr class="Linha" id="LinhaIntervencao">
-                <td colspan="3"><img src="Imgs/time.png"><label>'.$Intervencao['TempoInter'].'</label></td>
+                <td colspan="2"><img src="Imgs/time.png"><label>'.$Intervencao['TempoInter'].'</label></td>
+                <td colspan="1"><label>Tipo: '.$Intervencao['TipoIntervencao'].'</label></td>
                 </tr>';
                 echo '<tr class="Espaco"></tr>';
             }

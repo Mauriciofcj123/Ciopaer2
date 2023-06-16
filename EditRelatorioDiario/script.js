@@ -206,6 +206,8 @@ function ResetarModal(){
 function AbrirModalIntervencao(){
     ResetarModal();
    var Modal=document.getElementById('ModalInt');
+   let BTNSalvar=document.getElementById('BTNSalvar');
+   BTNSalvar.setAttribute('onClick','ConfirmarIntervencao()');
 
    Modal.style.visibility='visible';
 }
@@ -215,22 +217,25 @@ var idGlobal="";
 function EditarInt(id){
     ResetarModal();
     idGlobal=id;
+    id=id-1;
    let Modal=document.getElementById('ModalInt');
    let Aeronave=document.getElementById('Aeronave');
    let Tipo=document.getElementById('Tipo');
    let CaixaTexto=document.getElementById('CaixaTexto');
-   let AeronaveTXT=document.getElementsByName('PlacaInt')[id-1].value;
-   let MecanicoTXT=document.getElementsByName('ResponsavelInt')[id-1].value;
+   let AeronaveTXT=document.getElementsByName('PlacaInt')[id].value;
+   let MecanicoTXT=document.getElementsByName('ResponsavelInt')[id].value;
    let Mecanicos=MecanicoTXT.split('/');
-   let Descricao=document.getElementsByName('DescricaoInt')[id-1].value;
-   let TipoTXT=document.getElementsByName('TipoInt')[id-1].value;
-   let Tempo=document.getElementsByName('TempoInt')[id-1].value;
+   let Descricao=document.getElementsByName('DescricaoInt')[id].value;
+   let TipoTXT=document.getElementsByName('TipoInt')[id].value;
+   let Tempo=document.getElementsByName('TempoInt')[id].value;
    let HoraTXT=Tempo.substring(0,2);
    let MinutosTXT=Tempo.substring(3,5);
    let SegundosTXT=Tempo.substring(6,8);
    let Hora=document.getElementById('Hora');
    let Minuto=document.getElementById('Minuto');
    let Segundo=document.getElementById('Segundo');
+   let BTNSalvar=document.getElementById('BTNSalvar');
+   BTNSalvar.setAttribute('onClick','ConfirmarEdicao()');
 
    for(Mec=0;Mec<Mecanicos.length;Mec++){
         AdicionarMecanico(Mecanicos[Mec]);
@@ -343,7 +348,7 @@ function ConfirmarIntervencao(){
 
     if(Aprovado){
         let IntervencaoTB=document.getElementById('IntervencaoTB');
-        let NumeroLinhas=IntervencaoTB.getElementsByTagName('tr');
+        let NumeroLinhas=IntervencaoTB.rows.length;
 
 
         let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
@@ -367,14 +372,13 @@ function ConfirmarIntervencao(){
         let Celula1=Linha1.insertCell(0);
         Celula1.colSpan=7;
         Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
-
         console.log(IntervencaoTB.rows.length);
         FecharModalIntervencao();
 
     }
 }
 
-function ConfirmarIntervencao(){
+function ConfirmarEdicao(){
    let Aprovado=true;
    let Aeronave=document.getElementById('Aeronave').value;
    let Responsáveis=ContarMecanicos();
@@ -395,21 +399,21 @@ function ConfirmarIntervencao(){
     if(VerificarTempo()){
         let Hora=document.getElementById('Hora').value;
         let HoraTXT;
-            if(Hora<10){
+            if(Hora<10 && Hora.length<2){
             HoraTXT='0'+Hora;
            }else{
             HoraTXT=Hora;
            }
         let Minutos=document.getElementById('Minuto').value;
         let MinutoTXT;
-           if(Minutos<10){
+           if(Minutos<10&&Minutos.length<2){
             MinutoTXT='0'+Minutos;
            }else{
             MinutoTXT=Minutos;
            }
         let Segundos=document.getElementById('Segundo').value;
         let SegundosTXT;
-           if(Segundos<10){
+           if(Segundos<10 && Segundos.length<2){
             SegundosTXT='0'+Segundos;
            }else{
             SegundosTXT=Segundos;
@@ -422,9 +426,11 @@ function ConfirmarIntervencao(){
     }
 
     if(Aprovado){
+        RemoverIntervencao();
         let IntervencaoTB=document.getElementById('IntervencaoTB');
         let NumeroLinhas=IntervencaoTB.rows.length;
-        let Linha2=IntervencaoTB.insertRow(idGlobal);
+
+        let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
         Linha2.classList.add('CamposInt');
         let Celula2=Linha2.insertCell(0);
         let Celula3=Linha2.insertCell(1);
@@ -461,6 +467,13 @@ function RemoverIntervencao(){
             Linha[i].remove();
         }
     }
+}
+function RemoverIntervencao(){
+
+    let IntervencaoTB=document.getElementById('IntervencaoTB');
+    let Linha=IntervencaoTB.rows.length;
+
+    Linha[0].remove();
 }
 
 function AdicionarMecanico(Texto){

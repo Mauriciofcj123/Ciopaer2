@@ -27,7 +27,7 @@
         echo "<a href='index.php'><img class='Parte' src='Imgs/Fone de ouvido.png' title='Objetos Cautelados'></a>";
         echo "<a href='../RelatorioDiarioObs/index.php'><img class='Parte' src='Imgs/papel.png' title='Observações'></a>";
 
-        $SQL='SELECT * FROM acessoriodisp WHERE Data='.$_SESSION['Data'].'';
+            $SQL="SELECT * FROM acessoriodisp WHERE Data='".$_SESSION['Data']."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
             $QTD=$Requisicao->num_rows;
 
@@ -44,7 +44,7 @@
 
                 while($Linha=$Requisicao->fetch_assoc()){
                     echo '<tr>
-                    <td><img src="Imgs/'.$Linha['NomeAcessorio'].'.png"></td>
+                    <td><img src="Imgs/'.$Linha['NomeAcessorio'].'.png" title="'.$Linha['NomeAcessorio'].'"></td>
                     <td>'.$Linha['Responsável'].'</td>        
                     </tr>';
                 }

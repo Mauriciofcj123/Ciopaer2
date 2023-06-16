@@ -8,7 +8,8 @@
     <title>Relatório Diário</title>
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <link rel="stylesheet" href="style.css">
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
+    <script src="../Cabecalho/script.js" defer></script>
 
 </head>
 <body>
@@ -16,21 +17,22 @@
     <?php
             include('../Cabecalho/Cabecalho.php');
             include('../Conexao.php');
-            
-    ?>
-    <div class='Pesquisa'>
-        <form action="" method='get'>
-            <input type="text" placeholder="Pesquisar" name='PesquisarTXT' class='PesquisaTXT'>
-            <button type='submit' name='PesquisarBTN' id='PesquisarBTN' class='PesquisaBTN'><img src="Imgs/Pesquisar.png""></button><br>
-            <input type="date" name='PesquisarDe' class='PesquisaData'>
+
+    if(isset($_SESSION['Nome'])){
+    echo "<div class='Pesquisa'>
+        <form action='' method='get'>
+            <input type='text' placeholder='Pesquisar' name='PesquisarTXT' class='PesquisaTXT'>
+            <button type='submit' name='PesquisarBTN' id='PesquisarBTN' class='PesquisaBTN'><img src='Imgs/Pesquisar.png'></button><br>
+            <input type='date' name='PesquisarDe' class='PesquisaData'>
             <label>Até</label>
-            <input type="date" name='PesquisarAte' class='PesquisaData'>
+            <input type='date' name='PesquisarAte' class='PesquisaData'>
         </form>
         <div class='Botoes'>
-            <button onclick="CriarRelatorio()" title="Criar um novo relatório"><img src="Imgs/CriarRel.png"></button>
+            <button onclick='CriarRelatorio()' title='Criar um novo relatório'><img src='Imgs/CriarRel.png'></button>
         </div>
-    </div>
-    <?php
+    </div>";
+
+
     echo '<div class="TabelaDIV">';
         if(isset($_GET['PesquisarBTN'])){
             $PesquisarTXT=mysqli_real_escape_string($mysqli,$_GET['PesquisarTXT']);
@@ -149,6 +151,7 @@
         if($Quantidade<=0){
             echo '<h1 class="Erro">Nenhum resultado encontrado.</h1>';
         }
+    }
         
     ?>
 </body>

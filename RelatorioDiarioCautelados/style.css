@@ -130,14 +130,17 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.Tabela td{
+    cursor: default;
+}
 .Espaco{
     height: 50px;
 }
-.Titulo td:nth-child(2){
-    text-align: center;
-}
 .Titulo td:nth-child(1){
     text-align: left;
+}
+.Titulo td:nth-child(2){
+    text-align: center;
 }
 .Titulo td:nth-child(3){
     text-align: right;

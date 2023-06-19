@@ -102,12 +102,14 @@
     
             $SQL="SELECT * FROM discrepancias WHERE Data='".$Data."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
+            $QTD=$Requisicao->num_rows;
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
     
             echo "<div class='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
+                    <label for='DiscrepanciaQTD' class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
                 </div>";
             
             while($Linha=$Requisicao->fetch_assoc()){
@@ -209,7 +211,6 @@
                         <td><input type='text' name='TempoInt' value='".$Intervencao['TempoInter']."' disabled></input></td>
                         <td><button onClick='EditarInt(".$IDInt.")'><img src='Imgs/editar.png'></button></img></td>
                         </tr>";
-
                 }
                 echo "</table>";
 

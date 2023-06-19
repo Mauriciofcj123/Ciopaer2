@@ -468,7 +468,7 @@ function RemoverIntervencao(){
         }
     }
 }
-function RemoverIntervencao(){
+function RemoverIntervencaoID(){
 
     let IntervencaoTB=document.getElementById('IntervencaoTB');
     let Linha=IntervencaoTB.rows.length;

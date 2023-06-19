@@ -190,6 +190,20 @@
         border: none;
         cursor: pointer;
     }
+    .DiscrepanciaQTDTXT{
+        position: relative;
+        float: right;
+        right: 5px;
+        bottom: 0%;
+        color: rgb(89, 189, 255);
+        -webkit-text-stroke: 0.2px black;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .DiscrepanciaQTD{
+        position: relative;
+        float: right;
+    }
     
     .Selecionada{
         transform: scale(1.2);
@@ -1041,7 +1055,8 @@
     }
     .CardBoxs{
         width: 100%;
-        height: 50%;
+        max-height: 50%;
+        background-color: aqua;
     }
     .CardBox{
         position: relative;
@@ -1053,6 +1068,7 @@
         border-radius: 10px;
         float: left;
         left: 5%;
+        overflow: auto;
     }
     .CardBox button{
         background-color: rgb(221, 221, 221);
@@ -1092,6 +1108,7 @@
         border-radius: 10px;
         float: right;
         right: 5%;
+        overflow: auto;
     }
     .responsavelDIV button{
         background-color: rgb(221, 221, 221);

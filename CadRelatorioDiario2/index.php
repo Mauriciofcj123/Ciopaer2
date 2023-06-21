@@ -15,13 +15,13 @@
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
-        if(isset($_POST['EditarBTN'])){
-            $_SESSION['Data']=$_POST['DataTXT'];
+        if(isset($_POST['AcessarBTN'])){
+            $_SESSION['Data']=$_POST['DataRelatorio'];
         }
 
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
-            echo '<select id="MecanicoDia" disabled>';
+            echo '<select id="MecanicoDia">';
             $Mecanicos='SELECT * FROM operacional';
             $MecanicosReq=mysqli_query($mysqli,$Mecanicos);
             while($MecanicosArray=$MecanicosReq->fetch_assoc()){
@@ -35,8 +35,8 @@
         echo '</select>';
         echo '</div>';
         
-        $Data=date('Y-m-d',strtotime($_SESSION['Data']));
-        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'" disabled></div>';
+        $Data=date('dd/mm/YY');
+        echo '<div class="Data"><input type="date" id="DataTXT" value="'.date('Y-m-d').'"></div>';
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
@@ -59,11 +59,15 @@
         $i=0;
 
         while($Linha1=$AeronavesCad->fetch_assoc()){
+            $SQL='SELECT * FROM disponibilidade ORDER BY Data Desc LIMIT 1';
+            $Requisicao=mysqli_query($mysqli,$SQL);
+            $Resultado=$Requisicao->fetch_assoc();
+            $UltimaData=$Resultado['Data'];
             $i++;
 
             echo '<div id="'.$Linha1['Marca'].'">';
 
-            $SQL='SELECT * FROM disponibilidade WHERE Placa="'.$Linha1['Marca'].'" AND Data = "'.$Data.'"';
+            $SQL='SELECT * FROM disponibilidade WHERE Placa="'.$Linha1['Marca'].'" AND Data = "'.$UltimaData.'"';
             $Requisicao=mysqli_query($mysqli,$SQL);
             $Disponibilidade=$Requisicao->fetch_assoc();
 
@@ -99,17 +103,20 @@
             $ID++;
         }
         echo '</div>';
-    
-            $SQL="SELECT * FROM discrepancias WHERE Data='".$Data."'";
+        
+        $SQL='SELECT * FROM discrepancias ORDER BY Data Desc LIMIT 1';
             $Requisicao=mysqli_query($mysqli,$SQL);
-            $QTD=$Requisicao->num_rows;
+            $Resultado=$Requisicao->fetch_assoc();
+            $UltimaData=$Resultado['Data'];
+    
+            $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."'";
+            $Requisicao=mysqli_query($mysqli,$SQL);
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
     
             echo "<div class='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
-                    <label class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
                 </div>";
             
             while($Linha=$Requisicao->fetch_assoc()){
@@ -135,7 +142,6 @@
                     </tr>";
             echo "</table>";
             }
-    
 
     
         echo "</div>";
@@ -194,30 +200,12 @@
             <button onClick='RemoverIntervencao()'><img src='Imgs/lixo.png' title='Remover Intervenção'></button>
             </div>";
 
-            $SQLInt="SELECT * FROM intervencao WHERE Data='$Data'";
-            $RequisicaoInt=mysqli_query($mysqli,$SQLInt);
-            $IDInt=0;
             echo "<table class='IntervencaoTB' id='IntervencaoTB'>";
-                while($Intervencao=$RequisicaoInt->fetch_assoc()){
-                    echo "<tr class='Responsavel' name='ResponsavelInt'>
-                        <td colspan='7'><input type='text' name='MecanicoInt' value='".$Intervencao['RealizadoPor']."' disabled></input></td>
-                    </tr>";
-                    echo "<tr class='CamposInt' name='CamposInt'>
-                        <td><input type='checkbox' name='CheckInt'></td>
-                        <td><input type='text' name='PlacaInt' value='".$Intervencao['Placa']."' disabled></input></td>
-                        <td colspan='2'><textarea name='DescricaoInt' disabled >".$Intervencao['DescIntervencao']."</textarea></input></td>
-                        <td><input type='text' name='TipoInt' value='".$Intervencao['TipoIntervencao']."' disabled></input></td>
-                        <td><input type='text' name='TempoInt' value='".$Intervencao['TempoInter']."' disabled></input></td>
-                        <td><button onClick='EditarInt(".$IDInt.")'><img src='Imgs/editar.png'></button></img></td>
-                        </tr>";
-                        $IDInt++;
-                }
-                echo "</table>";
-
+            echo "</table>";
         echo "</div>";
         echo "</div>";
 
-        $SQL='SELECT * FROM observacoes WHERE data="'.$Data.'"';
+        $SQL='SELECT * FROM observacoes WHERE data="'.$UltimaData.'"';
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         echo "<div class='Observacoes'>";
@@ -226,7 +214,6 @@
                 <button onClick='RemoverOBS()'><img src='Imgs/lixo.png' title='Remover Observação'></button>
             </div>";
 
-        echo "<div class='ObservacoesDIV'>";
         echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
         while($Observacoes=$Requisicao->fetch_assoc()){
             echo "<tr name='LinhaOBS'>
@@ -236,7 +223,6 @@
                 </tr>";
         }
         echo "</table>";
-        echo "</div>";
 
         echo "</div>";
 
@@ -264,42 +250,40 @@
         </select>
                 
         <div class="CardBoxs">
-            <div class="TodosDIV">
-                <table class="TodosTB" id="MecanicosTB">
-                    <thead>
-                        <th>Todos</th>
-                    </thead>
-                    <?php
+            
+            <table class="CardBox" id="MecanicosTB">
+                <thead>
+                    <th>Operacional</th>
+                </thead>
+                <?php
 
-                        $SQL='SELECT * FROM operacional';
-                        $Requisicao1=mysqli_query($mysqli,$SQL);
+                    $SQL='SELECT * FROM operacional';
+                    $Requisicao1=mysqli_query($mysqli,$SQL);
 
-                        while($Mecanicos=$Requisicao1->fetch_assoc()){
-                            if($Mecanicos['Patente']==="Sem Patente"){
-                                echo '<tr disabled name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
-                                    <td>
-                                        <button onClick="AdicionarMecanico(\''. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'</button>
-                                    </td>
-                                </tr>';
-                            }else{
-                                echo '<tr name="Cartão" id="'. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'">
+                    while($Mecanicos=$Requisicao1->fetch_assoc()){
+                        if($Mecanicos['Patente']==="Sem Patente"){
+                            echo '<tr disabled name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
                                 <td>
-                                    <button onClick="AdicionarMecanico(\''. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'</button>
+                                    <button onClick="AdicionarMecanico(\''. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'</button>
                                 </td>
                             </tr>';
-                            }
-                            
+                        }else{
+                            echo '<tr name="Cartão" id="'. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'">
+                            <td>
+                                <button onClick="AdicionarMecanico(\''. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'</button>
+                            </td>
+                        </tr>';
                         }
-                    ?>
-                </table>
-            </div>
-            <div class="responsavelDIV">
-                <table class="responsavelTB" id='ResponsavelTB'>
-                <thead>
-                    <th>Responsáveis</th>
-                </thead>
-                </table>
-            </div>
+                        
+                    }
+                ?>
+            </table>
+            <table class="responsavelDIV" id='ResponsavelTB'>
+            <thead>
+                <th>Responsável pela Intervenção</th>
+            </thead>
+                
+            </table>
         </div>
         <label style='font-weight: bold;'>Tipo: </label>
         <select id='Tipo'>
@@ -313,7 +297,7 @@
         <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
         <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>
         <input type="number" class="Tempo" id="Segundo" max="59" min="0" value=0><label class="Legenda">Seg.</label>
-        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN" id='BTNSalvar'><img src="Imgs/Confirmar.png" alt=""></button>
+        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN"><img src="Imgs/Confirmar.png" alt=""></button>
         <button onClick='FecharModalIntervencao()' class="FecharBTN"><img src="Imgs/Fechar.png" alt=""></button>
             </div>
         </div>

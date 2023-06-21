@@ -1,0 +1,13 @@
+.principal{
+    text-align: center;
+    display: block;
+    font-size: 4rem;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    -webkit-text-stroke: 0.2px black;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.479);
+}
+.principal img{
+    position: relative;
+    width: 50%;
+}

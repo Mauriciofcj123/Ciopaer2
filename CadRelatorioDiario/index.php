@@ -15,8 +15,8 @@
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
-        if(isset($_POST['AcessarBTN'])){
-            $_SESSION['Data']=$_POST['DataRelatorio'];
+        if(isset($_POST['EditarBTN'])){
+            $_SESSION['Data']=$_POST['DataTXT'];
         }
 
         if(isset($_SESSION['Data'])){
@@ -35,8 +35,8 @@
         echo '</select>';
         echo '</div>';
         
-        $Data=date('dd/mm/YY');
-        echo '<div class="Data"><input type="date" id="DataTXT" value="'.date('Y-m-d').'"></div>';
+        $Data=date('Y-m-d');
+        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'"></div>';
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
@@ -103,20 +103,17 @@
             $ID++;
         }
         echo '</div>';
-        
-        $SQL='SELECT * FROM discrepancias ORDER BY Data Desc LIMIT 1';
-            $Requisicao=mysqli_query($mysqli,$SQL);
-            $Resultado=$Requisicao->fetch_assoc();
-            $UltimaData=$Resultado['Data'];
     
             $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
+            $QTD=$Requisicao->num_rows;
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
     
             echo "<div class='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
+                    <label for='DiscrepanciaQTD' class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
                 </div>";
             
             while($Linha=$Requisicao->fetch_assoc()){
@@ -201,8 +198,12 @@
             <button onClick='RemoverIntervencao()'><img src='Imgs/lixo.png' title='Remover Intervenção'></button>
             </div>";
 
+            $SQLInt="SELECT * FROM intervencao WHERE Data='$UltimaData'";
+            $RequisicaoInt=mysqli_query($mysqli,$SQLInt);
+            $IDInt=0;
             echo "<table class='IntervencaoTB' id='IntervencaoTB'>";
-            echo "</table>";
+                echo "</table>";
+
         echo "</div>";
         echo "</div>";
 
@@ -215,6 +216,7 @@
                 <button onClick='RemoverOBS()'><img src='Imgs/lixo.png' title='Remover Observação'></button>
             </div>";
 
+        echo "<div class='ObservacoesDIV'>";
         echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
         while($Observacoes=$Requisicao->fetch_assoc()){
             echo "<tr name='LinhaOBS'>
@@ -224,6 +226,7 @@
                 </tr>";
         }
         echo "</table>";
+        echo "</div>";
 
         echo "</div>";
 
@@ -251,39 +254,42 @@
         </select>
                 
         <div class="CardBoxs">
-            <table class="CardBox" id="MecanicosTB">
-                <thead>
-                    <th>Operacional</th>
-                </thead>
-                <?php
+            <div class="TodosDIV">
+                <table class="TodosTB" id="MecanicosTB">
+                    <thead>
+                        <th>Todos</th>
+                    </thead>
+                    <?php
 
-                    $SQL='SELECT * FROM operacional';
-                    $Requisicao1=mysqli_query($mysqli,$SQL);
+                        $SQL='SELECT * FROM operacional';
+                        $Requisicao1=mysqli_query($mysqli,$SQL);
 
-                    while($Mecanicos=$Requisicao1->fetch_assoc()){
-                        if($Mecanicos['Patente']==="Sem Patente"){
-                            echo '<tr disabled name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
+                        while($Mecanicos=$Requisicao1->fetch_assoc()){
+                            if($Mecanicos['Patente']==="Sem Patente"){
+                                echo '<tr disabled name="Cartão" id="'. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'">
+                                    <td>
+                                        <button onClick="AdicionarMecanico(\''. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'</button>
+                                    </td>
+                                </tr>';
+                            }else{
+                                echo '<tr name="Cartão" id="'. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'">
                                 <td>
-                                    <button onClick="AdicionarMecanico(\''. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Nome']. ' '.$Mecanicos['Sobrenome'].'</button>
+                                    <button onClick="AdicionarMecanico(\''. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'</button>
                                 </td>
                             </tr>';
-                        }else{
-                            echo '<tr name="Cartão" id="'. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'">
-                            <td>
-                                <button onClick="AdicionarMecanico(\''. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'\')"> '. $Mecanicos['Patente']. ' '.$Mecanicos['Sobrenome'].'</button>
-                            </td>
-                        </tr>';
+                            }
+                            
                         }
-                        
-                    }
-                ?>
-            </table>
-            <table class="responsavelDIV" id='ResponsavelTB'>
-            <thead>
-                <th>Responsável pela Intervenção</th>
-            </thead>
-                
-            </table>
+                    ?>
+                </table>
+            </div>
+            <div class="responsavelDIV">
+                <table class="responsavelTB" id='ResponsavelTB'>
+                <thead>
+                    <th>Responsáveis</th>
+                </thead>
+                </table>
+            </div>
         </div>
         <label style='font-weight: bold;'>Tipo: </label>
         <select id='Tipo'>
@@ -297,7 +303,7 @@
         <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
         <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>
         <input type="number" class="Tempo" id="Segundo" max="59" min="0" value=0><label class="Legenda">Seg.</label>
-        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN"><img src="Imgs/Confirmar.png" alt=""></button>
+        <button onClick='ConfirmarIntervencao()' class="ConfirmarBTN" id='BTNSalvar'><img src="Imgs/Confirmar.png" alt=""></button>
         <button onClick='FecharModalIntervencao()' class="FecharBTN"><img src="Imgs/Fechar.png" alt=""></button>
             </div>
         </div>

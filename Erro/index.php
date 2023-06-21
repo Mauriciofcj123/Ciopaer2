@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina em Produção</title>
     <link rel="stylesheet" href="../Cabecalho/style.css">
-    <link rel="stylesheet" href="script.css">
+    <link rel="stylesheet" href="style.css">
     <script src='../Cabecalho/script.js' defer></script>
 </head>
 <body>
     <?php
         include_once('../Cabecalho/Cabecalho.php');
     ?>
+    <div class="principal">
+        <label>Página em manutenção!!!</label><br>
+        <img src="Imgs/Erro.png">
+    </div>
 
-    <img src="Imgs/Erro.png" alt="" id='Imagem'>
+
     
 </body>
 </html>

@@ -190,20 +190,6 @@
         border: none;
         cursor: pointer;
     }
-    .DiscrepanciaQTDTXT{
-        position: relative;
-        float: right;
-        right: 5px;
-        bottom: 0%;
-        color: rgb(89, 189, 255);
-        -webkit-text-stroke: 0.2px black;
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-    .DiscrepanciaQTD{
-        position: relative;
-        float: right;
-    }
     
     .Selecionada{
         transform: scale(1.2);
@@ -343,23 +329,16 @@
         text-align: center;
     }
     .CamposInt td:nth-child(1){
-        width: 2%;
+        width: 10%;
     }
     .CamposInt td:nth-child(2){
-        width: 10%;
+        width: 60%;
     }
     .CamposInt td:nth-child(3){
-        width: 40%;
+        width: 20%;
     }
     .CamposInt td:nth-child(4){
-        width: 30%;
-
-    }
-    .CamposInt td:nth-child(5){
         width: 10%;
-    }
-    .CamposInt td:nth-child(6){
-        width: 8%;
     }
     .Observacoes{
         position: relative;
@@ -472,30 +451,22 @@
     .CardBoxs{
         width: 100%;
         height: 50%;
-        justify-content: space-between;
-        display: flex;
     }
-    .TodosDIV{
+    .CardBox{
         position: relative;
-        height: 100%;
         width: 40%;
+        height: 100%;
+        padding: 5px;
         border: 1px rgb(119, 119, 119) solid;
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        left: 10px;
+        float: left;
+        left: 5%;
     }
-    .TodosTB{
-        position: relative;
-        width: 100%;
-        padding: 5px;
-    }
-    .TodosTB button{
-        position: relative;
+    .CardBox button{
         background-color: rgb(221, 221, 221);
         width: 80%;
-        height: 60px;
+        height: 30px;
         padding: 10px;
         margin-top: 10px;
         border-radius: 10px;
@@ -504,12 +475,12 @@
         cursor: pointer;
         color: rgb(0, 0, 0);
     }
-    .TodosTB button:hover{
+    .CardBox button:hover{
         background-color: rgb(51, 255, 0);
         transform: scale(1.05);
         color: white;
     }
-    .TodosTB thead{
+    .CardBox thead{
         position: relative;
         top: 10px;
         color: rgb(82, 82, 82);
@@ -524,24 +495,16 @@
         position: relative;
         width: 40%;
         height: 100%;
+        padding: 5px;
         border: 1px rgb(119, 119, 119) solid;
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
-        overflow-y: auto;
-        overflow-x: hidden;
         float: right;
-        right: 10px;
-
+        right: 5%;
     }
-    .responsavelTB{
-        position: relative;
-        width: 100%;
-        padding: 5px;
-    }
-    .responsavelTB button{
+    .responsavelDIV button{
         background-color: rgb(221, 221, 221);
         width: 80%;
-        height: 60px;
         padding: 10px;
         margin: 5px;
         border-radius: 10px;
@@ -550,12 +513,12 @@
         cursor: pointer;
         color: rgb(59, 59, 59);
     }
-    .responsavelTB button:hover{
+    .responsavelDIV button:hover{
         background-color: rgb(255, 96, 96);
         transform: scale(1.05);
         color: white;
     }
-    .responsavelTB thead{
+    .responsavelDIV thead{
         position: relative;
         top: 5px;
         color: rgb(82, 82, 82);
@@ -802,16 +765,6 @@
         border: 0.5px rgb(162, 233, 255) dashed;
         border-radius: 15px;
         padding: 5px
-    }
-    .DiscrepanciaQTDTXT{
-        position: relative;
-        float: right;
-        right: 5px;
-        bottom: 0%;
-        color: rgb(89, 189, 255);
-        -webkit-text-stroke: 0.2px black;
-        font-size: 1rem;
-        font-weight: bold;
     }
     .MenuDiscrepancias{
         width: 100%;
@@ -1081,30 +1034,23 @@
     }
     .CardBoxs{
         width: 100%;
-        height: 350px;
-        display: flex;
-        justify-content: space-between;
+        height: 50%;
     }
-    .TodosDIV{
+    .CardBox{
         position: relative;
-        width: 50%;
+        width: 40%;
         height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        border-radius: 10px;
+        padding: 5px;
         border: 1px rgb(119, 119, 119) solid;
         background-color: rgb(255, 255, 255);
-        left: 10px;
+        border-radius: 10px;
+        float: left;
+        left: 5%;
     }
-    .TodosTB{
-        width: 100%;
-        padding: 5px;
-
-    }
-    .TodosTB button{
+    .CardBox button{
         background-color: rgb(221, 221, 221);
         width: 80%;
-        height: 60px;
+        height: 30px;
         padding: 10px;
         margin-top: 10px;
         border-radius: 10px;
@@ -1113,12 +1059,12 @@
         cursor: pointer;
         color: rgb(0, 0, 0);
     }
-    .TodosTB button:hover{
+    .CardBox button:hover{
         background-color: rgb(51, 255, 0);
         transform: scale(1.05);
         color: white;
     }
-    .TodosTB thead{
+    .CardBox thead{
         position: relative;
         top: 10px;
         color: rgb(82, 82, 82);
@@ -1133,19 +1079,14 @@
         position: relative;
         width: 40%;
         height: 100%;
+        padding: 5px;
         border: 1px rgb(119, 119, 119) solid;
+        background-color: rgb(255, 255, 255);
         border-radius: 10px;
         float: right;
-        right: 10px;
-        background-color: white;
-        overflow-y: auto;
-        overflow-x: hidden;
+        right: 5%;
     }
-    .responsavelTB{
-        width: 100%;
-        background-color: rgb(255, 255, 255);
-    }
-    .responsavelTB button{
+    .responsavelDIV button{
         background-color: rgb(221, 221, 221);
         width: 80%;
         padding: 10px;
@@ -1156,12 +1097,12 @@
         cursor: pointer;
         color: rgb(59, 59, 59);
     }
-    .responsavelTB button:hover{
+    .responsavelDIV button:hover{
         background-color: rgb(255, 96, 96);
         transform: scale(1.05);
         color: white;
     }
-    .responsavelTB thead{
+    .responsavelDIV thead{
         position: relative;
         top: 5px;
         color: rgb(82, 82, 82);
@@ -1237,7 +1178,6 @@
     }
 }
 
-    
 
 
 

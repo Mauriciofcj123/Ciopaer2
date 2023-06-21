@@ -212,18 +212,20 @@ function AbrirModalIntervencao(){
    Modal.style.visibility='visible';
 }
 
-var idGlobal="";
+var idGlobal=0;
 
 function EditarInt(id){
     ResetarModal();
-    idGlobal=id;
-    id=id-1;
+    idGlobal=Math.floor(id);
+    let linha=document.getElementsByName("CamposInt");
+    console.log(idGlobal);
+    
    let Modal=document.getElementById('ModalInt');
    let Aeronave=document.getElementById('Aeronave');
    let Tipo=document.getElementById('Tipo');
    let CaixaTexto=document.getElementById('CaixaTexto');
    let AeronaveTXT=document.getElementsByName('PlacaInt')[id].value;
-   let MecanicoTXT=document.getElementsByName('ResponsavelInt')[id].value;
+   let MecanicoTXT=document.getElementsByName('MecanicoInt')[id].value;
    let Mecanicos=MecanicoTXT.split('/');
    let Descricao=document.getElementsByName('DescricaoInt')[id].value;
    let TipoTXT=document.getElementsByName('TipoInt')[id].value;
@@ -247,7 +249,6 @@ function EditarInt(id){
    Aeronave.value=AeronaveTXT;
    Tipo.value=TipoTXT;
    CaixaTexto.value=Descricao;
-
    Modal.style.visibility='visible';
 }
 
@@ -349,10 +350,13 @@ function ConfirmarIntervencao(){
     if(Aprovado){
         let IntervencaoTB=document.getElementById('IntervencaoTB');
         let NumeroLinhas=IntervencaoTB.rows.length;
+        let IDLocal=0;
+        IDLocal=Math.floor((NumeroLinhas+2)/2-1);
 
 
         let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
         Linha2.classList.add('CamposInt');
+        Linha2.setAttribute('name','CamposInt');
         let Celula2=Linha2.insertCell(0);
         let Celula3=Linha2.insertCell(1);
         let Celula4=Linha2.insertCell(2);
@@ -365,13 +369,14 @@ function ConfirmarIntervencao(){
         Celula4.colSpan=2;
         Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
         Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt("+(NumeroLinhas/2+1)+")'><img src='Imgs/editar.png'></button></img>";
+        Celula7.innerHTML="<button onClick='EditarInt("+IDLocal+")'><img src='Imgs/editar.png'></button></img>";
 
         let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
         Linha1.classList.add('Responsavel');
+        Linha1.setAttribute('name','ResponsavelInt');
         let Celula1=Linha1.insertCell(0);
         Celula1.colSpan=7;
-        Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
+        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" disabled>';
         console.log(IntervencaoTB.rows.length);
         FecharModalIntervencao();
 
@@ -426,12 +431,15 @@ function ConfirmarEdicao(){
     }
 
     if(Aprovado){
-        RemoverIntervencao();
+        RemoverIntervencaoID();
         let IntervencaoTB=document.getElementById('IntervencaoTB');
         let NumeroLinhas=IntervencaoTB.rows.length;
+        let IDLocal=0;
+        IDLocal=Math.floor((NumeroLinhas+2)/2-1);
 
         let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
         Linha2.classList.add('CamposInt');
+        Linha2.setAttribute('name','CamposInt');
         let Celula2=Linha2.insertCell(0);
         let Celula3=Linha2.insertCell(1);
         let Celula4=Linha2.insertCell(2);
@@ -444,15 +452,16 @@ function ConfirmarEdicao(){
         Celula4.colSpan=2;
         Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
         Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt("+(NumeroLinhas/2+1)+")'><img src='Imgs/editar.png'></button></img>";
+        Celula7.innerHTML="<button onClick='EditarInt(\""+IDLocal+"\")'><img src='Imgs/editar.png'></button></img>";
 
         let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
         Linha1.classList.add('Responsavel');
+        Linha1.setAttribute('name','ResponsavelInt');
         let Celula1=Linha1.insertCell(0);
         Celula1.colSpan=6;
-        Celula1.innerHTML='<input type="text" name="ResponsavelInt" value="'+Responsáveis+'" disabled>';
-
+        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" disabled>';
         FecharModalIntervencao();
+
 
     }
 }
@@ -470,10 +479,16 @@ function RemoverIntervencao(){
 }
 function RemoverIntervencaoID(){
 
-    let IntervencaoTB=document.getElementById('IntervencaoTB');
-    let Linha=IntervencaoTB.rows.length;
+    let Responsaveis=document.getElementsByName('ResponsavelInt');
+    let Campos=document.getElementsByName('CamposInt');
+    console.log(Campos.length);
+    console.log(Responsaveis.length);
+    if(Campos.length>0){
+        Campos[idGlobal].remove();
+        Responsaveis[idGlobal].remove();
+    }
 
-    Linha[0].remove();
+
 }
 
 function AdicionarMecanico(Texto){
@@ -601,10 +616,7 @@ function ListarDiscrepancias(Formulario){
             DIVDiscrepancia.appendChild(Input2);
         }
 
-        
-
     }
-
 }
 
 function ListarIntervencao(Formulario){

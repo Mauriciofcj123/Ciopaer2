@@ -85,6 +85,7 @@ function RemoverAcessorio(){
     let Checkbox=document.getElementsByName('CheckboxAcessorio');
     let Objetos=document.getElementsByClassName('Objeto');
     let Selecionados=0;
+    console.log(Checkbox.length);
 
     for(let i=0;i<Checkbox.length;i++){
         if(Checkbox[i].checked){
@@ -140,6 +141,7 @@ function AdicionarDiscrepancia(){
     Celula4.innerHTML="<textarea name='DescricaoDisc'/>";
     Celula4.colSpan=2;
     Celula4.classList.add('DiscrepanciaTXT');
+    console.log(document.getElementsByName('DescricaoDisc')[12]);
 }
 function AdicionarOBS(){
     let Tabela=document.getElementById('ObservacoesTB');
@@ -170,9 +172,6 @@ function ResetarModal(){
     let Mecanicos=document.getElementById('MecanicosTB');
     let Aeronave=document.getElementById('Aeronave');
     let Tipo=document.getElementById('Tipo');
-    let Hora=document.getElementById('Hora');
-    let Minuto=document.getElementById('Minuto');
-    let Segundo=document.getElementById('Segundo');
 
     Aeronave.value=Aeronave.options[0].value;
     Tipo.value=Tipo.options[0].value;
@@ -196,59 +195,12 @@ function ResetarModal(){
     CaixaTexto.value="";
     Caracteres.innerHTML="0/120";
 
-    Hora.value=0;
-    Minuto.value=0;
-    Segundo.value=0;
-
     
 }
-
 function AbrirModalIntervencao(){
     ResetarModal();
    var Modal=document.getElementById('ModalInt');
-   let BTNSalvar=document.getElementById('BTNSalvar');
-   BTNSalvar.setAttribute('onClick','ConfirmarIntervencao()');
 
-   Modal.style.visibility='visible';
-}
-
-var idGlobal=0;
-
-function EditarInt(id){
-    ResetarModal();
-    idGlobal=Math.floor(id);
-    let linha=document.getElementsByName("CamposInt");
-    console.log(idGlobal);
-    
-   let Modal=document.getElementById('ModalInt');
-   let Aeronave=document.getElementById('Aeronave');
-   let Tipo=document.getElementById('Tipo');
-   let CaixaTexto=document.getElementById('CaixaTexto');
-   let AeronaveTXT=document.getElementsByName('PlacaInt')[id].value;
-   let MecanicoTXT=document.getElementsByName('MecanicoInt')[id].value;
-   let Mecanicos=MecanicoTXT.split('/');
-   let Descricao=document.getElementsByName('DescricaoInt')[id].value;
-   let TipoTXT=document.getElementsByName('TipoInt')[id].value;
-   let Tempo=document.getElementsByName('TempoInt')[id].value;
-   let HoraTXT=Tempo.substring(0,2);
-   let MinutosTXT=Tempo.substring(3,5);
-   let SegundosTXT=Tempo.substring(6,8);
-   let Hora=document.getElementById('Hora');
-   let Minuto=document.getElementById('Minuto');
-   let Segundo=document.getElementById('Segundo');
-   let BTNSalvar=document.getElementById('BTNSalvar');
-   BTNSalvar.setAttribute('onClick','ConfirmarEdicao()');
-
-   for(Mec=0;Mec<Mecanicos.length;Mec++){
-        AdicionarMecanico(Mecanicos[Mec]);
-   }
-
-   Hora.value=HoraTXT.replace('0','');
-   Minuto.value=MinutosTXT;
-   Segundo.value=SegundosTXT;
-   Aeronave.value=AeronaveTXT;
-   Tipo.value=TipoTXT;
-   CaixaTexto.value=Descricao;
    Modal.style.visibility='visible';
 }
 
@@ -265,7 +217,7 @@ function ContarMecanicos(){
     let Mecanicos="";
     let Celulas=IntervencaoTB.getElementsByTagName('td');
     for(let i=0;i<NumeroLinhas-1;i++){
-        if(Mecanicos==undefined||Mecanicos.length==0){
+        if(Mecanicos==undefined||Mecanicos==""||Mecanicos==null){
             Mecanicos=Celulas[i].textContent;
         }else{
             Mecanicos+='/ '+Celulas[i].textContent;
@@ -298,6 +250,7 @@ function VerificarTempo(){
     }else{
         Aprovado=false;
     }
+    console.log(Hora+Minutos+Segundos);
     return Aprovado;
 }
 function ConfirmarIntervencao(){
@@ -321,7 +274,7 @@ function ConfirmarIntervencao(){
     if(VerificarTempo()){
         let Hora=document.getElementById('Hora').value;
         let HoraTXT;
-        if(Hora<10){
+            if(Hora<10){
             HoraTXT='0'+Hora;
            }else{
             HoraTXT=Hora;
@@ -350,150 +303,34 @@ function ConfirmarIntervencao(){
     if(Aprovado){
         let IntervencaoTB=document.getElementById('IntervencaoTB');
         let NumeroLinhas=IntervencaoTB.rows.length;
-        let IDLocal=0;
-        IDLocal=Math.floor((NumeroLinhas+2)/2-1);
-
 
         let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
         Linha2.classList.add('CamposInt');
-        Linha2.setAttribute('name','CamposInt');
         let Celula2=Linha2.insertCell(0);
         let Celula3=Linha2.insertCell(1);
         let Celula4=Linha2.insertCell(2);
         let Celula5=Linha2.insertCell(3);
-        let Celula6=Linha2.insertCell(4);
-        let Celula7=Linha2.insertCell(5);
-        Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
-        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
-        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
-        Celula4.colSpan=2;
-        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
-        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt("+IDLocal+")'><img src='Imgs/editar.png'></button></img>";
+        Celula2.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
+        Celula3.colSpan=3;
+        Celula3.innerHTML='<textarea name="DescricaoInt" disabled>'+Descricao+'</textarea>';
+        Celula4.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
+        Celula5.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
 
         let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
         Linha1.classList.add('Responsavel');
-        Linha1.setAttribute('name','ResponsavelInt');
-        let Celula1=Linha1.insertCell(0);
-        Celula1.colSpan=7;
-        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" disabled>';
-        console.log(IntervencaoTB.rows.length);
-        FecharModalIntervencao();
-
-    }
-}
-
-function ConfirmarEdicao(){
-   let Aprovado=true;
-   let Aeronave=document.getElementById('Aeronave').value;
-   let Responsáveis=ContarMecanicos();
-   let Tempo;
-   let Tipo=document.getElementById('Tipo').value;
-   let Descricao=document.getElementById('CaixaTexto').value;
-
-   if(Responsáveis==''||Responsáveis==undefined){
-        Aprovado=false;
-        alert('Por favor selecione os responsáveis pelo serviço.');
-   }
-
-   if(Descricao.length<10){
-        Aprovado=false;
-        alert('Por favor descreva o que foi realizado na intervenção.');
-   }
-   
-    if(VerificarTempo()){
-        let Hora=document.getElementById('Hora').value;
-        let HoraTXT;
-            if(Hora<10 && Hora.length<2){
-            HoraTXT='0'+Hora;
-           }else{
-            HoraTXT=Hora;
-           }
-        let Minutos=document.getElementById('Minuto').value;
-        let MinutoTXT;
-           if(Minutos<10&&Minutos.length<2){
-            MinutoTXT='0'+Minutos;
-           }else{
-            MinutoTXT=Minutos;
-           }
-        let Segundos=document.getElementById('Segundo').value;
-        let SegundosTXT;
-           if(Segundos<10 && Segundos.length<2){
-            SegundosTXT='0'+Segundos;
-           }else{
-            SegundosTXT=Segundos;
-           }
-
-           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
-    }else{
-        Aprovado=false;
-        alert('Por favor informe a duração do serviço.');
-    }
-
-    if(Aprovado){
-        RemoverIntervencaoID();
-        let IntervencaoTB=document.getElementById('IntervencaoTB');
-        let NumeroLinhas=IntervencaoTB.rows.length;
-        let IDLocal=0;
-        IDLocal=Math.floor((NumeroLinhas+2)/2-1);
-
-        let Linha2=IntervencaoTB.insertRow(NumeroLinhas);
-        Linha2.classList.add('CamposInt');
-        Linha2.setAttribute('name','CamposInt');
-        let Celula2=Linha2.insertCell(0);
-        let Celula3=Linha2.insertCell(1);
-        let Celula4=Linha2.insertCell(2);
-        let Celula5=Linha2.insertCell(3);
-        let Celula6=Linha2.insertCell(4);
-        let Celula7=Linha2.insertCell(5);
-        Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
-        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
-        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
-        Celula4.colSpan=2;
-        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
-        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt(\""+IDLocal+"\")'><img src='Imgs/editar.png'></button></img>";
-
-        let Linha1=IntervencaoTB.insertRow(NumeroLinhas);
-        Linha1.classList.add('Responsavel');
-        Linha1.setAttribute('name','ResponsavelInt');
         let Celula1=Linha1.insertCell(0);
         Celula1.colSpan=6;
-        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" disabled>';
+        Celula1.innerHTML='<input type="text" name="ResponsavelTXT" value="'+Responsáveis+'" disabled>';
+
         FecharModalIntervencao();
 
-
     }
-}
-function RemoverIntervencao(){
-
-    let IntervencaoTB=document.getElementById('IntervencaoTB');
-    let Linha=IntervencaoTB.getElementsByTagName('tr');
-    let Checkbox=document.getElementsByName('CheckInt');
-
-    for(let i=0;i<Checkbox.length;i++){
-        while(Checkbox[i].checked){
-            Linha[i].remove();
-        }
-    }
-}
-function RemoverIntervencaoID(){
-
-    let Responsaveis=document.getElementsByName('ResponsavelInt');
-    let Campos=document.getElementsByName('CamposInt');
-    console.log(Campos.length);
-    console.log(Responsaveis.length);
-    if(Campos.length>0){
-        Campos[idGlobal].remove();
-        Responsaveis[idGlobal].remove();
-    }
-
-
 }
 
 function AdicionarMecanico(Texto){
     let Responsavel=document.getElementById('ResponsavelTB');
     let Cartões=document.getElementsByName('Cartão');
+    console.log(Cartões.length);
 
     let NumeroLinhas = Responsavel.rows.length;
     let Linha=Responsavel.insertRow(NumeroLinhas);
@@ -575,6 +412,7 @@ function VerificarDisponibilidade(){
     let Valido=true;
 
     for(i=0;i<Status.length;i++){
+        console.log(Causa[i].value.length+"---"+Status[i].value);
 
         if(Causa[i].value.length<=0 && Status[i].value=='Indisponivel'){
             Valido=false;
@@ -616,7 +454,10 @@ function ListarDiscrepancias(Formulario){
             DIVDiscrepancia.appendChild(Input2);
         }
 
+        
+
     }
+
 }
 
 function ListarIntervencao(Formulario){

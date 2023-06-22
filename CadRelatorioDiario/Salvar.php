@@ -2,10 +2,17 @@
     include_once('../Conexao.php');
 
     if(isset($_POST['SalvarBTN'])){
-        if(isset($_POST['Data'])){
-            $Data=$_POST['Data'];
-            $MecanicoDia=$_POST['MecanicoDia'];
 
+        if(isset($_POST['Data'])){
+            $Data=$_POST['Data'];    $MecanicoDia=$_POST['MecanicoDia'];
+
+$Registros='SELECT * FROM registrodisp WHERE Data='.$Data.' AND Mecanico='.$MecanicoDia.' LIMIT 1';
+$Requisicaoreg=mysqli_query($mysqli,$Registros);
+$QTDReg=$Requisicaoreg.rows;
+
+if($QTDReg!=0){
+
+}
                 $SQLReg="INSERT INTO registrodisp (Mecanico,Data) VALUES('$MecanicoDia','$Data')";
                 $Requisicao=mysqli_query($mysqli,$SQLReg);
 

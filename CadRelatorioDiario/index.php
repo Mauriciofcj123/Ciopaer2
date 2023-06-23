@@ -15,8 +15,9 @@
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
-        if(isset($_POST['EditarBTN'])){
-            $_SESSION['Data']=$_POST['DataTXT'];
+        if(isset($_POST['AcessarBTN'])){
+            $Data=date('dd/mm/YY');
+            $_SESSION['Data']=$Data;
         }
 
         if(isset($_SESSION['Data'])){
@@ -147,7 +148,7 @@
 
         echo "<div class='Part2'>";
 
-        $SQL='SELECT * FROM acessoriodisp';
+        $SQL="SELECT * FROM acessoriodisp WHERE Data='$UltimaData'";
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         $SQL2="SELECT * FROM pilotos";

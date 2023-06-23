@@ -16,7 +16,8 @@
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
         if(isset($_POST['AcessarBTN'])){
-            $_SESSION['Data']=$_POST['DataRelatorio'];
+            $Data=date('dd/mm/YY');
+            $_SESSION['Data']=$Data;
         }
 
         if(isset($_SESSION['Data'])){

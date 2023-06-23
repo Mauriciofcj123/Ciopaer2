@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" 
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer">
+    </script>
     <script src="../Cabecalho/script.js" defer></script>
 
 </head>
@@ -23,10 +28,14 @@
         }
 
         if(isset($_SESSION['Data'])||!empty($_SESSION['Data'])){
+            $SQLMecanicoDia="SELECT * FROM registrodisp WHERE Data='".$_SESSION['Data']."' LIMIT 1";
+            $RequisicaoMecanico=mysqli_query($mysqli,$SQLMecanicoDia);
+            $MecanicoDia=$RequisicaoMecanico->fetch_assoc();
+            echo '<input id="MecanicoNome" value="'.$MecanicoDia['Mecanico'].'" disabled style="visibility: hidden;"></input>';
 
             echo '<div class="Data"><form method="post" action="../EditRelatorioDiario/index.php">
               <button type="submit"><img src="Imgs/editar.png" name="EditarBTN"></img></button>
-              <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT"><button type="button"><img src="Imgs/Print.png"></button>
+              <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT" id="DataTXT"><button type="button" onclick="CriarImpressao()"><img src="Imgs/Print.png"></button>
             </form></div><br>';
 
         echo "<a href='index.php'><img class='Parte' src='Imgs/Relatório.png' title='Relatório Principal'></a>";
@@ -78,7 +87,7 @@
                 echo '<table class="Tabela">
                 <tr class="Titulo">
                     <td><img src="Imgs/time.png"><label>'.$Horimetro['HorasAtuais'].'</label></td>
-                    <td><label>'.$Aeronaves['Marca'].'</label><img src='.$StatusImagem.' title="'.$Texto.'"></td>
+                    <td><label name="'.$Status['Status'].'" id="'.$Texto.'">'.$Aeronaves['Marca'].'</label><img src='.$StatusImagem.' title="'.$Texto.'"></td>
                     <td><label>'.$QTDDiscrepancias.'</label><img src="Imgs/alerta.png" title="Discrepâncias"><label>'.$QTDIntervencoes.'</label><img src="Imgs/manutencao.png" title="Intervenções"></td>
                 </tr>
                 <tr class="Espaco"></tr>';
@@ -87,15 +96,16 @@
             $RequisicaoIntervencao=mysqli_query($mysqli,$SQLIntervencao);
 
             while($Intervencao=$RequisicaoIntervencao->fetch_assoc()){
+                echo '<label name="PlacaInt" style="visibility: hidden;">'.$Aeronaves['Marca'].'</label>';
                 echo '<tr class="Linha" id="LinhaIntervencao">
-                        <td colspan="3"><label style="color: rgb(255, 191, 73);">'.$Intervencao['RealizadoPor'].'</label></td>
+                        <td colspan="3"><label name="ResponsavelInt" style="color: rgb(255, 191, 73);">'.$Intervencao['RealizadoPor'].'</label></td>
                     </tr>';
                 echo '<tr class="Linha" id="LinhaIntervencao">
-                    <td colspan="3"><img src="Imgs/manutencao.png"><label>'.$Intervencao['DescIntervencao'].'</label></td>
+                    <td colspan="3"><img src="Imgs/manutencao.png"><label name="DescricaoInt">'.$Intervencao['DescIntervencao'].'</label></td>
                 </tr>';
                 echo '<tr class="Linha" id="LinhaIntervencao">
-                <td colspan="2"><img src="Imgs/time.png"><label>'.$Intervencao['TempoInter'].'</label></td>
-                <td colspan="1"><label>Tipo: '.$Intervencao['TipoIntervencao'].'</label></td>
+                <td colspan="2"><img src="Imgs/time.png"><label name="TempoInt">'.$Intervencao['TempoInter'].'</label></td>
+                <td colspan="1"><label name="TipoInt">Tipo: '.$Intervencao['TipoIntervencao'].'</label></td>
                 </tr>';
                 echo '<tr class="Espaco"></tr>';
             }
@@ -104,16 +114,51 @@
             $RequisicaoDiscrepancias=mysqli_query($mysqli,$SQLDiscrepancias);
 
             while($Discrepancias=$RequisicaoDiscrepancias->fetch_assoc()){
+                echo '<label name="PlacaDisc" style="visibility: hidden;">'.$Aeronaves['Marca'].'</label>';
                 echo '<tr class="Linha">
-                        <td colspan="3"><img src="Imgs/alerta.png"><label>'.$Discrepancias['DescDiscrepancias'].'</label></td>
+                        <td colspan="3"><img src="Imgs/alerta.png"><label name="DescricaoDisc">'.$Discrepancias['DescDiscrepancias'].'</label></td>
                 </tr>';
                 echo '<tr class="Espaco"></tr>';
             }
                     echo '</table>';
         }
-        }  
+
+        $SQL="SELECT * FROM acessoriodisp WHERE Data='".$_SESSION['Data']."'";
+        $Requisicao=mysqli_query($mysqli,$SQL);
+        $QTD=$Requisicao->num_rows;
+
+        if($QTD>0){
+            while($Acessorios=$Requisicao->fetch_assoc()){
+                echo "<label name='NomeAces' style='visibility: hidden;'>".$Acessorios['NomeAcessorio']."</label>";
+                echo "<label name='ResponsavelAces' style='visibility: hidden;'>".$Acessorios['Responsável']."</label>";
+            }
+
+        }
+
+        $SQL='SELECT * FROM observacoes WHERE Data="'.$_SESSION['Data'].'"';
+        $Requisicao=mysqli_query($mysqli,$SQL);
+        $QTD=$Requisicao->num_rows;
+
+        if($QTD>0){
+            while($Observacoes=$Requisicao->fetch_assoc()){
+                echo "<label name='Observacao' style='visibility: hidden;'>".$Observacoes['Observacoes']."</label>";
+            }
+        }
+        }
 
     ?>
+
+<div class="ImprimirBox" id='Imprimir'>
+    <button class="FecharBTN">X</button>
+    <div class="ImprimirModal">
+
+    <div class="menuprint">
+        <button type="button" onclick="ImprimirPDF()"><img src="Imgs/Salvar.png"></button>
+    </div>
+    <div class='Corpo' id='ImprimirDIV'></div>
+
+    </div>
+</div>
     
 </body>
 </html>

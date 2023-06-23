@@ -22,5 +22,16 @@ function VerRelatorio2(Data){
     IDRelatorioTXT.value=Data;
 }
 function CriarRelatorio(){
-    window.location.href='../CadRelatorioDiario/index.php'
+    let DIV=document.getElementById('BotoesDIV');
+    let Formulario=document.createElement('form');
+    Formulario.setAttribute('method','post');
+    Formulario.setAttribute('action','../CadRelatorioDiario/index.php')
+    DIV.appendChild(Formulario);
+
+    let Botao=document.createElement('button');
+    Botao.setAttribute('type','submit');
+    Botao.setAttribute('name','AcessarBTN');
+    Formulario.appendChild(Botao);
+    Botao.click();
+    //window.location.href='../CadRelatorioDiario/index.php'
 }

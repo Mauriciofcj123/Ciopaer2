@@ -143,7 +143,7 @@
 
         echo "<div class='Part2'>";
 
-        $SQL='SELECT * FROM acessoriodisp';
+        $SQL="SELECT * FROM acessoriodisp WHERE Data='$Data'";
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         $SQL2="SELECT * FROM pilotos";

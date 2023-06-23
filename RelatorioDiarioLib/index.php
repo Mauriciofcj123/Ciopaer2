@@ -27,8 +27,9 @@
             <label>Até</label>
             <input type='date' name='PesquisarAte' class='PesquisaData'>
         </form>
-        <div class='Botoes'>
-            <button onclick='CriarRelatorio()' title='Criar um novo relatório'><img src='Imgs/CriarRel.png'></button>
+        
+        <div class='Botoes' id='BotoesDIV'>
+            <button onclick='CriarRelatorio()' title='Criar um novo relatório' ><img src='Imgs/CriarRel.png'></button>
         </div>
     </div>";
 

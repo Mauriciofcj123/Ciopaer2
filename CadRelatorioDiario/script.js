@@ -620,7 +620,7 @@ function ListarDiscrepancias(Formulario){
 }
 
 function ListarIntervencao(Formulario){
-    let Responsavel = document.getElementsByName('ResponsavelTXT');
+    let Responsavel = document.getElementsByName('MecanicoInt');
     let Placas = document.getElementsByName('PlacaInt');
     let Descricao = document.getElementsByName('DescricaoInt');
     let Tipo = document.getElementsByName('TipoInt');
@@ -651,7 +651,7 @@ function ListarIntervencao(Formulario){
 
             let Input2=document.createElement('input');
             Input2.setAttribute('name', 'DescricaoInt[]');
-            Input2.setAttribute('value', Descricao[i].textContent);
+            Input2.setAttribute('value', Descricao[i].value);
             DIVIntervencao.appendChild(Input2);
 
             let Input3=document.createElement('input');

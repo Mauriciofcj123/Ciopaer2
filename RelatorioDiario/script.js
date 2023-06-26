@@ -2,6 +2,7 @@ function Sair(){
     window.location.href="Sair.php";
 }
 function CriarImpressao(){
+
     const Imprimir=document.getElementById('ImprimirDIV');
     const TituloDIV=document.createElement('div');
     TituloDIV.classList.add('TituloDIV');
@@ -277,17 +278,20 @@ function CriarImpressao(){
         CorpoDIV.appendChild(Observacao);
     }
 
-    let ImprimirDIV=document.getElementById('Imprimir');
-    ImprimirDIV.style.visibility='visible';
-
+        let ImprimirDIV=document.getElementById('Imprimir');
+        ImprimirDIV.style.visibility='visible';
+}
+function FecharModalPrint(){
+    let ImprimirBOX=document.getElementById('Imprimir');
+    let ImprimirDIV=document.getElementById('ImprimirDIV');
+    ImprimirBOX.style.visibility='hidden';
+    ImprimirDIV.innerText="";
 }
 function ImprimirPDF(){
     const Imprimir=document.getElementById('ImprimirDIV');
 
-    CriarImpressao();
-
     const Option={
-        margin:[0,0,10,0],
+        margin:[0,0,0,0],
         filename:"Relatorio Diario",
         html2canvas:{scale:2},
         jsPDF:{unit:"mm", format:"a4", orientation:"portrait"},

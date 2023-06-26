@@ -38,9 +38,11 @@
               <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT" id="DataTXT"><button type="button" onclick="CriarImpressao()"><img src="Imgs/Print.png"></button>
             </form></div><br>';
 
-        echo "<a href='index.php'><img class='Parte' src='Imgs/Relatório.png' title='Relatório Principal'></a>";
-        echo "<a href='../RelatorioDiarioCautelados/index.php'><img class='Parte' src='Imgs/Fone de ouvido.png ' title='Objetos Cautelados'></a>";
-        echo "<a href='../RelatorioDiarioObs/index.php'><img class='Parte' src='Imgs/papel.png' title='Observações'></a>";
+        echo "<div class=Parte>";
+        echo "<a href='index.php'><img src='Imgs/Relatório.png' title='Relatório Principal'></a>";
+        echo "<a href='../RelatorioDiarioCautelados/index.php'><img src='Imgs/Fone de ouvido.png ' title='Objetos Cautelados'></a>";
+        echo "<a href='../RelatorioDiarioObs/index.php'><img src='Imgs/papel.png' title='Observações'></a>";
+        echo "</div>";
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $Requisicao=mysqli_query($mysqli,$SQL);
@@ -149,10 +151,10 @@
     ?>
 
 <div class="ImprimirBox" id='Imprimir'>
-    <button class="FecharBTN">X</button>
+    <button class="FecharBTN" onclick="FecharModalPrint()">X</button>
     <div class="ImprimirModal">
 
-    <div class="menuprint">
+    <div class="menuprint" id="MenuPrint">
         <button type="button" onclick="ImprimirPDF()"><img src="Imgs/Salvar.png"></button>
     </div>
     <div class='Corpo' id='ImprimirDIV'></div>

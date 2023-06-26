@@ -3,97 +3,12 @@
     margin: 0;
     box-sizing: border-box;
 }
-.ImprimirBox{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0%;
-    left: 0%;
-    display: block;
-    position: fixed;
-    z-index: 3;
-    background-color: rgba(0, 0, 0, 0.514);
-    backdrop-filter: blur(2px);
-    visibility: hidden;
-}
-.FecharBTN{
-    border-radius: 50%;
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-}
-.ImprimirModal{
-    position: relative;
-    width: 50%;
-    height: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgb(255, 255, 255);
-    border: 1px solid black;
-    overflow: auto;
-    display: block;
 
-}
-.menuprint{
-    position: relative;
-    width: 100%;
-    height: 50px;
-    background-color: rgb(212, 212, 212);
-    text-align: center;
-}
-.menuprint button,.menuprint img{
-    position: relative;
-    height: 100%;
-    background:none;
-    border: none;
-}
-.Corpo{
-    position: relative;
-    width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: block;
-}
-.TituloDIV{
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-}
-.CorpoDIV{
-    position: relative;
-    text-align: left;
-}
-.IntervencaoTB{
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid black;
-    text-align: center;
-}
-.IntervencaoTB tr:nth-child(1){
-    font-weight: bold;
-}
-.IntervencaoTB td{
-    padding: 1px;
-    border: 1px solid black;
-    max-width: 300px;
-    overflow: hidden;
-}
-.IntervencaoTB label{
-    width: 100%;
-}
 @media (min-width:580px){
     .Data{
-        position: relative;
-        display: inline-flex;
+        position: absolute;
         left: 50%;
-        top: 10px;
+        top: 160px;
         transform: translateX(-50%);
         z-index: 1;
     }
@@ -144,13 +59,16 @@
     .Espaco{
         height: 50px;
     }
-    .Titulo td:nth-child(2){
-        text-align: center;
-    }
     .Titulo td:nth-child(1){
+        width: 40%;
         text-align: left;
     }
+    .Titulo td:nth-child(2){
+        width: 20%;
+        text-align: center;
+    }
     .Titulo td:nth-child(3){
+        width: 40%;
         text-align: right;
     }
     .Botao{
@@ -163,19 +81,116 @@
     }
     .Parte{
         position: relative;
-        width: 50px;
+        box-sizing: border-box;
+        text-align: center;
+        width: 100%;
         left: 50%;
         transform: translateX(-50%);
         margin-top: 50px;
+    }
+    .Parte img{
+        height: 50px;
+    }
+
+    .ImprimirBox{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0%;
+        left: 0%;
+        display: block;
+        position: fixed;
+        z-index: 3;
+        background-color: rgba(0, 0, 0, 0.514);
+        backdrop-filter: blur(2px);
+        visibility: hidden;
+    }
+    .FecharBTN{
+        position: relative;
+        float: right;
+        top: 10%;
+        right: 22%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        z-index: 4;
+    }
+    .ImprimirModal{
+        position: relative;
+        width: 50%;
+        height: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid black;
+        overflow: auto;
+        display: block;
+    
+    }
+    .menuprint{
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(212, 212, 212);
+        text-align: center;
+    }
+    .menuprint button,.menuprint img{
+        position: relative;
+        height: 100%;
+        background:none;
+        border: none;
+    }
+    .Corpo{
+        position: relative;
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+    }
+    .TituloDIV{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+    }
+    .CorpoDIV{
+        position: relative;
+        text-align: left;
+    }
+    .IntervencaoTB{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px solid black;
+        text-align: center;
+    }
+    .IntervencaoTB tr:nth-child(1){
+        font-weight: bold;
+    }
+    .IntervencaoTB td{
+        padding: 1px;
+        border: 1px solid black;
+        max-width: 300px;
+        overflow: hidden;
+    }
+    .IntervencaoTB label{
+        width: 100%;
     }
     
 }
 @media (max-width:580px){
     .Data{
-        position: relative;
+        position: absolute;
         display: inline-flex;
         left: 50%;
-        top: 10px;
+        top: 160px;
         transform: translateX(-50%);
     }
     .Data img{
@@ -245,12 +260,104 @@
     }
     .Parte{
         position: relative;
-        width: 40px;
-        left: 40%;
-        transform: translateX(-50%);
-        margin-top: 20px;
+        width: 100%;
+        margin-top: 50px;
         text-align: center;
         margin-right: 10px;
+    }
+    .Parte img{
+        height: 40px;
+    }
+
+    .ImprimirBox{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0%;
+        left: 0%;
+        display: block;
+        position: fixed;
+        z-index: 3;
+        background-color: rgba(0, 0, 0, 0.514);
+        backdrop-filter: blur(2px);
+        visibility: hidden;
+    }
+    .FecharBTN{
+        position: relative;
+        float: right;
+        top: 6%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        z-index: 4;
+    }
+    .ImprimirModal{
+        position: relative;
+        width: 90%;
+        height: 90%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid black;
+        overflow: auto;
+        display: block;
+    
+    }
+    .menuprint{
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(212, 212, 212);
+        text-align: center;
+    }
+    .menuprint button,.menuprint img{
+        position: relative;
+        height: 100%;
+        background:none;
+        border: none;
+    }
+    .Corpo{
+        position: relative;
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+    }
+    .TituloDIV{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+    }
+    .CorpoDIV{
+        position: relative;
+        text-align: left;
+    }
+    .IntervencaoTB{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px solid black;
+        text-align: center;
+    }
+    .IntervencaoTB tr:nth-child(1){
+        font-weight: bold;
+    }
+    .IntervencaoTB td{
+        padding: 1px;
+        border: 1px solid black;
+        max-width: 300px;
+        overflow: hidden;
+    }
+    .IntervencaoTB label{
+        width: 100%;
     }
 
     

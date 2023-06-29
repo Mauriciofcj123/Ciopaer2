@@ -20,22 +20,25 @@ document.addEventListener('keyup', function (e){
 
 function Ativar(id,Nome,Valor){
     let Botoes=document.getElementsByName('Botao'+id);
-    let Selecionado=document.getElementById(Nome+id);
-    let Status=document.getElementsByName('Status[]');
-    let Causa=document.getElementById('Causa'+id);
-    let CausaTXT=Causa.children;
+    let Selecionado=Botoes[idAtual];
+    let Status=document.getElementsByName('Status[]')[id];
+    let CausaDIV=document.getElementsByName('CausaDIV')[id];
+    let CausaTXT=document.getElementsByName('Causa[]')[id];
+    let Previsao=document.getElementById('Previsao'+id);
 
     for(i=0;i<Botoes.length;i++){
         Botoes[i].style.transform='scale(1.0)';
     }
-    Selecionado.style.transform='scale(1.2)';
-    Status[id-1].value=Valor;
+        Selecionado.style.transform='scale(1.2)';
+        Status.value=Valor;
 
     if(Valor=='Disponível'){
-        Causa.style.visibility='hidden';
-        CausaTXT[1].value='';
+        CausaDIV.style.visibility='hidden';
+        Previsao.style.visibility='hidden';
+        CausaTXT.value='';
     }else{
-        Causa.style.visibility='visible';
+        CausaDIV.style.visibility='visible';
+        Previsao.style.visibility='visible';
     }
 
 
@@ -535,6 +538,7 @@ function ListarDisponibilidade(Formulario){
     let Filhos = document.getElementById('AeronavesDIV').children;
     let Status=document.getElementsByName('Status[]');
     let Causa=document.getElementsByName('Causa[]');
+    let Previsao=document.getElementsByName('Previsao');
 
     let Disponibilidade=document.createElement("div");
     Disponibilidade.setAttribute('name','Disponibilidades');
@@ -567,6 +571,16 @@ function ListarDisponibilidade(Formulario){
             Input3.setAttribute('value', Causa[i].value);
             DIVAeronave.appendChild(Input3);
 
+            let Input4=document.createElement('input');
+            Input4.setAttribute('name', 'PrevisaoDisp[]')
+            DIVAeronave.appendChild(Input4);
+
+            if(Status[i].value=='Disponível'){
+                Input4.value="";
+            }else{
+                Input4.value=Previsao[i].options[Previsao[i].selectedIndex].value;
+            }
+
     }
 }
 function VerificarDisponibilidade(){
@@ -589,6 +603,7 @@ function ListarDiscrepancias(Formulario){
     var Tabelas =document.getElementsByName('DiscrepanciasTB');
     var Placas = document.getElementsByName('PlacaDisc');
     var Descricao = document.getElementsByName('DescricaoDisc');
+    var Medidas = document.getElementsByName('MedidaTXT');
     let DIV=document.getElementById('FormularioDIV');
 
     let Discrepancias=document.createElement("div");
@@ -600,6 +615,7 @@ function ListarDiscrepancias(Formulario){
         if(Descricao[i].value.length>0){
             var PlacaTXT=Placas[i].options[Placas[i].selectedIndex].value;
             var DescricaoTXT=Descricao[i].value;
+            var MedidaTXT=Medidas[i].value;
 
             let DIVDiscrepancia=document.createElement("div");
             DIVDiscrepancia.setAttribute('name','Discrepancia');
@@ -607,13 +623,18 @@ function ListarDiscrepancias(Formulario){
 
             let Input=document.createElement('input');
             Input.setAttribute('name', 'PlacaDisc[]')
-            Input.setAttribute('value', PlacaTXT);
+            Input.value=PlacaTXT;
             DIVDiscrepancia.appendChild(Input);
 
             let Input2=document.createElement('input');
             Input2.setAttribute('name', 'Descricao[]')
-            Input2.setAttribute('value', DescricaoTXT);
+            Input2.value=DescricaoTXT;
             DIVDiscrepancia.appendChild(Input2);
+
+            let Input3=document.createElement('input');
+            Input3.setAttribute('name', 'MedidaTXT[]')
+            Input3.value=MedidaTXT.toUpperCase();
+            DIVDiscrepancia.appendChild(Input3);
         }
 
     }

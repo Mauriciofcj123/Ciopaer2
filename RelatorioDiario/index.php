@@ -75,7 +75,7 @@
                 $Texto='Disponível';
             } else if($Status['Status']=='Indisponível'){
                 $StatusImagem='Imgs/cancelar.png';
-                $Texto='Causa: '.$Status['Causa'];
+                $Texto='Causa: '.$Status['Causa'].' ('.$Status['TipoCausa'].')';
             }else if($Status['Status']=='Despachada'){
                 $StatusImagem='Imgs/Despachada.png';
                 $Texto=$Status['Causa'];
@@ -120,6 +120,12 @@
                 echo '<tr class="Linha">
                         <td colspan="3"><img src="Imgs/alerta.png"><label name="DescricaoDisc">'.$Discrepancias['DescDiscrepancias'].'</label></td>
                 </tr>';
+                if(!empty($Discrepancias['Medida'])){
+                    echo '<tr class="Linha" style="color: rgb(83, 83, 83);">
+                        <td colspan="3"><label>Medida Tomada: </label><label name="MedidaDisc">'.$Discrepancias['Medida'].'</label></td>
+                    </tr>';
+                }
+
                 echo '<tr class="Espaco"></tr>';
             }
                     echo '</table>';

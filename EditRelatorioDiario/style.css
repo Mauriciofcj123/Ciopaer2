@@ -50,16 +50,15 @@
     .Part1{
         width: 100%;
         height: 700px;
-        display: inline-block;
+        display: flex;
+        justify-content: space-between;
     }
     .Aeronaves{
         position: relative;
         width: 30%;
         height: 100%;
-        float: left;
-        left: 5%;
         padding: 5px;
-        margin: 10px 0px;
+        margin: 10px 10px;
         border: 1px rgb(0, 195, 255) solid;
         border-radius: 15px;
         font-weight: bold;
@@ -86,13 +85,42 @@
         font-weight: bold;
         border: none;
     }
-    .Aeronaves input{
+    .MarcaTXT{
         width: 100px;
         height: 20px;
         color: rgb(0, 195, 255);
         font-weight: bold;
         border: none;
         background-color: white;
+    }
+    .CausaTXT{
+        height: 30px;
+        width: 100%;
+    }
+    .CausaTXT label{
+        margin-top: 20%;
+    }
+    .CausaTXT input{
+        position: relative;
+        margin-left: 20px;
+        width: 60%;
+        border: none;
+        border-bottom: 1px solid rgb(0, 195, 255);
+        border-right: 1px solid rgb(0, 195, 255);
+        border: 1px 1px 1px 1px (0, 195, 255);
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        width: 50%;
+    }
+    .CausaTXT select{
+        height: 30px;
+        width: 20%;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+    }
+    .CausaTXT option{
+        font-weight: bold;
+        text-align: center;
     }
     .Aeronaves button{
         background-color: rgba(255, 255, 255,0);
@@ -104,14 +132,13 @@
     }
     .Discrepancias{
         position: relative;
-        width: 50%;
+        width: 65%;
         height: 100%;
-        float: right;
-        right: 5%;
         border: 1px rgb(0, 195, 255) solid;
         border-radius: 15px;
         padding: 10px;
         overflow-y: auto;
+        margin-right: 10px;
     
     }
     .DiscrepanciasTB{
@@ -133,9 +160,24 @@
     .DiscrepanciasTB img{
         width: 30px;
     }
-    .DiscrepanciasTB input{
+    .DiscrepanciasTB :nth-child(1) input{
         width: 100%;
-        border-radius: 15px;
+        height: 30px;
+        border-radius: 0px 0px 10px 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: rgb(82, 82, 82);
+        border: 1px rgb(0, 195, 255) dashed;
+        outline: none;
+        text-align: center;
+    }
+    .DiscrepanciasTB input::placeholder{
+        color: rgb(190, 190, 190);
+    }
+    .DiscrepanciasTB :nth-child(1) label{
+        font-weight: bold;
+        margin-right: 10px;
+        color: rgb(0, 195, 255);
     }
     .TituloDiscrepancia{
         width: 100%;
@@ -175,7 +217,7 @@
         font-weight: bold;
         font-size: 15px;
         border: 0.5px rgb(162, 233, 255) dashed;
-        border-radius: 15px;
+        border-radius: 0px 15px 0px 0px;
         padding: 5px
     }
     .MenuDiscrepancias{
@@ -224,18 +266,18 @@
     
     .Part2{
         width: 100%;
-        height: 330px;
         margin-top: 20px;
+        display: flex;
+        justify-content:  space-between;
     }
     .Acessorios{
         position: relative;
-        left: 5%;
         width: 30%;
         height: 300px;
         padding: 10px;
         border: 1px rgb(0, 195, 255) solid;
         border-radius: 15px;
-        float: left;
+        margin-left: 10px;
         overflow: auto;
     }
     .Acessorios input{
@@ -282,10 +324,9 @@
     }
     .Intervencao{
         position: relative;
-        width: 50%;
+        width: 65%;
         height: 300px;
-        right: 5%;
-        float: right;
+        margin-right: 10px;
         border: 1px rgb(0, 195, 255) solid;
         border-radius: 15px;
         padding: 10px;
@@ -710,13 +751,40 @@
         font-weight: bold;
         border: none;
     }
-    .Aeronaves input{
+    .MarcaTXT{
         width: 100px;
         height: 20px;
         color: rgb(0, 195, 255);
         font-weight: bold;
         border: none;
         background-color: white;
+    }
+    .CausaTXT{
+        height: 30px;
+    }
+    .CausaTXT label{
+        margin-top: 10px;
+    }
+    .CausaTXT input{
+        margin-left: 20px;
+        width: 200px;
+        border: none;
+        border-bottom: 1px solid rgb(0, 195, 255);
+        border-right: 1px solid rgb(0, 195, 255);
+        border: 1px 1px 1px 1px (0, 195, 255);
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+        width: 50%;
+    }
+    .CausaTXT select{
+        height: 30px;
+        width: 20%;
+        color: rgb(0, 195, 255);
+        font-weight: bold;
+    }
+    .CausaTXT option{
+        font-weight: bold;
+        text-align: center;
     }
     .Aeronaves button{
         background-color: rgba(255, 255, 255,0);
@@ -758,9 +826,24 @@
     .DiscrepanciasTB img{
         width: 30px;
     }
-    .DiscrepanciasTB input{
+    .DiscrepanciasTB :nth-child(1) input{
         width: 100%;
-        border-radius: 15px;
+        height: 30px;
+        border-radius: 0px 0px 10px 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: rgb(82, 82, 82);
+        border: 1px rgb(0, 195, 255) dashed;
+        outline: none;
+        text-align: center;
+    }
+    .DiscrepanciasTB input::placeholder{
+        color: rgb(190, 190, 190);
+    }
+    .DiscrepanciasTB :nth-child(1) label{
+        font-weight: bold;
+        margin-right: 10px;
+        color: rgb(0, 195, 255);
     }
     .TituloDiscrepancia{
         width: 100%;
@@ -963,18 +1046,26 @@
         border: none;
         text-align: center;
     }
+    .CamposInt button{
+        background-color: white;
+        border: none;
+    }
     .CamposInt td:nth-child(1){
-        width: 10%;
+        width: 5%;
     }
     .CamposInt td:nth-child(2){
-        width: 60%;
-    }
-    .CamposInt td:nth-child(3){
         width: 20%;
     }
-    .CamposInt td:nth-child(4){
-        width: 10%;
+    .CamposInt td:nth-child(3){
+        width: 75%;
     }
+    .CamposInt td:nth-child(4){
+        width: 0%;
+    }
+    .CamposInt td:nth-child(5){
+        width: 0%;
+    }
+
     .Observacoes{
         position: relative;
         width: 90%;

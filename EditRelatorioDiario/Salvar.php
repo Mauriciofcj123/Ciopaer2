@@ -21,8 +21,10 @@
                 $Placa=$_POST['PlacaDisp'];
                 $Status=$_POST['StatusDisp'];
                 $Causa=$_POST['CausaDisp'];
+                $Previsao=$_POST['PrevisaoDisp'];
+
                 for($i=0;$i<count($Placa);$i++){
-                    $SQLDisp="UPDATE disponibilidade SET  Status='".$Status[$i]."', Causa='".$Causa[$i]."' WHERE Data='".$Data."' AND Placa='".$Placa[$i]."' ";
+                    $SQLDisp="UPDATE disponibilidade SET  Status='".$Status[$i]."', Causa='".$Causa[$i]."', TipoCausa='".$Previsao[$i]."' WHERE Data='".$Data."' AND Placa='".$Placa[$i]."' ";
                     $Requisicao=mysqli_query($mysqli,$SQLDisp);
                 }
             }
@@ -31,13 +33,14 @@
                 
                 $Placa=$_POST['PlacaDisc'];
                 $Descricao=$_POST['Descricao'];
+                $Medida=$_POST['MedidaTXT'];
 
                 $SQLDisc="DELETE from discrepancias WHERE Data='$Data'";
                 $Requisicao=mysqli_query($mysqli,$SQLDisc);
 
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','$Data')";
+                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisc);
                 }
             }
@@ -96,9 +99,10 @@
                 $Placa=$_POST['PlacaDisp'];
                 $Status=$_POST['StatusDisp'];
                 $Causa=$_POST['CausaDisp'];
+                $Previsao=$_POST['PrevisaoDisp'];
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisp="INSERT INTO disponibilidade(Placa,Status,Causa,Data) VALUES('".$Placa[$i]."','".$Status[$i]."','".$Causa[$i]."','".$Data."')";
+                    $SQLDisp="INSERT INTO disponibilidade(Placa,Status,Causa,TipoCausa,Data) VALUES('".$Placa[$i]."','".$Status[$i]."','".$Causa[$i]."','".$Previsao[$i]."','".$Data."')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisp);
                 }
             }
@@ -107,10 +111,11 @@
                 
                 $Placa=$_POST['PlacaDisc'];
                 $Descricao=$_POST['Descricao'];
+                $Medida=$_POST['MedidaTXT'];
 
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','$Data')";
+                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisc);
                 }
             }

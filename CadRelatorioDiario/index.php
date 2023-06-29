@@ -52,8 +52,6 @@
         $AeronavesCad=mysqli_query($mysqli,$SQL);
         
 
-        $ID=0;
-
         echo '<div class="Part1">';
         echo '<div class="Aeronaves" id="AeronavesDIV">';
         
@@ -64,44 +62,55 @@
             $Requisicao=mysqli_query($mysqli,$SQL);
             $Resultado=$Requisicao->fetch_assoc();
             $UltimaData=$Resultado['Data'];
-            $i++;
 
-            echo '<div id="'.$Linha1['Marca'].'">';
+            echo '<div id="'.$Linha1['Marca'].'" name="MarcaDIV">';
 
             $SQL='SELECT * FROM disponibilidade WHERE Placa="'.$Linha1['Marca'].'" AND Data = "'.$UltimaData.'"';
             $Requisicao=mysqli_query($mysqli,$SQL);
             $Disponibilidade=$Requisicao->fetch_assoc();
 
-            echo '<input type="text" value="'.$Linha1['Marca'].'" disabled class="Placa" name="AeronavePlaca">';
+            echo '<input type="text" class="MarcaTXT" value="'.$Linha1['Marca'].'" disabled class="Placa" name="AeronavePlaca">';
 
             if($Disponibilidade['Status']=='Disponível'){
                 
-                echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
-                <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" class="Selecionada" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
+                echo '<button Onclick="Ativar('.$i.',\'0\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
+                <button Onclick="Ativar('.$i.',\'1\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'2\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" class="Selecionada" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
-                echo '<div id="Causa'.$i.'" style="visibility : hidden; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
+                echo '<div name="CausaDIV" id="Causa'.$i.'" class="CausaTXT" style="visibility : hidden;"><label>Causa</label><input type="text" class="CausaTXT" name="Causa[]" value="'.$Disponibilidade['Causa'].'" >
+                <select name="Previsao" id="Previsao'.$i.'" style="visibility: hidden;">
+                <option>Prevista</option>
+                <option>Imprevista</option>
+                </select></div>';
                 
             }else if($Disponibilidade['Status']=='Indisponível'){
-                echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" class="Selecionada" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
-                <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
+                echo '<button Onclick="Ativar('.$i.',\'0\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" src="Imgs/Despachada.png" title="Despachadas" ></button>
+                <button Onclick="Ativar('.$i.',\'1\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" class="Selecionada" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'2\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
-                echo '<div id="Causa'.$i.'" style="visibility : visible; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" value="'.$Disponibilidade['Causa'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
+                echo '<div name="CausaDIV" id="Causa'.$i.'" class="CausaTXT" style="visibility : visible;"><label>Causa</label><input type="text" class="CausaTXT" name="Causa[]" value="'.$Disponibilidade['Causa'].'" >
+                <select name="Previsao" id="Previsao'.$i.'" style="visibility: visible;">
+                <option>Prevista</option>
+                <option>Imprevista</option>
+                </select></div>';
                 
             }else if($Disponibilidade['Status']=='Despachada'){
-                echo '<button Onclick="Ativar('.$i.',\'DespachadaBTN\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" class="Selecionada" src="Imgs/Despachada.png" title="Despachadas" ></button>
-                <button Onclick="Ativar('.$i.',\'IndisponivelBTN\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
-                <button Onclick="Ativar('.$i.',\'Disponivel\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
+                echo '<button Onclick="Ativar('.$i.',\'0\',\'Despachada\')"><img name="Botao'.$i.'" id="DespachadaBTN'.$i.'" class="Selecionada" src="Imgs/Despachada.png" title="Despachadas" ></button>
+                <button Onclick="Ativar('.$i.',\'1\',\'Indisponível\')"><img name="Botao'.$i.'" id="IndisponivelBTN'.$i.'" src="Imgs/cancelar.png" title="Indisponíveis" ></button>
+                <button Onclick="Ativar('.$i.',\'2\',\'Disponível\')"><img name="Botao'.$i.'" id="Disponivel'.$i.'" src="Imgs/verificado.png" title="Disponíveis" ></button><br>';
 
-                echo '<div id="Causa'.$i.'" style="visibility : visible; margin-top: 10px;"><label>Causa</label><input type="text" name="Causa[]" value="'.$Disponibilidade['Causa'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); width: 80%;"></div>';
+                echo '<div name="CausaDIV" id="Causa'.$i.'" class="CausaTXT" style="visibility : visible;"><label>Causa</label><input type="text" class="CausaTXT" name="Causa[]" value="'.$Disponibilidade['Causa'].'" >
+                <select name="Previsao" id="Previsao'.$i.'" style="visibility: visible;">
+                <option>Programado</option>
+                <option>Não Programado</option>
+                </select></div>';
             }
 
             echo '<input type="text" name="Status[]" id="Status" value="'.$Disponibilidade['Status'].'" style="margin-left: 20px;width: 200px; border-bottom: 1px solid rgb(0, 195, 255); border-right: 1px solid rgb(0, 195, 255); visibility: hidden; width: 80%;"><br>';
 
             echo'</div>';
 
-            $ID++;
+            $i++;
         }
         echo '</div>';
     
@@ -110,7 +119,6 @@
             $QTD=$Requisicao->num_rows;
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
-    
             echo "<div class='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
@@ -118,7 +126,7 @@
                 </div>";
             
             while($Linha=$Requisicao->fetch_assoc()){
-            echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
+                echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
                 echo "<tr class='TituloDiscrepancia'>
                         <td colspan='4'>
                         <select name='PlacaDisc'>
@@ -137,7 +145,11 @@
                         <td><input type='checkbox' name='CheckboxDiscrepancia' id=''></td>
                         <td><img src='Imgs/alerta.png' title='Discrepancias'></td>
                         <td colspan='2' class='DiscrepanciaTXT'><textarea name='DescricaoDisc'>".$Linha['DescDiscrepancias']."</textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan='4'><input type='text' name='MedidaTXT' placeholder='Medida Tomada' value='".$Linha['Medida']."'><td/>
                     </tr>";
+                    
             echo "</table>";
             }
     
@@ -154,7 +166,7 @@
         $SQL2="SELECT * FROM pilotos";
         $Pilotos=mysqli_query($mysqli,$SQL2);
 
-        echo '<select style="visibility: hidden" id="Pilotos" name="PilotosOBJ">';
+        echo '<select style="visibility: hidden; position: absolute;" id="Pilotos" name="PilotosOBJ">';
         while($Piloto=$Pilotos->fetch_assoc()){
             if($Piloto['Patente']=='Sem Patente'){
                 echo "<option>".$Piloto['Nome']." ".$Piloto['Sobrenome']."</option>"; 
@@ -165,7 +177,7 @@
         echo '<select>';
 
 
-        echo '<h1 class="TituloCautela">Acessórios Cautelados</h1>';
+        //echo '<h1 class="TituloCautela">Acessórios Cautelados</h1>';
         echo '<div class="Acessorios">';
 
         echo '<div class="MenuAcessorio"><button onClick="AdicionarFone()"><img src="Imgs/AdicionarAcessorio.png" class="MenuCautela" title="Cautelar Fone"></button>
@@ -193,6 +205,7 @@
         echo '</table>';
         echo '</div>';
 
+        //echo '<h1 class="TituloInter">Intervenção</h1>';
         echo "<div class='Intervencao'>";
             echo "<div class='MenuIntervencao'>
             <button onClick='AbrirModalIntervencao()'><img src='Imgs/AdicionarIntervencao.png' title='Adicionar'></button>
@@ -253,7 +266,6 @@
                 }
             ?>
         </select>
-                
         <div class="CardBoxs">
             <div class="TodosDIV">
                 <table class="TodosTB" id="MecanicosTB">
@@ -298,8 +310,8 @@
             <option>Elétrica</option>
             <option>Limpeza e Higienização</option>
             <option>Adequação para Missão</option>
+            <option>Avionics</option>
         </select>
-
         <textarea name="CaixaTexto" id="CaixaTexto" class="DescIntervencao" cols="30" rows="10" placeholder="Descrição da Intervenção" maxlength="120"></textarea><p id='Caracteres'>0/120</p><br>
         <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
         <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>

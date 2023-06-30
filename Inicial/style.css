@@ -124,4 +124,74 @@
     width: 100%;
     word-break: break-all;
 }
+#ModalTarefa{
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.418);
+    z-index: 3;
+}
+#FormularioDIV{
+    position: relative;
+    align-items: center;
+    height: 90%;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-image: radial-gradient(white,rgb(232, 250, 255));
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.616);
+}
+#Formulario{
+    position: relative;
+    height: 100%;
+    top: 2%;
+    width: 100%;
+    text-align: center;
+}
+#Formulario label{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+}
+#DestinatarioDIV{
+    position: relative;
+    width: 250px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: rgb(217, 237, 255);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: start;
+    padding: 10px;
+}
+#DestinatarioDIV input{
+    margin-right: 30px;
+    background-color: aqua;
+}
+#TituloTXT{
+    position: relative;
+    width: 50%;
+    height: 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+#Formulario textarea ::placeholder{
+    text-transform: uppercase;
+}
+#Formulario textarea{
+    width: 80%;
+    height: 200px;
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#DataTXT{
+    width: 20%;
+    height: 50px;
+}
 

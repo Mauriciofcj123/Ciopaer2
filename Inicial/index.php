@@ -70,12 +70,36 @@
                         </div>";
                     }
                     echo '</div>';
-
                 echo '</div>';
+
+                    echo "<div id='ModalTarefa'>
+                        <div id='FormularioDIV'>
+                            <form action='' method='post' id='Formulario'>
+                                <label>Destinatário </label>
+                                <div id='DestinatarioDIV'>
+                                <input type='checkbox' name='checkbox' id='checkbox'><label for='checkbox'>Todos</label><br>";
+                                $SQLUser='SELECT * FROM cadastros';
+                                $RequisicaoUser=mysqli_query($mysqli,$SQLUser);
+                                while($Users=$RequisicaoUser->fetch_assoc()){
+                                    if($Users['Patente']=='Sem Patente'){
+                                        echo "<input type='checkbox' name='checkbox=' id='checkbox'><label for='checkbox'>".$Users['Nome']." ".$Users['Sobrenome']."</label><br>";
+                                    }else{
+                                        echo "<input type='checkbox' name='checkbox=' id='checkbox'><label for='checkbox'>".$Users['Patente']." ".$Users['Sobrenome']."</label><br>";
+                                    }
+                                    
+                                }
+                                    
+                                echo "</div>
+                                <input type='text' placeholder='Título' id='TituloTXT'><br>
+                                <textarea name='' id='' placeholder='Tarefa'></textarea><br>
+                                <label for=''>Data Limite:</label> <input type='date' name='' id='DataTXT'>
+                                <button type='submit'>Enviar</button>
+                            </form>
+                        </div>
+                    </div>";
             }
         }
     ?>
-
     
     
 </body>

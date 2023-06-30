@@ -22,6 +22,12 @@
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
             echo '<select id="MecanicoDia" disabled>';
+
+            $MecanicoSelec='SELECT * FROM registrodisp WHERE Data="'.$_SESSION['Data'].'" LIMIT 1';
+            $MecanicosSelectReq=mysqli_query($mysqli,$MecanicoSelec);
+            $MecanicoSelecionado=$MecanicosSelectReq->fetch_assoc();
+            echo "<option>".$MecanicoSelecionado['Mecanico']."</option>";
+
             $Mecanicos='SELECT * FROM operacional';
             $MecanicosReq=mysqli_query($mysqli,$Mecanicos);
             while($MecanicosArray=$MecanicosReq->fetch_assoc()){

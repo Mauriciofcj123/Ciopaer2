@@ -18,7 +18,7 @@ document.addEventListener('keyup', function (e){
 
 
 
-function Ativar(id,Nome,Valor){
+function Ativar(id,idAtual,Valor){
     let Botoes=document.getElementsByName('Botao'+id);
     let Selecionado=Botoes[idAtual];
     let Status=document.getElementsByName('Status[]')[id];

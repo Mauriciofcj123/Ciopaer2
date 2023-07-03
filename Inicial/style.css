@@ -132,6 +132,7 @@
     top: 0px;
     background-color: rgba(0, 0, 0, 0.418);
     z-index: 3;
+    visibility: hidden;
 }
 #FormularioDIV{
     position: relative;
@@ -143,6 +144,7 @@
     transform: translate(-50%,-50%);
     background-image: radial-gradient(white,rgb(232, 250, 255));
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.616);
+    transition-duration: 0.5s;
 }
 #Formulario{
     position: relative;
@@ -159,8 +161,8 @@
 }
 #DestinatarioDIV{
     position: relative;
-    width: 250px;
-    height: 300px;
+    width: 20%;
+    height: 30%;
     overflow-y: auto;
     background-color: rgb(217, 237, 255);
     left: 50%;
@@ -168,10 +170,16 @@
     text-align: start;
     padding: 10px;
 }
-#DestinatarioDIV input{
-    margin-right: 30px;
+#checkbox{
+    width: 10%;
     background-color: aqua;
 }
+#DestinatarioTXT{
+    font-weight: bold;
+    border: none;
+    background:none;
+}
+
 #TituloTXT{
     position: relative;
     width: 50%;
@@ -193,5 +201,19 @@
 #DataTXT{
     width: 20%;
     height: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+.EnviarBTN{
+    position: relative;
+    width: 400px;
+    height: 50px;
+    background-color: rgb(0, 255, 0);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
 }
 

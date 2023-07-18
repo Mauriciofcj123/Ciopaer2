@@ -3,6 +3,8 @@ document.addEventListener('click',()=>{
     let Tarefa=document.getElementById('Tarefa');
     let SalvarBTN=document.getElementById('EnviarBTN');
     let DestinatariosCB=document.getElementsByName('checkbox');
+    let TodosCB=document.getElementsByName('checkbox')[0];
+
     let Quantidade=0;
 
     for(i=0;i<DestinatariosCB.length;i++){
@@ -10,11 +12,25 @@ document.addEventListener('click',()=>{
             Quantidade++;
         }
     }
+    if(Quantidade<DestinatariosCB.length){
+        TodosCB.checked=false;
+    }
+
 
     if(Titulo.value.length<=0||Tarefa.value.length<=0||Quantidade<=0){
         SalvarBTN.style.visibility='hidden';
     }else{
         SalvarBTN.style.visibility='visible';
+    }
+});
+
+let TodosCB=document.getElementsByName('checkbox')[0];
+
+TodosCB.addEventListener('click',()=>{
+    let DestinatariosCB=document.getElementsByName('checkbox');
+    let TodosCB=document.getElementsByName('checkbox')[0];
+    for(i=0;i<DestinatariosCB.length;i++){
+        DestinatariosCB[i].checked=TodosCB.checked;
     }
 });
 
@@ -51,7 +67,6 @@ document.addEventListener('keydown',()=>{
         Tarefa.value=Tarefa.value.substring(0,250);
     }
 });
-
 function FecharModal(){
     let Modal=document.getElementById('ModalTarefa');
     let FormularioDIV=document.getElementById('FormularioDIV');
@@ -81,8 +96,9 @@ function Salvar(){
     let DIV=document.getElementById('FormularioDIV');
     let Formulario=document.createElement('form');
     Formulario.setAttribute('method','post');
-    Formulario.setAttribute('action','');
+    Formulario.setAttribute('action','salvar.php');
     Formulario.style.position='fixed';
+    Formulario.style.visibility='hidden';
     DIV.appendChild(Formulario);
 
     let input1=document.createElement('input');
@@ -119,6 +135,26 @@ function Salvar(){
     let Botao=document.createElement('button');
     Botao.setAttribute('type','submit');
     Botao.setAttribute('name','EnviarBTN');
+    Formulario.appendChild(Botao);
+    Botao.click();
+}
+
+function Resolver(id){
+    let DIV=document.getElementById('body');
+    let Formulario=document.createElement('form');
+    Formulario.setAttribute('method','post');
+    Formulario.setAttribute('action','salvar.php');
+    Formulario.style.position='fixed';
+    DIV.appendChild(Formulario);
+
+    let input1=document.createElement('input');
+    input1.setAttribute('name','ID');
+    input1.value=id;
+    Formulario.appendChild(input1);
+
+    let Botao=document.createElement('button');
+    Botao.setAttribute('type','submit');
+    Botao.setAttribute('name','ResolverBTN');
     Formulario.appendChild(Botao);
     Botao.click();
 }

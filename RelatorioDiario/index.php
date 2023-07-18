@@ -33,13 +33,26 @@
             $MecanicoDia=$RequisicaoMecanico->fetch_assoc();
             echo '<input id="MecanicoNome" value="'.$MecanicoDia['Mecanico'].'" disabled style="visibility: hidden;"></input>';
 
-            echo '<div class="Data"><form method="post" action="../EditRelatorioDiario/index.php">
-              <button type="submit"><img src="Imgs/editar.png" name="EditarBTN"></img></button>
-              <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT" id="DataTXT"><button type="button" onclick="CriarImpressao()"><img src="Imgs/Print.png"></button>
-            </form></div><br>';
+            if($MecanicoDia['Mecanico']==$_SESSION['Nome']){
+                echo '<div class="Data">
+                    <form method="post" action="../EditRelatorioDiario/index.php">
+                        <button type="submit" name="EditarBTN">
+                            <img src="Imgs/editar.png"></img>
+                        </button>
+                        <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" name="DataTXT" id="DataTXT" readonly>
+                        <button type="button" onclick="CriarImpressao()">
+                            <img src="Imgs/Print.png">
+                        </button>
+                </form></div><br>';
+            }else{
+                echo '<div class="Data"><form method="post" action="../EditRelatorioDiario/index.php">
+                <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled id="DataTXT"><button type="button" onclick="CriarImpressao()"><img src="Imgs/Print.png"></button>
+              </form></div><br>';
+            }
+            
 
         echo "<div class=Parte>";
-        echo "<a href='index.php'><img src='Imgs/Relatório.png' title='Relatório Principal'></a>";
+        echo "<a href='index.php'><img src='Imgs/Relatorio.png' title='Relatorio Principal'></a>";
         echo "<a href='../RelatorioDiarioCautelados/index.php'><img src='Imgs/Fone de ouvido.png ' title='Objetos Cautelados'></a>";
         echo "<a href='../RelatorioDiarioObs/index.php'><img src='Imgs/papel.png' title='Observações'></a>";
         echo "</div>";
@@ -140,7 +153,6 @@
                 echo "<label name='NomeAces' style='visibility: hidden;'>".$Acessorios['NomeAcessorio']."</label>";
                 echo "<label name='ResponsavelAces' style='visibility: hidden;'>".$Acessorios['Responsável']."</label>";
             }
-
         }
 
         $SQL='SELECT * FROM observacoes WHERE Data="'.$_SESSION['Data'].'"';

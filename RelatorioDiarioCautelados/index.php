@@ -23,7 +23,7 @@
         echo '<div class="Data"><a href="../CadRelatorioDiario/index.php"><img src="Imgs/editar.png"></a><input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT"> <img src="Imgs/Print.png"></div><br>';
 
         
-        echo "<a href='../RelatorioDiario/index.php'><img class='Parte' src='Imgs/Relatório.png' title='Relatório Principal'></a>";
+        echo "<a href='../RelatorioDiario/index.php'><img class='Parte' src='Imgs/Relatorio.png' title='Relatório Principal'></a>";
         echo "<a href='index.php'><img class='Parte' src='Imgs/Fone de ouvido.png' title='Objetos Cautelados'></a>";
         echo "<a href='../RelatorioDiarioObs/index.php'><img class='Parte' src='Imgs/papel.png' title='Observações'></a>";
 

@@ -1,7 +1,7 @@
 <?php
 
 $hostname="localhost";
-$bancodedados="ciopaer";
+$bancodedados="u534616872_ciopaer";
 $usuario="root";
 $senha="";
 

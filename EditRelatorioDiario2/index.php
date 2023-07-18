@@ -15,19 +15,34 @@
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
-        if(isset($_POST['AcessarBTN'])){
-            $Data=date('dd/mm/YY');
-            $_SESSION['Data']=$Data;
+        if(isset($_POST['EditarBTN'])){
+            $_SESSION['Data']=$_POST['DataTXT'];
         }
 
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
-            echo '<input id="MecanicoDia" value="'.$_SESSION['Nome'].'" disabled>';
+            echo '<select id="MecanicoDia" disabled>';
+
+            $MecanicoSelec='SELECT * FROM registrodisp WHERE Data="'.$_SESSION['Data'].'" LIMIT 1';
+            $MecanicosSelectReq=mysqli_query($mysqli,$MecanicoSelec);
+            $MecanicoSelecionado=$MecanicosSelectReq->fetch_assoc();
+            echo "<option>".$MecanicoSelecionado['Mecanico']."</option>";
+
+            $Mecanicos='SELECT * FROM operacional';
+            $MecanicosReq=mysqli_query($mysqli,$Mecanicos);
+            while($MecanicosArray=$MecanicosReq->fetch_assoc()){
+                if($MecanicosArray['Patente']=="Sem Patente"){
+                        echo "<option>".$MecanicosArray['Nome']." ".$MecanicosArray['Sobrenome']."</option>";
+                }else{
+                        echo "<option>".$MecanicosArray['Patente']." ".$MecanicosArray['Sobrenome']."</option>";
+                }
+                        
+            }
         echo '</select>';
         echo '</div>';
         
-        $Data=date('Y-m-d');
-        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'"></div>';
+        $Data=date('Y-m-d',strtotime($_SESSION['Data']));
+        echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'" disabled></div>';
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
@@ -40,6 +55,9 @@
 
         $SQL='SELECT * FROM aeronavescadastradas';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
+        
+
+        $ID=0;
 
         echo '<div class="Part1">';
         echo '<div class="Aeronaves" id="AeronavesDIV">';
@@ -47,14 +65,10 @@
         $i=0;
 
         while($Linha1=$AeronavesCad->fetch_assoc()){
-            $SQL='SELECT * FROM disponibilidade ORDER BY Data Desc LIMIT 1';
-            $Requisicao=mysqli_query($mysqli,$SQL);
-            $Resultado=$Requisicao->fetch_assoc();
-            $UltimaData=$Resultado['Data'];
 
-            echo '<div id="'.$Linha1['Marca'].'" name="MarcaDIV">';
+            echo '<div id="'.$Linha1['Marca'].'">';
 
-            $SQL='SELECT * FROM disponibilidade WHERE Placa="'.$Linha1['Marca'].'" AND Data = "'.$UltimaData.'"';
+            $SQL='SELECT * FROM disponibilidade WHERE Placa="'.$Linha1['Marca'].'" AND Data = "'.$Data.'"';
             $Requisicao=mysqli_query($mysqli,$SQL);
             $Disponibilidade=$Requisicao->fetch_assoc();
 
@@ -103,19 +117,20 @@
         }
         echo '</div>';
     
-            $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."'";
+            $SQL="SELECT * FROM discrepancias WHERE Data='".$Data."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
             $QTD=$Requisicao->num_rows;
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
+    
             echo "<div class='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
-                    <label for='DiscrepanciaQTD' class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
+                    <label class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
                 </div>";
             
             while($Linha=$Requisicao->fetch_assoc()){
-                echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
+            echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
                 echo "<tr class='TituloDiscrepancia'>
                         <td colspan='4'>
                         <select name='PlacaDisc'>
@@ -149,7 +164,7 @@
 
         echo "<div class='Part2'>";
 
-        $SQL="SELECT * FROM acessoriodisp WHERE Data='$UltimaData'";
+        $SQL="SELECT * FROM acessoriodisp WHERE Data='$Data'";
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         $SQL2="SELECT * FROM pilotos";
@@ -194,20 +209,36 @@
         echo '</table>';
         echo '</div>';
 
-        //echo '<h1 class="TituloInter">Intervenção</h1>';
-        echo "<div class='Intervencao' id='IntervencaoDIV'>";
+        echo "<div class='Intervencao'>";
             echo "<div class='MenuIntervencao'>
             <button onClick='AbrirModalIntervencao()'><img src='Imgs/AdicionarIntervencao.png' title='Adicionar'></button>
             <button onClick='RemoverIntervencao()'><img src='Imgs/lixo.png' title='Remover Intervenção'></button>
             </div>";
 
-            $SQLInt="SELECT * FROM intervencao WHERE Data='$UltimaData'";
+            $SQLInt="SELECT * FROM intervencao WHERE Data='$Data'";
             $RequisicaoInt=mysqli_query($mysqli,$SQLInt);
+            $IDInt=0;
+            echo "<table class='IntervencaoTB' id='IntervencaoTB'>";
+                while($Intervencao=$RequisicaoInt->fetch_assoc()){
+                    echo "<tr class='Responsavel' name='ResponsavelInt'>
+                        <td colspan='7'><input type='text' name='MecanicoInt' value='".$Intervencao['RealizadoPor']."' disabled></input></td>
+                    </tr>";
+                    echo "<tr class='CamposInt' name='CamposInt'>
+                        <td><input type='checkbox' name='CheckInt'></td>
+                        <td><input type='text' name='PlacaInt' value='".$Intervencao['Placa']."' disabled></input></td>
+                        <td colspan='2'><textarea name='DescricaoInt' disabled >".$Intervencao['DescIntervencao']."</textarea></input></td>
+                        <td><input type='text' name='TipoInt' value='".$Intervencao['TipoIntervencao']."' disabled></input></td>
+                        <td><input type='text' name='TempoInt' value='".$Intervencao['TempoInter']."' disabled></input></td>
+                        <td><button onClick='EditarInt(".$IDInt.")'><img src='Imgs/editar.png'></button></img></td>
+                        </tr>";
+                        $IDInt++;
+                }
+                echo "</table>";
 
         echo "</div>";
         echo "</div>";
 
-        $SQL='SELECT * FROM observacoes WHERE data="'.$UltimaData.'"';
+        $SQL='SELECT * FROM observacoes WHERE data="'.$Data.'"';
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         echo "<div class='Observacoes'>";
@@ -218,13 +249,20 @@
 
         echo "<div class='ObservacoesDIV'>";
         echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
+        while($Observacoes=$Requisicao->fetch_assoc()){
+            echo "<tr name='LinhaOBS'>
+                    <td><input type='checkbox' name='CheckOBS'></td>
+                    <td><img src='Imgs/papel.png'></td>
+                    <td><textarea name='ObservacaoTXT'>".$Observacoes['Observacoes']."</textarea></td>
+                </tr>";
+        }
         echo "</table>";
         echo "</div>";
 
         echo "</div>";
 
         echo '<div class="Botoes">
-        <button class="SalvarBTN" onclick="AbrirAviso()">Salvar</button>
+        <button class="SalvarBTN" onclick="Salvar()">Salvar</button>
         </div>';
     }
     ?>
@@ -245,6 +283,7 @@
                 }
             ?>
         </select>
+                
         <div class="CardBoxs">
             <div class="TodosDIV">
                 <table class="TodosTB" id="MecanicosTB">
@@ -291,6 +330,7 @@
             <option>Adequação para Missão</option>
             <option>Avionics</option>
         </select>
+
         <textarea name="CaixaTexto" id="CaixaTexto" class="DescIntervencao" placeholder="Descrição da Intervenção" maxlength="500"></textarea><p id='Caracteres'>0/500</p><br>
         <input type="number" class="Tempo" id="Hora" min="0" value=0><label class="Legenda">Hrs.</label>
         <input type="number" class="Tempo" id="Minuto" max="59" min="0" value=0><label class="Legenda">Min.</label>
@@ -299,12 +339,6 @@
         <button onClick='FecharModalIntervencao()' class="FecharBTN"><img src="Imgs/Fechar.png" alt=""></button>
             </div>
         </div>
-    </div>
-    <div class="Aviso" id='Aviso'>
-        <img src="Imgs/Aviso.png"><br>
-        <label>Verificou tudo?</label><br>
-        <button onClick='Salvar()'><img src="Imgs/Like.png"></button>
-        <button onClick='FecharAviso()'><img src="Imgs/Unlike.png"></button>
     </div>
 </body>
 </html>

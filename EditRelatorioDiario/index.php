@@ -20,10 +20,10 @@
             $_SESSION['Data']=$_POST['DataTXT'];
         }
 
-        $Data=date('Y-m-d',strtotime($_SESSION['Data']));
-        echo $Data;
-        
         if(isset($_SESSION['Data'])){
+            
+            $Data=date('Y-m-d',strtotime($_SESSION['Data']));
+
             echo '<div class="NomeMec">';
             echo '<input id="MecanicoDia" value="'.$_SESSION['Nome'].'" disabled>';
             echo '</div>';
@@ -48,10 +48,6 @@
         $i=0;
 
         while($Linha1=$AeronavesCad->fetch_assoc()){
-            $SQL='SELECT * FROM disponibilidade ORDER BY Data Desc LIMIT 1';
-            $Requisicao=mysqli_query($mysqli,$SQL);
-            $Resultado=$Requisicao->fetch_assoc();
-            $Data=$Resultado['Data'];
 
             echo '<div id="'.$Linha1['Marca'].'" name="MarcaDIV">';
 
@@ -204,6 +200,25 @@
 
             $SQLInt="SELECT * FROM intervencao WHERE Data='$Data'";
             $RequisicaoInt=mysqli_query($mysqli,$SQLInt);
+            $IDInt=0;
+                while($Intervencao=$RequisicaoInt->fetch_assoc()){
+                echo "<table class='IntervencaoTB' name='IntervencaoTB'>";
+                    echo "<tr class='Responsavel' name='ResponsavelInt'>
+                        <td colspan='7'><input type='text' name='MecanicoInt' value='".$Intervencao['RealizadoPor']."' disabled></input></td>
+                    </tr>";
+                    echo "<tr class='CamposInt' name='CamposInt'>
+                        <td><input type='checkbox' name='CheckInt'></td>
+                        <td><input type='text' name='PlacaInt' value='".$Intervencao['Placa']."' disabled></input></td>
+                        <td colspan='2'><textarea name='DescricaoInt' readonly >".$Intervencao['DescIntervencao']."</textarea></input></td>
+                        <td><input type='text' name='TipoInt' value='".$Intervencao['TipoIntervencao']."' disabled></input></td>
+                        <td><input type='text' name='TempoInt' value='".$Intervencao['TempoInter']."' disabled></input></td>
+                        <td><button onClick='EditarInt(".$IDInt.")'><img src='Imgs/editar.png'></button></img></td>
+                        </tr>";
+                       
+                echo "</table>";
+                $IDInt++;
+                }
+
 
         echo "</div>";
         echo "</div>";
@@ -217,10 +232,17 @@
                 <button onClick='RemoverOBS()'><img src='Imgs/lixo.png' title='Remover Observação'></button>
             </div>";
 
-        echo "<div class='ObservacoesDIV'>";
-        echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
-        echo "</table>";
-        echo "</div>";
+            echo "<div class='ObservacoesDIV'>";
+            echo "<table class='ObservacoesTB' id='ObservacoesTB'>";
+            while($Observacoes=$Requisicao->fetch_assoc()){
+                echo "<tr name='LinhaOBS'>
+                        <td><input type='checkbox' name='CheckOBS'></td>
+                        <td><img src='Imgs/papel.png'></td>
+                        <td><textarea name='ObservacaoTXT'>".$Observacoes['Observacoes']."</textarea></td>
+                    </tr>";
+            }
+            echo "</table>";
+            echo "</div>";
 
         echo "</div>";
 

@@ -1,0 +1,45 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+}
+.PesquisarDIV{
+    width: 100%;
+    text-align: center;
+}
+.PesquisarDIV input{
+    text-align: center;
+    width: 20%;
+    height: 30px;
+    margin: 5px;
+    font-weight: bold;
+}
+.InformacoesDIV{
+    position: relative;
+    display: block;
+    width: 70%;
+    justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.InformacoesDIV label{
+    position: relative;
+    font-weight: bold;
+    margin-left: 10px;
+    line-height: 50px;
+    left: 5%;
+    text-align: right;
+}
+.InformacoesDIV input{
+    position: relative;
+    height: 50px;
+    width: 70%;
+    float: right;
+    right: 5%;
+}
+.InformacoesDIV p{
+    position: relative;
+    left: 50%;
+    font-weight: bold;
+    color: red;
+}

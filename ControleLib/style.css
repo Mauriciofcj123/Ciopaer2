@@ -1,0 +1,31 @@
+.Menu{
+    width: 100%;
+    padding: 0px 100px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.Menu ul a{
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+.Menu ul{
+    width: 150px;
+    height: 150px;
+    border: 0.5px solid rgba(0, 0, 0, 0.219);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.137);
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: serif;
+}
+.Menu ul img{
+    width: 75px;
+    margin-bottom: 10px;
+}
+.Menu ul:hover{
+    box-shadow: 2px 2px 6px rgba(43, 255, 0, 0.137);
+    border: 0.5px solid rgba(51, 255, 0, 0.219);
+}

@@ -39,15 +39,21 @@
                         <button type="submit" name="EditarBTN">
                             <img src="Imgs/editar.png"></img>
                         </button>
-                        <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" name="DataTXT" id="DataTXT" readonly>
+                        <input type="date" value="'.date('Y-m-d',strtotime($_SESSION['Data'])).'" name="DataTXT" id="DataTXT" readonly>
                         <button type="button" onclick="CriarImpressao()">
                             <img src="Imgs/Print.png">
                         </button>
-                </form></div><br>';
+                    </form>
+                    </div><br>';
             }else{
-                echo '<div class="Data"><form method="post" action="../EditRelatorioDiario/index.php">
-                <input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled id="DataTXT"><button type="button" onclick="CriarImpressao()"><img src="Imgs/Print.png"></button>
-              </form></div><br>';
+                echo '<div class="Data">
+                <form method="post" action="../EditRelatorioDiario/index.php">
+                <input type="date" value="'.date('Y-m-d',strtotime($_SESSION['Data'])).'" disabled id="DataTXT">
+                <button type="button" onclick="CriarImpressao()">
+                    <img src="Imgs/Print.png">
+                </button>
+              </form>
+              </div><br>';
             }
             
 

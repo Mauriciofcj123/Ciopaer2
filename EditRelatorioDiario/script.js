@@ -361,6 +361,7 @@ function ConfirmarIntervencao(){
         let IntervencaoDIV=document.getElementById('IntervencaoDIV');
         let IntervencaoTB=document.createElement('table');
         IntervencaoTB.setAttribute('name','IntervencaoTB');
+        IntervencaoTB.classList.add('IntervencaoTB');
         IntervencaoDIV.appendChild(IntervencaoTB);
         let NumeroLinhas=document.getElementsByName('IntervencaoTB');
         let IDLocal=0;
@@ -386,7 +387,7 @@ function ConfirmarIntervencao(){
         let Celula7=Linha2.insertCell(5);
         Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
         Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
-        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
+        Celula4.innerHTML='<textarea name="DescricaoInt" readonly >'+Descricao+'</textarea>';
         Celula4.colSpan=2;
         Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
         Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
@@ -451,6 +452,7 @@ function ConfirmarEdicao(id){
         let IntervencaoDIV=document.getElementById('IntervencaoDIV');
         let IntervencaoTB=document.createElement('table');
         IntervencaoTB.setAttribute('name','IntervencaoTB');
+        IntervencaoTB.setAttribute('class','IntervencaoTB');
         IntervencaoDIV.appendChild(IntervencaoTB);
 
         let Linha1=IntervencaoTB.insertRow(0);
@@ -458,7 +460,7 @@ function ConfirmarEdicao(id){
         Linha1.setAttribute('name','ResponsavelInt');
         let Celula1=Linha1.insertCell(0);
         Celula1.colSpan=6;
-        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" disabled>';
+        Celula1.innerHTML='<input type="text" name="MecanicoInt" value="'+Responsáveis+'" readonly>';
 
         let Linha2=IntervencaoTB.insertRow(1);
         Linha2.classList.add('CamposInt');
@@ -470,11 +472,11 @@ function ConfirmarEdicao(id){
         let Celula6=Linha2.insertCell(4);
         let Celula7=Linha2.insertCell(5);
         Celula2.innerHTML="<input type='checkbox' name='CheckInt'>";
-        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" disabled>';
-        Celula4.innerHTML='<input type="text" name="DescricaoInt" value="'+Descricao+'" disabled>';
+        Celula3.innerHTML='<input type="text" name="PlacaInt" value="'+Aeronave+'" readonly>';
+        Celula4.innerHTML='<textarea name="DescricaoInt" readonly >'+Descricao+'</textarea>';
         Celula4.colSpan=2;
-        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
-        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
+        Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" readonly>';
+        Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" readonly>';
         Celula7.innerHTML="<button onClick='EditarInt(\""+idGlobal+"\")'><img src='Imgs/editar.png'></button></img>";
         FecharModalIntervencao();
 
@@ -772,7 +774,8 @@ function Salvar(){
     Formulario.setAttribute('method','post');
     Formulario.setAttribute('action','Salvar.php');
     Formulario.setAttribute('name','FormularioGeral');
-    Formulario.style.visibility='visible';
+    Formulario.style.visibility='hidden';
+    Formulario.setAttribute('readonly','');
     DIV.appendChild(Formulario);
 
     ListarDisponibilidade(Formulario);

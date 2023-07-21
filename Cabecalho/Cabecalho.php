@@ -24,7 +24,7 @@
                     <li><a href="../Inicial/index.php">Inicio</a></li>
                     <li><a href= "../Erro/index.php">Mapa de Componentes</a></li>
                     <li><a href= "../Relatorios/index.php">Relatórios</a></li>
-                    <li><a href= "../Erro/index.php">Controle</a></li>
+                    <li><a href= "../ControleLib/index.php">Controle</a></li>
                     <li><a href="../Erro/index.php">DeshBoard</a></li>
                 </ul>
                 </nav>

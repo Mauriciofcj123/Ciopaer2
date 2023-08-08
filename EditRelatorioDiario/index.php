@@ -105,39 +105,39 @@
             $QTD=$Requisicao->num_rows;
     
             echo "<div class='Discrepancias' id='Discrepancias'>";
-            echo "<div class='MenuDiscrepancias'>
+            echo "<div class='MenuDiscrepancias' id='MenuDiscrepancias'>
                     <button onClick='RemoverDiscrepancias()'><img src='Imgs/verifica.png' title='Resolvido'></button>
                     <button onClick='AdicionarDiscrepancia()'><img src='Imgs/AdicionarDiscrepancias.png' title='Adicionar'></button>
                     <label for='DiscrepanciaQTD' class='DiscrepanciaQTDTXT'>Quantidade: ".$QTD."</label>
                 </div>";
             
-            while($Linha=$Requisicao->fetch_assoc()){
-                echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
-                echo "<tr class='TituloDiscrepancia'>
-                        <td colspan='4'>
-                        <select name='PlacaDisc'>
-                            <option>".$Linha['Placa']."</option>";
-
-                            $SQL='SELECT * FROM aeronavescadastradas WHERE Marca != "'.$Linha['Placa'].'"';
-                            $AeronavesCad=mysqli_query($mysqli,$SQL);
-
-                            while($Placa=$AeronavesCad->fetch_assoc()){
-                                echo "<option>".$Placa['Marca']."</option>";
-                            }
-                echo "</select>
-                        </td>
-                    </tr>
-                    <tr class='Elemento'>
-                        <td><input type='checkbox' name='CheckboxDiscrepancia' id=''></td>
-                        <td><img src='Imgs/alerta.png' title='Discrepancias'></td>
-                        <td colspan='2' class='DiscrepanciaTXT'><textarea name='DescricaoDisc'>".$Linha['DescDiscrepancias']."</textarea></td>
-                    </tr>
-                    <tr>
-                        <td colspan='4'><input type='text' name='MedidaTXT' placeholder='Medida Tomada' value='".$Linha['Medida']."'><td/>
-                    </tr>";
-                    
-            echo "</table>";
-            }
+                while($Linha=$Requisicao->fetch_assoc()){
+                    echo "<table class='DiscrepanciasTB' id='DiscrepanciasTB' name='DiscrepanciasTB'>";
+                    echo "<tr class='TituloDiscrepancia'>
+                            <td colspan='4'>
+                            <select name='PlacaDisc'>
+                                <option>".$Linha['Placa']."</option>";
+    
+                                $SQL='SELECT * FROM aeronavescadastradas WHERE Marca != "'.$Linha['Placa'].'"';
+                                $AeronavesCad=mysqli_query($mysqli,$SQL);
+    
+                                while($Placa=$AeronavesCad->fetch_assoc()){
+                                    echo "<option>".$Placa['Marca']."</option>";
+                                }
+                    echo "</select>
+                            </td>
+                        </tr>
+                        <tr class='Elemento'>
+                            <td><button onclick='SelecionarLinha()'><input type='checkbox' name='CheckboxDiscrepancia' id=''></button></td>
+                            <td><img src='Imgs/alerta.png' title='Discrepancias'></td>
+                            <td colspan='2' class='DiscrepanciaTXT'><textarea name='DescricaoDisc'>".$Linha['DescDiscrepancias']."</textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan='4'><input type='text' name='MedidaTXT' placeholder='Medida Tomada' value='".$Linha['Medida']."'><td/>
+                        </tr>";
+                        
+                echo "</table>";
+                }
     
 
     
@@ -308,10 +308,10 @@
         </div>
         <label style='font-weight: bold;'>Tipo: </label>
         <select id='Tipo'>
-            <option>Mecânica</option>
-            <option>Elétrica</option>
+            <option>Grupo MotoPropulsor</option>
+            <option>Célula</option>
             <option>Limpeza e Higienização</option>
-            <option>Adequação para Missão</option>
+            <option>Configuração de Aeronave</option>
             <option>Avionics</option>
         </select>
         <textarea name="CaixaTexto" id="CaixaTexto" class="DescIntervencao" placeholder="Descrição da Intervenção" maxlength="500"></textarea><p id='Caracteres'>0/500</p><br>

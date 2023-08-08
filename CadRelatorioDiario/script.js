@@ -16,7 +16,47 @@ document.addEventListener('keyup', function (e){
     Caracteres.innerHTML=(CaixaTexto.value.length)+"/500";
 });
 
+let DiscrepanciasDIV=document.getElementById('Discrepancias');
 
+DiscrepanciasDIV.addEventListener('mouseleave',()=>{
+    let MenuDiscrepancias=document.getElementById('MenuDiscrepancias');
+    MenuDiscrepancias.style.position='relative';
+    MenuDiscrepancias.style.top='0px'
+    MenuDiscrepancias.style.backgroundColor='none';
+    MenuDiscrepancias.style.width='100%';
+    MenuDiscrepancias.style.borderRadius='0px';
+    MenuDiscrepancias.style.boxShadow='none';
+    MenuDiscrepancias.style.zIndex=1;
+    MenuDiscrepancias.style.backdropFilter='none';
+});
+DiscrepanciasDIV.addEventListener('scroll',()=>{
+    let MenuDiscrepancias=document.getElementById('MenuDiscrepancias');
+
+    MenuDiscrepancias.style.position='fixed';
+    MenuDiscrepancias.style.top='35%';
+    MenuDiscrepancias.style.right='1%'
+    MenuDiscrepancias.style.backgroundColor='rgba(255, 255, 255, 0.8)';
+    MenuDiscrepancias.style.width='65%';
+    MenuDiscrepancias.style.borderRadius='10px';
+    MenuDiscrepancias.style.boxShadow='2px 2px 6px rgba(0, 195, 255, 0.6)';
+    MenuDiscrepancias.style.zIndex=10;
+    MenuDiscrepancias.style.backdropFilter='blur(1px)';
+
+});
+
+
+function SelecionarLinha(){
+    let Linhas=document.getElementsByName('DiscrepanciasTB');
+    let Checkbox=document.getElementsByName('CheckboxDiscrepancia');
+
+    for(i=0;i<Checkbox.length;i++){
+        if(Checkbox[i].checked){
+            Linhas[i].style.backgroundColor='rgba(0, 195, 255, 0.2)';
+        }else{
+            Linhas[i].style.backgroundColor='white';
+        }
+    }
+}
 
 function Ativar(id,idAtual,Valor){
     let Botoes=document.getElementsByName('Botao'+id);
@@ -105,12 +145,21 @@ function RemoverAcessorio(){
 function RemoverDiscrepancias(){
     let Checkbox =document.getElementsByName('CheckboxDiscrepancia');
     let Discrepancia=document.getElementsByClassName('DiscrepanciasTB');
+    let QuantidadeLinhas=document.getElementById('QuantidadeDisc');
 
-    for(let i=0;i<Checkbox.length;i++){
-        while(Checkbox[i].checked){
-            Discrepancia[i].remove();
+    if(Checkbox.length>0){
+
+        for(let i=0;i<Checkbox.length;i++){
+            while(Checkbox[i].checked){
+                QuantidadeLinhas.textContent='Quantidade: '+(Discrepancia.length-1);
+                Discrepancia[i].remove();
+            }
         }
+
+    }else{
+        QuantidadeLinhas.textContent='Quantidade: 0';
     }
+
 }
 
 
@@ -150,6 +199,10 @@ function AdicionarDiscrepancia(){
     let Celula5=Linha3.insertCell(0);
     Celula5.innerHTML="<input type='text' name='MedidaTXT' placeholder='Medida Tomada' value=''>";
     Celula5.colSpan=4;
+    
+    let QuantidadeLinhas=document.getElementById('QuantidadeDisc');
+    let Linhas=document.getElementsByName('DiscrepanciasTB');
+    QuantidadeLinhas.textContent='Quantidade:'+ Linhas.length;
 }
 function AdicionarOBS(){
     let Tabela=document.getElementById('ObservacoesTB');
@@ -228,7 +281,7 @@ var idGlobal=0;
 function EditarInt(id){
     ResetarModal();
     let linha=document.getElementsByName("CamposInt");
-    console.log(id+"======");
+
     
    let Modal=document.getElementById('ModalInt');
    let Aeronave=document.getElementById('Aeronave');
@@ -240,9 +293,10 @@ function EditarInt(id){
    let Descricao=document.getElementsByName('DescricaoInt')[id].value;
    let TipoTXT=document.getElementsByName('TipoInt')[id].value;
    let Tempo=document.getElementsByName('TempoInt')[id].value;
-   let HoraTXT=Tempo.substring(0,2);
-   let MinutosTXT=Tempo.substring(3,5);
-   let SegundosTXT=Tempo.substring(6,8);
+   let Tempos=Tempo.split(":");
+   let HoraTXT=Tempos[0];
+   let MinutosTXT=Tempos[1];
+   let SegundosTXT=Tempos[2];
    let Hora=document.getElementById('Hora');
    let Minuto=document.getElementById('Minuto');
    let Segundo=document.getElementById('Segundo');
@@ -310,6 +364,24 @@ function VerificarTempo(){
     }
     return Aprovado;
 }
+function Formatar(Valor){
+    let ValorTXT=Valor;
+    let Resultado;
+
+    if(ValorTXT<0){
+        ValorTXT=0;
+    }
+
+    if(ValorTXT.length==0){
+        Resultado='00';
+    }else if(Valor.length==1){
+        Resultado='0'+ValorTXT;
+    }else{
+        Resultado=ValorTXT;
+    }
+
+    return Resultado;
+}
 function ConfirmarIntervencao(){
    let Aprovado=true;
    let Aeronave=document.getElementById('Aeronave').value;
@@ -330,28 +402,9 @@ function ConfirmarIntervencao(){
    
     if(VerificarTempo()){
         let Hora=document.getElementById('Hora').value;
-        let HoraTXT;
-        if(Hora<10){
-            HoraTXT='0'+Hora;
-           }else{
-            HoraTXT=Hora;
-           }
         let Minutos=document.getElementById('Minuto').value;
-        let MinutoTXT;
-           if(Minutos<10){
-            MinutoTXT='0'+Minutos;
-           }else{
-            MinutoTXT=Minutos;
-           }
         let Segundos=document.getElementById('Segundo').value;
-        let SegundosTXT;
-           if(Segundos<10){
-            SegundosTXT='0'+Segundos;
-           }else{
-            SegundosTXT=Segundos;
-           }
-
-           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
+           Tempo=Formatar(Hora)+':'+Formatar(Minutos)+':'+Formatar(Segundos);
     }else{
         Aprovado=false;
         alert('Por favor informe a duração do serviço.');
@@ -405,7 +458,7 @@ function ConfirmarEdicao(id){
    let Tempo;
    let Tipo=document.getElementById('Tipo').value;
    let Descricao=document.getElementById('CaixaTexto').value;
-   console.log(id);
+   idGlobal=id;
 
    if(Responsáveis==''||Responsáveis==undefined){
         Aprovado=false;
@@ -417,30 +470,11 @@ function ConfirmarEdicao(id){
         alert('Por favor descreva o que foi realizado na intervenção.');
    }
    
-    if(VerificarTempo()){
-        let Hora=document.getElementById('Hora').value;
-        let HoraTXT;
-            if(Hora<10 && Hora.length<2){
-            HoraTXT='0'+Hora;
-           }else{
-            HoraTXT=Hora;
-           }
-        let Minutos=document.getElementById('Minuto').value;
-        let MinutoTXT;
-           if(Minutos<10&&Minutos.length<2){
-            MinutoTXT='0'+Minutos;
-           }else{
-            MinutoTXT=Minutos;
-           }
-        let Segundos=document.getElementById('Segundo').value;
-        let SegundosTXT;
-           if(Segundos<10 && Segundos.length<2){
-            SegundosTXT='0'+Segundos;
-           }else{
-            SegundosTXT=Segundos;
-           }
-
-           Tempo=HoraTXT+':'+MinutoTXT+':'+SegundosTXT;
+   if(VerificarTempo()){
+    let Hora=document.getElementById('Hora').value;
+    let Minutos=document.getElementById('Minuto').value;
+    let Segundos=document.getElementById('Segundo').value;
+       Tempo=Formatar(Hora)+':'+Formatar(Minutos)+':'+Formatar(Segundos);
     }else{
         Aprovado=false;
         alert('Por favor informe a duração do serviço.');
@@ -475,7 +509,7 @@ function ConfirmarEdicao(id){
         Celula4.colSpan=2;
         Celula5.innerHTML='<input type="text" name="TipoInt" value="'+Tipo+'" disabled>';
         Celula6.innerHTML='<input type="text" name="TempoInt" value="'+Tempo+'" disabled>';
-        Celula7.innerHTML="<button onClick='EditarInt(\""+idGlobal+"\")'><img src='Imgs/editar.png'></button></img>";
+        Celula7.innerHTML="<button onClick='EditarInt("+idGlobal+")'><img src='Imgs/editar.png'></button></img>";
         FecharModalIntervencao();
 
 

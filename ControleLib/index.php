@@ -16,6 +16,7 @@
         <ul><a href=""><img src="Imgs/Horimetro.png">Atualizar Horimetros</a></ul>
         <ul><a href=""><img src="Imgs/CadEmpresa.png">Cadastrar Empresa</a></ul>
         <ul><a href="../CadAeronave/index.php"><img src="Imgs/CadAeronave.png">Cadastrar Aeronave</a></ul>
+        <ul><a href="../Aerodromos/index.php"><img src="Imgs/CadAeronave.png">Pesquisar Aeródromos</a></ul>
     </li>
 </body>
 </html>

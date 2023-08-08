@@ -1,0 +1,192 @@
+*{
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+#TipoPesquisa{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    display: block;
+}
+#TipoPesquisa button{
+    width: 20%;
+    height: 100%;
+    background-color: white;
+    color: rgb(0, 174, 255);
+    border: 1px solid rgb(0, 174, 255);
+    font-weight: bold;
+    cursor: pointer;
+}
+#TipoPesquisa button:hover{
+    border: 2px solid rgb(0, 174, 255);
+    
+}
+.Formulario{
+    position: relative;
+    width: 50%;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+.Formulario input{
+    height: 30px;
+    width: 200px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.Formulario select{
+    height: 30px;
+    width: 200px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.Formulario button{
+    height: 30px;
+    width: 30%;
+    background-color: rgb(0, 174, 255);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+#Informacoes{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px;
+    justify-content: space-between;
+}
+#Texto{
+    position: relative;
+    width: 28%;
+    float: left;
+    left: 0px;
+    text-align: center;
+    display: block;
+}
+#Texto input{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: rgb(241, 241, 241);
+    border: none;
+    color: rgb(56, 56, 56);
+    margin-bottom: 5px;
+}
+#Texto label{
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#Mapa{
+    position: relative;
+    text-align: end;
+    width: 70%;
+    height: 500px;
+}
+#Aeroporto{
+    position: relative;
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    border: 1px solid rgb(134, 134, 134);
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: rgb(233, 233, 233);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+#Aeroporto button{
+    position: relative;
+    float: right;
+    right: 0px;
+    padding: 5px;
+    width: 30px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 15px;
+    margin: 5px;
+}
+#Pista{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-size: contain;
+}
+#Aviao{
+    position: relative;
+    justify-content: center;
+    left: 100%;
+    animation: AviaoAnim 15s infinite linear;
+}
+#AeroportosTB{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: none;
+    margin-top: 10px;
+}
+#AeroportosTB img{
+    height: 30px;
+    background: none;
+    border: none;
+}
+#AeroportosTB button{
+    background: none;
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 10%;
+    padding: 2px;
+    transition-duration: 1s;
+}
+#AeroportosTB button:hover{
+    background-color: aliceblue;
+}
+#AeroportosTB input{
+    line-height: 30px;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 90%;
+    height: 100%;
+}
+#AeroportosTB th{
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+#AeroportosTB td:nth-child(2){
+    width: 30%;
+}
+.Metrica{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+.Metrica input{
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5%;
+    padding: 2px;
+    border: 1px solid black;
+}
+@keyframes AviaoAnim{
+    0%{
+        left: 100%;
+    }
+    40%{
+        transform: scale(1);
+    }
+    100%{
+        left: -20%;
+        transform: scale(5);
+    }
+}

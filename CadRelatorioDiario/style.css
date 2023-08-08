@@ -140,6 +140,7 @@
         border: 1px rgb(0, 195, 255) solid;
         border-radius: 15px;
         margin: 5px 0px;
+        transition-duration: 0.5s;
     }
     .DiscrepanciasTB select{
         text-align: center;
@@ -172,6 +173,10 @@
         font-weight: bold;
         margin-right: 10px;
         color: rgb(0, 195, 255);
+    }
+    .DiscrepanciasTB button{
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
     }
     .TituloDiscrepancia{
         width: 100%;
@@ -214,8 +219,13 @@
         border-radius: 0px 15px 0px 0px;
         padding: 5px
     }
+    .MenuDIV{
+        height: 40px;
+        width: 100%;
+    }
     .MenuDiscrepancias{
         width: 100%;
+        transition-duration: 1s;
     }
     .MenuDiscrepancias img{
         height: 40px;
@@ -848,6 +858,10 @@
     }
     .DiscrepanciasTB img{
         width: 30px;
+    }
+    .DiscrepanciasTB button{
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
     }
     .DiscrepanciasTB :nth-child(1) input{
         width: 100%;

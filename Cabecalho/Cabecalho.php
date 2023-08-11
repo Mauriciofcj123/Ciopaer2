@@ -8,6 +8,7 @@
             {
                 echo "<p class='LogTexto'> Seja Bem Vindo ".$_SESSION['Nome']."</p><br><br>";
                 echo '<input type="button" value="Sair" class="Sair" onClick="window.location.href=\'../Cabecalho/Sair.php\'">';
+                echo "<input type='text' value='".$_SESSION['Nome']."' id='NomeUsuario' readonly style='visibility:hidden;position:relative;'></input>";
             } else{
                 echo "<a class='Sair'  href='../Loggin/index.php'>Entrar</a>";
             }

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src="script.js" defer></script>
@@ -12,44 +14,150 @@
 
 </head>
 <body id='body'>
-
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
         if(isset($_SESSION['Nome'])){
+
+            function ContarDatas($Data){
+                if(!empty($Data)){
+                    $Data2=date('Y-m-d');
+
+                    $DataFinal=explode('-',$Data);
+
+                    $DiaFinal=$DataFinal[2];
+                    $MesFinal=$DataFinal[1];
+                    $AnoFinal=$DataFinal[0];
+
+                    $TotalDiasFinal=$DiaFinal+($MesFinal*30);
+
+                    $DataAtual=explode('-',$Data2);
+
+                    $DiaAtual=$DataAtual[2];
+                    $MesAtual=$DataAtual[1];
+                    $AnoAtual=$DataAtual[0];
+
+                    $TotalDiasAtual=$DiaAtual+($MesAtual*30);
+
+                    return $TotalDiasFinal-$TotalDiasAtual;
+                }
+
+
+
+            }
+            function CorFundo($Data){
+                
+                    $Cor="rgb(255, 255, 255)";
+
+                if(!empty($Data)){
+                    $Dias=ContarDatas($Data);
+
+                    if($Dias>=7){
+                        $Cor="rgb(255, 255, 255)";
+                    }else if($Dias<7 && $Dias>3){
+                        $Cor='rgb(255, 254, 187)';
+                    }else{
+                        $Cor='rgb(255, 204, 204)';
+                    }
+                }
+
+
+                return $Cor;
+            }
+
             if($_SESSION['Nome']!=""){
 
                 echo '<button onclick="AbrirModal()" class="AddTarefa">+</button><br>';
                 echo '<div class="Quadro">';
-                    echo '<div class="CardBox" style="background-color:rgb(176, 255, 202);">';
-                    echo '<label class="Titulo">Tarefas Gerais</label>';
+                    echo '<div class="CardBox" style="background-color:rgb(255, 233, 163);">';
+                    echo '<label class="Titulo">Minhas Tarefas</label>';
+                    
+                    
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
+                    $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
-                    $SQLGeral="SELECT * FROM tarefas WHERE Destinatario='Todos' AND Status!='Completo'";
-                    $RequisicaoGeral=mysqli_query($mysqli,$SQLGeral);
+                    while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
 
-                    while($Tarefas=$RequisicaoGeral->fetch_assoc()){
-                        echo "<div class='CartaoTarefa'>
+                        echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
+                            <div class='Selo'>
+                                <img src='Imgs/Todos.png'>
+                            </div>
                             <label style='visibility: hidden;position: absolute;'></label>
                             <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
                             <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
-                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>
-                            <button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>";
+                            if(!empty($Tarefas['DataLimite'])){
+                                echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
+                            }
+                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                        </div>";
+                    }
+
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite='' ORDER BY DataLimite ASC";
+                    $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
+
+                    while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
+
+                        echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
+                            <div class='Selo'>
+                                <img src='Imgs/Todos.png'>
+                            </div>
+                            <label style='visibility: hidden;position: absolute;'></label>
+                            <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
+                            <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
+                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>";
+                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                        </div>";
+                    }
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
+                    $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
+
+                    while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
+                        echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
+                            <label style='visibility: hidden;position: absolute;'></label>
+                            <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
+                            <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
+                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>";
+                            if(!empty($Tarefas['DataLimite'])){
+                                echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
+                            }
+                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                        </div>";
+                    }
+
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite='' ORDER BY DataLimite ASC";
+                    $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
+
+                    while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
+                        echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
+                            <label style='visibility: hidden;position: absolute;'></label>
+                            <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
+                            <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
+                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>";
+                            if(!empty($Tarefas['DataLimite'])){
+                                echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
+                            }
+                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
                     echo '</div>';
 
-                    echo '<div class="CardBox" style="background-color:rgb(255, 233, 163);">';
-                    echo '<label class="Titulo">Minhas Tarefas</label>';
+                    echo '<div class="CardBox" style="background-color:rgb(176, 255, 202);">';
+                    echo '<label class="Titulo">Tarefas Completas</label>';
 
-                    $SQLMinhas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo'";
-                    $RequisicaoMinhas=mysqli_query($mysqli,$SQLMinhas);
+                    $SQLCompletas="SELECT * FROM tarefas WHERE Status='Completo' LIMIT 10";
+                    $RequisicaoCompletas=mysqli_query($mysqli,$SQLCompletas);
 
-                    while($Tarefas=$RequisicaoMinhas->fetch_assoc()){
+                    while($Tarefas=$RequisicaoCompletas->fetch_assoc()){
+                        
+                        $Data=date('d/m/y',strtotime($Tarefas['DataRealizacao']));
+
                         echo "<div class='CartaoTarefa'>
                             <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
                             <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
-                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>
-                            <button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br><br>
+                            <label>Realizador: </label><label name='TarefaTXT'>".$Tarefas['Realizador']."</label><br>
+                            <label>Data do Cumprimento: </label><label name='TarefaTXT'>".$Data."</label><br>
                         </div>";
                     }
                     echo '</div>';

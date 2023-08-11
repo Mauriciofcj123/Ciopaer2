@@ -152,9 +152,42 @@ function Resolver(id){
     input1.value=id;
     Formulario.appendChild(input1);
 
+    let NomeUsuario=document.getElementById('NomeUsuario');
+    let input2=document.createElement('input');
+    input2.setAttribute('name','Realizador');
+    input2.value=NomeUsuario.value;
+    Formulario.appendChild(input2);
+
+    let Data=new Date();
+    let Dia=String(Data.getDate()).padStart(2,'0');
+    let Mes=String(Data.getMonth()+1).padStart(2,'0');
+    let Ano=String(Data.getFullYear());
+    let DataRealizacao=Ano+'-'+Mes+'-'+Dia;
+
+    let input3=document.createElement('input');
+    input3.setAttribute('name','DataRealizacao');
+    input3.value=DataRealizacao;
+    Formulario.appendChild(input3);
+
     let Botao=document.createElement('button');
     Botao.setAttribute('type','submit');
     Botao.setAttribute('name','ResolverBTN');
     Formulario.appendChild(Botao);
-    Botao.click();
+
+    $.ajax({
+        url:'Resolver.php',
+        method:'POST',
+        data:{
+            ID:input1.value=id,
+            Realizador: NomeUsuario.value,
+            DataRealizacao:DataRealizacao,
+        },
+        dataTyoe: 'json'
+    }).done((Resultado)=>{
+        if(Resultado=='OK'){
+            Swal.fire('Sucesso','Missão Cumprida','success');
+        }
+    });
+
+    //Botao.click();
 }

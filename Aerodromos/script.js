@@ -48,6 +48,12 @@ function Sucess(Pos){
     Marker2.addTo(map);
     console.log(Pos.coords.latitude+'-'+Pos.coords.longitude);
     console.log(Latitude.value+'--'+Longitude.value);
+
+    var polygon = L.polygon([
+        [Pos.coords.latitude,Pos.coords.longitude],
+        [Latitude.value, Longitude.value],
+    ]);
+    polygon.addTo(map);
 }
 
 function Erro(){

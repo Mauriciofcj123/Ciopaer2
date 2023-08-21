@@ -69,15 +69,17 @@
 
                 echo '<button onclick="AbrirModal()" class="AddTarefa">+</button><br>';
                 echo '<div class="Quadro">';
-                    echo '<div class="CardBox" style="background-color:rgb(255, 233, 163);">';
+                    echo '<div class="CardBox" id="Minhas" style="background-color:rgb(255, 233, 163);">';
                     echo '<label class="Titulo">Minhas Tarefas</label>';
                     
+                    $id=0;
                     
                     $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
 
+                        $id++;
                         echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
                             <div class='Selo'>
                                 <img src='Imgs/Todos.png'>
@@ -89,15 +91,16 @@
                             if(!empty($Tarefas['DataLimite'])){
                                 echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
                             }
-                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            echo "<button onclick='Resolver(".$Tarefas['id'].",".$id.")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
 
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite='' ORDER BY DataLimite ASC";
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite IS null";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
 
+                        $id++;
                         echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
                             <div class='Selo'>
                                 <img src='Imgs/Todos.png'>
@@ -106,13 +109,14 @@
                             <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
                             <h2 name='RemetenteTXT'>".$Tarefas['Remetente']."</h2>
                             <label name='TarefaTXT'>".$Tarefas['Tarefa']."</label><br>";
-                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            echo "<button onclick='Resolver(".$Tarefas['id'].",".$id.")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
                     $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
+                        $id++;
                         echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
                             <label style='visibility: hidden;position: absolute;'></label>
                             <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
@@ -121,14 +125,15 @@
                             if(!empty($Tarefas['DataLimite'])){
                                 echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
                             }
-                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            echo "<button onclick='Resolver(".$Tarefas['id'].",".$id.")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
 
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite='' ORDER BY DataLimite ASC";
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite IS NULL ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
+                        $id++;
                         echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
                             <label style='visibility: hidden;position: absolute;'></label>
                             <h1 name='TituloTXT'>".$Tarefas['Titulo']."</h1>
@@ -137,13 +142,14 @@
                             if(!empty($Tarefas['DataLimite'])){
                                 echo "<label>Data Limite: </label><label>".date('d/m/Y',strtotime($Tarefas['DataLimite']))."</label><br>";
                             }
-                            echo "<button onclick='Resolver(".$Tarefas['id'].")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
+                            echo "<button onclick='Resolver(".$Tarefas['id'].",".$id.")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
                     echo '</div>';
 
-                    echo '<div class="CardBox" style="background-color:rgb(176, 255, 202);">';
+                    echo '<div class="CardBox" id="Completas" style="background-color:rgb(176, 255, 202);">';
                     echo '<label class="Titulo">Tarefas Completas</label>';
+
 
                     $SQLCompletas="SELECT * FROM tarefas WHERE Status='Completo' LIMIT 10";
                     $RequisicaoCompletas=mysqli_query($mysqli,$SQLCompletas);

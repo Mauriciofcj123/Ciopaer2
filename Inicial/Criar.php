@@ -1,13 +1,14 @@
 <?php
     session_start();
+
     require_once('../Conexao.php');
+
     if(isset($_SESSION['Nome'])){
         if($_SESSION['Nome']!=""){
 
             if(isset($_POST['EnviarBTN'])){
 
                 $Destinatario=$_POST['Destinatario'];
-
                 $Titulo=$_POST['Titulo'];
                 $Tarefa=$_POST['Tarefa'];
                 $Remetente=$_SESSION['Nome'];
@@ -21,7 +22,9 @@
                 }
                 $RequisicaoTarefa=mysqli_query($mysqli,$SQLTarefa);
             }
+
         
         }
+        header('location: index.php');
 }
 ?>

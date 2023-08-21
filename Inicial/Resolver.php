@@ -11,6 +11,6 @@
         $SQLTarefa="UPDATE tarefas SET Status='Completo', Realizador= '$Realizador', DataRealizacao= '$DataRealizacao' WHERE id= '$ID'";
         $RequisicaoTarefa=mysqli_query($mysqli,$SQLTarefa);
 
-        echo json_encode('OK');
+        echo json_encode(true);
     }
 ?>

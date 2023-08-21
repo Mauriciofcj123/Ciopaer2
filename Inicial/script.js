@@ -96,7 +96,7 @@ function Salvar(){
     let DIV=document.getElementById('FormularioDIV');
     let Formulario=document.createElement('form');
     Formulario.setAttribute('method','post');
-    Formulario.setAttribute('action','salvar.php');
+    Formulario.setAttribute('action','Criar.php');
     Formulario.style.position='fixed';
     Formulario.style.visibility='hidden';
     DIV.appendChild(Formulario);
@@ -138,8 +138,21 @@ function Salvar(){
     Formulario.appendChild(Botao);
     Botao.click();
 }
+function CriarTarefaCompleta(idLinha){
+    let CompletasDIV=document.getElementById('Completas');
+    let Tarefas=document.getElementsByClassName('CartaoTarefa');
+    let Clone=Tarefas[idLinha-1].cloneNode(true);
+    Clone.removeChild(Clone.childNodes[9]);
 
-function Resolver(id){
+
+    let CartaoTarefa=document.createElement('div');
+    CartaoTarefa.classList.add('CartaoTarefa');
+    CompletasDIV.appendChild(Clone);
+
+}
+
+function Resolver(id,idLinha){
+    let Linhas=document.getElementsByClassName('CartaoTarefa');
     let DIV=document.getElementById('body');
     let Formulario=document.createElement('form');
     Formulario.setAttribute('method','post');
@@ -184,7 +197,11 @@ function Resolver(id){
         },
         dataTyoe: 'json'
     }).done((Resultado)=>{
-        if(Resultado=='OK'){
+
+
+        if(Resultado){
+            CriarTarefaCompleta(idLinha);
+            Linhas[idLinha-1].style.animation='0.5s Sumir Linear forwards';
             Swal.fire('Sucesso','Missão Cumprida','success');
         }
     });

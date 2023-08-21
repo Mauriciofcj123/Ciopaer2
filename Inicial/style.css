@@ -8,6 +8,28 @@
     left: 1px;
     top: 1px;
 }
+
+@keyframes Sumir {
+    0%{
+        opacity: 100%;
+        transform: scale(1);
+        overflow: hidden;
+    }
+    90%{
+        opacity: 0%;
+        height: 0%;
+        width: 0%;
+        overflow: hidden;
+    }
+    100%{
+        opacity: 0%;
+        height: 0%;
+        width: 0%;
+        position: absolute;
+        visibility: hidden;
+        overflow: hidden;
+    }
+}
 @media (min-width: 600px) {
     .Quadro{
         position: relative;
@@ -55,6 +77,7 @@
         color: white;
         margin-bottom: 10px;
         background-color: rgb(0, 255, 0);
+        cursor: pointer;
     }
     .Titulo{
         position: relative;

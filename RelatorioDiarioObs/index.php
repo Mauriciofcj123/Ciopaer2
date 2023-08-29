@@ -18,12 +18,42 @@
         if(isset($_POST['AcessarBTN'])){
             $_SESSION['Data']=$_POST['DataRelatorio'];
         }
+            $SQLMecanicoDia="SELECT * FROM registrodisp WHERE Data='".$_SESSION['Data']."' LIMIT 1";
+            $RequisicaoMecanico=mysqli_query($mysqli,$SQLMecanicoDia);
+            $MecanicoDia=$RequisicaoMecanico->fetch_assoc();
+            echo '<input id="MecanicoNome" value="'.$MecanicoDia['Mecanico'].'" disabled style="visibility: hidden;"></input>';
 
-        echo '<div class="Data"><a href="../CadRelatorioDiario/index.php"><img src="Imgs/editar.png"></a><input type="text" value="'.date('d/m/Y',strtotime($_SESSION['Data'])).'" disabled name="DataTXT"> <img src="Imgs/Print.png"></div><br>';
+        if(isset($_SESSION['Nome'])){
+            if($MecanicoDia['Mecanico']==$_SESSION['Nome']){
+                echo '<div class="Data">
+                    <form method="post" action="../EditRelatorioDiario/index.php">
+                        <button type="submit" name="EditarBTN">
+                            <img src="Imgs/editar.png"></img>
+                        </button>
+                        <input type="date" value="'.date('Y-m-d',strtotime($_SESSION['Data'])).'" name="DataTXT" id="DataTXT" readonly>
+                        <button type="button" onclick="CriarImpressao()">
+                            <img src="Imgs/Print.png">
+                        </button>
+                    </form>
+                    </div><br>';
+            }else{
+                echo '<div class="Data">
+                <form method="post" action="../EditRelatorioDiario/index.php">
+                <input type="date" value="'.date('Y-m-d',strtotime($_SESSION['Data'])).'" disabled id="DataTXT">
+                <button type="button" onclick="CriarImpressao()">
+                    <img src="Imgs/Print.png">
+                </button>
+              </form>
+              </div><br>';
+            }
+        }
 
-        echo "<a href='../RelatorioDiario/index.php'><img class='Parte' src='Imgs/Relatorio.png' title='Relatório Principal'></a>";
-        echo "<a href='../RelatorioDiarioCautelados/index.php'><img class='Parte' src='Imgs/Fone de ouvido.png' title='Objetos Cautelados'></a>";
-        echo "<a href='index.php'><img class='Parte' src='Imgs/papel.png' title='Observações'></a>";
+        echo '<div class="Partes">';
+            echo "<a href='../RelatorioDiario/index.php'><img src='Imgs/Relatorio.png' title='Relatório Principal'></a>";
+            echo "<a href='../RelatorioDiarioCautelados/index.php'><img src='Imgs/Fone de ouvido.png' title='Objetos Cautelados'></a>";
+            echo "<a href='index.php'><img src='Imgs/papel.png' title='Observações'></a>";
+        echo '</div>';
+
 
         $SQL='SELECT * FROM observacoes WHERE Data="'.$_SESSION['Data'].'"';
             $Requisicao=mysqli_query($mysqli,$SQL);

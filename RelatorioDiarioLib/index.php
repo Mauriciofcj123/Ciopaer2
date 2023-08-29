@@ -18,20 +18,22 @@
             include('../Cabecalho/Cabecalho.php');
             include('../Conexao.php');
 
-    if(isset($_SESSION['Nome'])){
-    echo "<div class='Pesquisa'>
+            echo "<div class='Pesquisa'>
         <form action='' method='get'>
             <input type='text' placeholder='Pesquisar' name='PesquisarTXT' class='PesquisaTXT'>
             <button type='submit' name='PesquisarBTN' id='PesquisarBTN' class='PesquisaBTN'><img src='Imgs/Pesquisar.png'></button><br>
             <input type='date' name='PesquisarDe' class='PesquisaData'>
             <label>Até</label>
             <input type='date' name='PesquisarAte' class='PesquisaData'>
-        </form>
-        
-        <div class='Botoes' id='BotoesDIV'>
+        </form>";
+
+        if(isset($_SESSION['Nome'])){
+            echo "<div class='Botoes' id='BotoesDIV'>
             <button onclick='CriarRelatorio()' title='Criar um novo relatório' ><img src='Imgs/CriarRel.png'></button>
-        </div>
-    </div>";
+            </div>";
+        }
+        
+        echo "</div>";
 
 
     echo '<div class="TabelaDIV">';
@@ -146,13 +148,12 @@
                     </form>";
                 }
         }
-    echo '</div>';
+        echo '</div>';
 
         $Quantidade=$Requisicao->num_rows;
         if($Quantidade<=0){
             echo '<h1 class="Erro">Nenhum resultado encontrado.</h1>';
         }
-    }
         
     ?>
 </body>

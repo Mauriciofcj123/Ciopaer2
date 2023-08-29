@@ -1,0 +1,73 @@
+
+#Graficos{
+    width: 100%;
+    text-align: center;
+    padding: 0px 20px;
+}
+.Total{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#Grafico1{
+    width: 40%;
+    height: 200px;
+    border: 1px black solid;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    animation: Grafico linear 10s forwards;
+    float: left;
+}
+.Titulo1{
+    width: 40%;
+    float: left;
+}
+.Titulo2{
+    width: 40%;
+    float: right;
+}
+#Textos{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    padding: 0px 10px;
+    float: left;
+    stroke: red;
+}
+#Grafico2{
+    width: 40%;
+    height: 200px;
+    border: 1px black solid;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    animation: Grafico linear 10s forwards;
+    float: right;
+}
+#Textos2{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    padding: 0px 10px;
+    float: right;
+    stroke: red;
+}
+#Regua{
+    position: relative;
+    width: 50px;
+    height: 200px;
+    background-color: black;
+}
+#Formulario{
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    margin: 20px 0px;
+}
+#Formulario input{
+    height: 100%;
+    color: rgb(0, 195, 255);
+    font-weight: bold;
+    text-align: center;
+}

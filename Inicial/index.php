@@ -215,9 +215,15 @@
                         </div>
                     </div>";
             }
+        }else{
+            echo '<h1 style="width=100%;text-align: center;margin:50px;">Acesso rápido</h1>
+                    <li class="Menu">
+                        <ul><a href="../RelatorioDiarioLib/index.php">Relatórios Diário</a></ul>
+                        <ul><a href="../Horimetro/index.php">Horímetros</a></ul>
+                        <ul><a href="../Erro/index.php">Boletim Informativo</a></ul>
+                    </li>';
         }
     ?>
-    
-    
+
 </body>
 </html>

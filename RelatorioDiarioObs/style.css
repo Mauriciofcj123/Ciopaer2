@@ -86,14 +86,13 @@
 }
 .Data{
     position: relative;
-    display: inline-flex;
-    left: 50%;
-    top: 10px;
-    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
 }
 .Data img{
     margin-left: 10px;
     margin-right: 10px;
+    height: 30px;
 }
 .Data input{
     width: 200px;
@@ -105,6 +104,10 @@
     -webkit-text-stroke-width: 0.5px;
     font-size: 25px;
     background-color: rgba(255, 255, 255,0);
+    border: none;
+}
+.Data button{
+    background: none;
     border: none;
 }
 .Tabela{
@@ -149,10 +152,15 @@
 .Botao img{
     height: 20px;
 }
-.Parte{
+.Partes{
     position: relative;
-    width: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
     margin-top: 50px;
+}
+.Partes img{
+    position: relative;
+    height: 50px;
+    background: none;
+    border: none;
 }

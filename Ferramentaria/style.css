@@ -1,0 +1,129 @@
+#Formulario{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+#PesquisarTXT{
+    width: 15%;
+    height: 100%;
+    color: rgb(0, 162, 255);
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid rgb(0, 162, 255);
+    border-radius: 10px 0px 0px 10px ;
+}
+#PesquisarBTN{
+    position: relative;
+    width: 100px;
+    height: 100%;
+    font-weight: bold;
+    color: rgb(0, 162, 255);
+    background-color: white;
+    border: 1px solid rgb(0, 162, 255);
+    border-radius: 0px 10px 10px 0px ;
+}
+
+#FiltrosDIV{
+    height: 100px;
+    width: 100%;
+    margin-top: 20px;
+    visibility: hidden;
+    position: absolute;
+}
+.Filtro{
+    height: 50px;
+    width: 10%;
+    color: rgb(0, 162, 255);
+    font-weight: bold;
+    border: 1px solid rgb(0, 162, 255);
+    text-align: center;
+    font-weight: bold;
+}
+.Filtro option{
+    font-weight: bold;
+}
+.FiltrosBTN{
+    height: 100%;
+    width: 100px;
+    font-weight: bold;
+    border: none;
+    background-color: white;
+}
+#TabelaDIV{
+    width: 100%;
+    margin-top: 100px;
+}
+#Tabela{
+    position: relative;
+    width: 50%;
+    height: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid rgb(0, 162, 255);
+    border-radius: 20px;
+}
+#Tabela input{
+    height: 30px;
+    width: 100%;
+}
+#Tabela tr{
+    height: 30px;
+}
+#MenuTabela{
+    position: relative;
+    width: 50%;
+    height: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    border: 1px solid rgb(0, 162, 255);
+    border-radius: 10px;
+}
+#MenuTabela img{
+    height: 30px;
+}
+#MenuTabela button{
+    position: relative;
+    background: none;
+    border: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#MenuTabela button:hover{
+    cursor: pointer;
+}
+#Remover{
+    margin-left: 30px;
+}
+#Fundo{
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.329);
+    backdrop-filter: blur(1px);
+    z-index: 10;
+}
+#Modal{
+    position: relative;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.938);
+    border: 1px solid black;
+}
+#Fechar{
+    float: right;
+    right: 0px;
+    top: 0px;
+    transform: translate(50%,-50%);
+    background: none;
+    border: none;
+}
+#Fechar img{
+    height: 60px;
+}

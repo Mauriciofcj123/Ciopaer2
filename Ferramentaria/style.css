@@ -52,24 +52,20 @@
     background-color: white;
 }
 #TabelaDIV{
-    width: 100%;
     margin-top: 100px;
-}
-#Tabela{
-    position: relative;
     width: 50%;
     height: 500px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(50%);
+    overflow-y: auto;
     border: 1px solid rgb(0, 162, 255);
     border-radius: 20px;
 }
-#Tabela input{
-    height: 30px;
+.Tabela{
     width: 100%;
 }
-#Tabela tr{
-    height: 30px;
+.Tabela tr{
+    cursor: default;
 }
 #MenuTabela{
     position: relative;
@@ -99,12 +95,15 @@
 }
 #Fundo{
     top: 0px;
-    position: fixed;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0%;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.329);
     backdrop-filter: blur(1px);
     z-index: 10;
+    transition-duration: 1s;
 }
 #Modal{
     position: relative;
@@ -126,4 +125,37 @@
 }
 #Fechar img{
     height: 60px;
+}
+#AdicionarForm{
+    position: relative;
+    display: flex;
+    width: 60%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+}
+#AdicionarForm input{
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+#AdicionarForm select{
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+#AdicionarForm option{
+    font-weight: bold;
+    text-align: center;
+}
+#AdicionarForm label{
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
 }

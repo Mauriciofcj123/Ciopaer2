@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,17 +71,18 @@
                     <option>Peças</option>
                     <option>Ferramentas</option>
                     <option>Materiais Permanentes</option>
+                    <option>Consumíveis</option>
                 </select>
             </div>
         </form>
     </div>
     <div id='TabelaDIV'>
         <div id='MenuTabela'>
-            <button id='Adicionar'><img src="imgs/adicionar.png" title='Adicionar'></button>
+            <button id='Adicionar' onclick='AbrirModal()'><img src="imgs/adicionar.png" title='Adicionar'></button>
             <button id='Editar'><img src="imgs/editar.png" title='Editar'></button>
             <button id='Remover'><img src="imgs/remover.png" title='Remover Linhas Selecionadas'></button>
         </div>
-        <table id='Tabela'>
+        <table id='Tabela' class='Tabela'>
             <thead>
                 <th></th>
                 <th>Código</th>
@@ -111,7 +112,32 @@
     </div>
     <div id='Fundo'>
         <div id='Modal'>
-            <button id='Fechar'><img src="imgs/Fechar.png" alt=""></button>
+            <button id='Fechar' onclick='FecharModal()'><img src="imgs/Fechar.png" alt=""></button>
+                <form action="Salvar.php" method="post" id='AdicionarForm'>
+                <label>Código:</label><input type="text" name='Codigo'>
+                <label>Descrição do Produto*:</label><input type="text" name='Descricao'>
+                <label>Local Atual:*</label><input type="text" name='Local'>
+                <label>Quantidade:*</label><input type="number" name='QTD'>
+
+                <label>Grupo:*</label><select name="Tipo" id="TipoTXT">
+                            <option>Peças</option>
+                            <option>Ferramentas</option>
+                            <option>Materiais Permanentes</option>
+                            <option>Consumíveis</option>
+                        </select>
+
+                <label>Secao:*</label><select name="Secao" id="SecaoTXT">
+                            <?php
+                                $SQLSecoes='SELECT * FROM secoes';
+                                $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
+
+                                while($Secao=$RequisicaoSecoes->fetch_assoc()){
+                                    echo '<option>'.$Secao['Secao'].'</option>';
+                                }
+                            ?>
+                        </select>
+                    <input type="submit" value="Adicionar" name='SalvarBTN'>
+                </form>
         </div>
     </div>
 

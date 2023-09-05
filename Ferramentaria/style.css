@@ -1,3 +1,7 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
 #Formulario{
     position: relative;
     width: 100%;
@@ -52,20 +56,47 @@
     background-color: white;
 }
 #TabelaDIV{
+    position: relative;
     margin-top: 100px;
-    width: 50%;
-    height: 500px;
+    width: 80%;
+    height: 60vh;
     left: 50%;
-    transform: translateX(50%);
+    transform: translateX(-50%);
     overflow-y: auto;
     border: 1px solid rgb(0, 162, 255);
     border-radius: 20px;
 }
 .Tabela{
+    position: relative;
     width: 100%;
 }
 .Tabela tr{
-    cursor: default;
+    box-sizing: border-box;
+    transition-duration: 500ms;
+}
+.Tabela input{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-bottom: 1px  rgb(0, 162, 255) solid;
+    color: rgb(0, 162, 255);
+    font-weight: bold;
+    background: none;
+}
+.Tabela select{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-bottom: 1px  rgb(0, 162, 255) solid;
+    color: rgb(0, 162, 255);
+    font-weight: bold;
+    touch-action: none;
+    pointer-events: none;
+    background: none;
 }
 #MenuTabela{
     position: relative;
@@ -81,17 +112,29 @@
     height: 30px;
 }
 #MenuTabela button{
+    height: 30px;
+    width: 30px;
     position: relative;
     background: none;
     border: none;
     top: 50%;
     transform: translateY(-50%);
+    transition-duration: 0.5s;
 }
 #MenuTabela button:hover{
     cursor: pointer;
 }
 #Remover{
     margin-left: 30px;
+}
+#Editar{
+    transform: rotateY(0deg) translateY(-50%);
+    top: 50%;
+    background-image: url('imgs/editar.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: Rodar linear 1s forwards paused;
 }
 #Fundo{
     top: 0px;
@@ -158,4 +201,119 @@
     width: 100%;
     font-weight: bold;
     text-align: center;
+}
+@keyframes Rodar {
+    0%{
+        transform: rotateY(0deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/editar.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    74%{
+        transform: rotateY(269deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/editar.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    75%{
+        transform: rotateY(270deg) translateY(-50%);
+        background-image: url('imgs/Ok.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    100%{
+        transform: rotateY(360deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/Ok.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+@keyframes Voltar {
+    0%{
+        transform: rotateY(0deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/Ok.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    74%{
+        transform: rotateY(269deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/Ok.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    75%{
+        transform: rotateY(270deg) translateY(-50%);
+        background-image: url('imgs/editar.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    100%{
+        transform: rotateY(360deg) translateY(-50%);
+        top: 50%;
+        background-image: url('imgs/editar.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+@media (max-width:580px) {
+    .Tabela td:nth-child(2){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela th:nth-child(2){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela td:nth-child(3){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela th:nth-child(3){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela td:nth-child(4){
+        width: 60%;
+    }
+    .Tabela td:nth-child(5){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela th:nth-child(5){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela td:nth-child(6){
+        width: 5%;
+    }
+    .Tabela td:nth-child(7){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela th:nth-child(7){
+        position: absolute;
+        visibility: hidden;
+    }
+    .Tabela td:nth-child(8){
+        width: 30%;
+    }
+    #PesquisarTXT{
+        width: 60%;
+    }
+    #PesquisarBTN{
+        width: 30%;
+    }
+    #FiltrosDIV{
+        top: 10px;
+        position: relative;
+        background-color: aqua;
+    }
+    #Filtro{
+        height: 10px;
+    }
 }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src='script.js' defer></script>
-    <title>Document</title>
+    <title>Relatório de Intervenção</title>
 </head>
 <body>
     <?php

@@ -14,7 +14,7 @@
     ?>
     
     <ul id="MenuRel">
-        <li><a href="../RelatorioDiarioLib/index.php"><img id="Imagem1" src="Imgs/relatorio_diario.png" alt=""><a href="../RelatorioDiarioLib/index.php">Relatório Diário</a></li>
+        <li><a href="../SessaoRelDiario/index.php"><img id="Imagem1" src="Imgs/relatorio_diario.png" alt=""><a href="../RelatorioDiarioLib/index.php">Relatório Diário</a></li>
         <li><a href="../RelatorioInt/index.php"><img src="Imgs/Intervencoes.png"><a href="../RelatorioInt/index.php">Relatório de Intervenções</a></li>
     </ul>
     

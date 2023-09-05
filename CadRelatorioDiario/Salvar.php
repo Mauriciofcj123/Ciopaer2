@@ -6,13 +6,14 @@
         if(isset($_POST['Data'])){
             $Data=$_POST['Data'];
             $MecanicoDia=$_POST['MecanicoDia'];
+            $Secao=$_POST['Secao'];
 
         $Registros='SELECT * FROM `registrodisp` WHERE Data="'.$Data.'" LIMIT 1';
         $Requisicaoreg=mysqli_query($mysqli,$Registros);
         $QTDReg=$Requisicaoreg->num_rows;
 
         if($QTDReg>0){
-            $SQLReg="UPDATE registrodisp SET Mecanico='$MecanicoDia' WHERE Data='$Data'";
+            $SQLReg="UPDATE registrodisp SET Mecanico='$MecanicoDia', Secao='$Secao' WHERE Data='$Data'";
             $Requisicao=mysqli_query($mysqli,$SQLReg);
 
 
@@ -24,7 +25,7 @@
                 $Previsao=$_POST['PrevisaoDisp'];
 
                 for($i=0;$i<count($Placa);$i++){
-                    $SQLDisp="UPDATE disponibilidade SET  Status='".$Status[$i]."', Causa='".$Causa[$i]."', TipoCausa='".$Previsao[$i]."' WHERE Data='".$Data."' AND Placa='".$Placa[$i]."' ";
+                    $SQLDisp="UPDATE disponibilidade SET  Status='".$Status[$i]."', Causa='".$Causa[$i]."', TipoCausa='".$Previsao[$i]."', Secao='".$Secao."' WHERE Data='".$Data."' AND Placa='".$Placa[$i]."' ";
                     $Requisicao=mysqli_query($mysqli,$SQLDisp);
                 }
             }
@@ -40,7 +41,7 @@
 
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data')";
+                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data,Secao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisc);
                 }
             }
@@ -55,7 +56,7 @@
 
                 for($i=0;$i<count($Objeto);$i++){
 
-                    $SQLObj="INSERT INTO acessoriodisp(NomeAcessorio,Responsável,Data) VALUES('".$Objeto[$i]."','".$Responsavel[$i]."','$Data')";
+                    $SQLObj="INSERT INTO acessoriodisp(NomeAcessorio,Responsável,Data,Secao) VALUES('".$Objeto[$i]."','".$Responsavel[$i]."','$Data','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLObj);
                 }
             }
@@ -73,7 +74,7 @@
 
                 for($i=0;$i<count($ResponsavelInt);$i++){
 
-                    $SQLInt="INSERT INTO intervencao(Placa,DescIntervencao,RealizadoPor,TempoInter,Data,TipoIntervencao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$ResponsavelInt[$i]."','".$Tempo[$i]."','$Data','".$Tipo[$i]."')";
+                    $SQLInt="INSERT INTO intervencao(Placa,DescIntervencao,RealizadoPor,TempoInter,Data,TipoIntervencao,Secao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$ResponsavelInt[$i]."','".$Tempo[$i]."','$Data','".$Tipo[$i]."','".$Secao."')";
                     $Requisicao=mysqli_query($mysqli,$SQLInt);
                 }
             }
@@ -85,12 +86,12 @@
                 $Requisicao=mysqli_query($mysqli,$SQLOBS);
 
                 for($i=0;$i<count($OBS);$i++){
-                    $SQLOBS="INSERT INTO observacoes(Data,Observacoes) VALUES('$Data','$OBS[$i]')";
+                    $SQLOBS="INSERT INTO observacoes(Data,Observacoes,Secao) VALUES('$Data','$OBS[$i]','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLOBS);
                 }
             }
         }else{
-            $SQLReg="INSERT INTO registrodisp (Mecanico,Data) VALUES('$MecanicoDia','$Data')";
+            $SQLReg="INSERT INTO registrodisp (Mecanico,Data,Secao) VALUES('$MecanicoDia','$Data','$Secao')";
             $Requisicao=mysqli_query($mysqli,$SQLReg);
 
 
@@ -115,7 +116,7 @@
 
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data')";
+                    $SQLDisc="INSERT INTO discrepancias(Placa,DescDiscrepancias,Medida,Data,Secao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$Medida[$i]."','$Data','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisc);
                 }
             }
@@ -127,7 +128,7 @@
 
                 for($i=0;$i<count($Objeto);$i++){
 
-                    $SQLObj="INSERT INTO AcessorioDisp(NomeAcessorio,Responsável,Data) VALUES('".$Objeto[$i]."','".$Responsavel[$i]."','$Data')";
+                    $SQLObj="INSERT INTO AcessorioDisp(NomeAcessorio,Responsável,Data,Secao) VALUES('".$Objeto[$i]."','".$Responsavel[$i]."','$Data','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLObj);
                 }
             }
@@ -143,7 +144,7 @@
 
                 for($i=0;$i<count($ResponsavelInt);$i++){
 
-                    $SQLInt="INSERT INTO intervencao(Placa,DescIntervencao,RealizadoPor,TempoInter,Data,TipoIntervencao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$ResponsavelInt[$i]."','".$Tempo[$i]."','$Data','".$Tipo[$i]."')";
+                    $SQLInt="INSERT INTO intervencao(Placa,DescIntervencao,RealizadoPor,TempoInter,Data,TipoIntervencao,Secao) VALUES('".$Placa[$i]."','".$Descricao[$i]."','".$ResponsavelInt[$i]."','".$Tempo[$i]."','$Data','".$Tipo[$i]."','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLInt);
                 }
             }
@@ -151,7 +152,7 @@
             if(isset($_POST['ObservacaoTXT'])){
                 $OBS=$_POST['ObservacaoTXT'];
                 for($i=0;$i<count($OBS);$i++){
-                    $SQLOBS="INSERT INTO observacoes(Data,Observacoes) VALUES('$Data','$OBS[$i]')";
+                    $SQLOBS="INSERT INTO observacoes(Data,Observacoes,Secao) VALUES('$Data','$OBS[$i]','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLOBS);
                 }
             }

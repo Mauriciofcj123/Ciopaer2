@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id='Corpo'>
 
     <?php
         require_once("../Conexao.php");
@@ -79,12 +80,13 @@
     <div id='TabelaDIV'>
         <div id='MenuTabela'>
             <button id='Adicionar' onclick='AbrirModal()'><img src="imgs/adicionar.png" title='Adicionar'></button>
-            <button id='Editar'><img src="imgs/editar.png" title='Editar'></button>
-            <button id='Remover'><img src="imgs/remover.png" title='Remover Linhas Selecionadas'></button>
+            <button id='Editar' onclick='DecisaoEdit()'></button>
+            <button id='Remover' onclick='Deletar()'><img src="imgs/remover.png" title='Remover Linhas Selecionadas'></button>
         </div>
         <table id='Tabela' class='Tabela'>
             <thead>
                 <th></th>
+                <th>Id</th>
                 <th>Código</th>
                 <th>Descrição</th>
                 <th>Local</th>
@@ -95,14 +97,29 @@
             <?php
                 if(isset($RequisicaoPesquisa)){
                     while($Pesquisar=$RequisicaoPesquisa->fetch_assoc()){
-                        echo '<tr>';
-                            echo "<td><input type='checkbox'></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['Codigo']."' readonly></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['Descricao']."' readonly></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['Local']."' readonly></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['QTD']."' readonly></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['Tipo']."' readonly></td>";
-                            echo "<td><input type='text' value='".$Pesquisar['Secao']."' readonly></td>";
+                        echo '<tr name="Linha">';
+                            echo "<td><input type='checkbox' name='LinhaCB'></td>";
+                            echo "<td><input type='text' value='".$Pesquisar['ID']."' name='LinhaID' readonly></td>";
+                            echo "<td><input type='text' value='".$Pesquisar['Codigo']."' name='LinhaCOD' readonly></td>";
+                            echo "<td><input type='text' value='".$Pesquisar['Descricao']."' name='LinhaDesc' readonly></td>";
+                            echo "<td><input type='text' value='".$Pesquisar['Local']."' name='LinhaLocal' readonly></td>";
+                            echo "<td><input type='number' value='".$Pesquisar['QTD']."' name='LinhaQTD' readonly></td>";
+                            echo "<td><select name='LinhaTipo' tabindex='-1' aria-disabled='true' readonly='true'>";
+                            echo '<option>'.$Pesquisar['Tipo'].'</option>';
+                                echo '<option>Serviço</option>';
+                                echo '<option>Peças</option>';
+                                echo '<option>Materiais Permanetes</option>';
+                                echo '<option>Consumiveis</option>';
+                            echo "</select></td>";
+                            echo "<td><select name='LinhaSecao' tabindex='-1' aria-disabled='true' readonly='true'>";
+                                    echo '<option>'.$Pesquisar['Secao'].'</option>';
+                                    $SQLSecoes='SELECT * FROM secoes WHERE Secao!="'.$Pesquisar['Secao'].'"' ;
+                                    $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
+
+                                    while($Secao=$RequisicaoSecoes->fetch_assoc()){
+                                        echo '<option>'.$Secao['Secao'].'</option>';
+                                    }
+                            echo "</select></td>";
                         echo '</tr>';
                     }
                 }
@@ -136,7 +153,7 @@
                                 }
                             ?>
                         </select>
-                    <input type="submit" value="Adicionar" name='SalvarBTN'>
+                    <input type="submit" value="Adicionar" name='Adicionar'>
                 </form>
         </div>
     </div>

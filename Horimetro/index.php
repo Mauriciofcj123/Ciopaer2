@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar Horimetros</title>
     <link rel="stylesheet" href="../Cabecalho/style.css">
@@ -12,6 +12,15 @@
     <?php
     require_once('../Conexao.php');
     require('../Cabecalho/Cabecalho.php');
+
+    $SQLSecoes='SELECT * FROM secoes';
+    $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
+
+    echo '<select id="Secoes" class="Secao" name="SecaoTXT">';
+            while($Secao=$RequisicaoSecoes->fetch_assoc()){
+                echo "<option>".$Secao['Secao']."</option>";
+            }
+    echo '</select>';
 
     $SQLHorimetro='SELECT * FROM horimetro';
     $RequisicaoHorimetro=mysqli_query($mysqli,$SQLHorimetro);

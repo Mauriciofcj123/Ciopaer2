@@ -4,7 +4,7 @@ document.addEventListener('keyup',()=>{
     let Horimetro=document.getElementById('HorimetroTXT');
     let Botao=document.getElementById('Botao');
 
-    if(Nome.value.length > 6 && Horimetro.value > 0 && isNaN(Horimetro.value)==false){
+    if(Nome.value.length > 3 && Horimetro.value > 0 && isNaN(Horimetro.value)==false){
         Botao.style.visibility='visible';
     }else{
         Botao.style.visibility='hidden';

@@ -1,0 +1,27 @@
+﻿*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.Menu{
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
+.Menu img{
+    position: relative;
+    width: 40%;
+    height: 500px;
+    cursor: pointer;
+    filter: grayscale(100%);
+    transition-duration: 1s;
+}
+.Fixa:hover{
+    filter: grayscale(0%);
+}
+.Rotativa:hover{
+    filter: grayscale(0%);
+}

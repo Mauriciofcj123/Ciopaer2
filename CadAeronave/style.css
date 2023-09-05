@@ -49,6 +49,14 @@
         font-weight: bold;
         color: red;
     }
+    .InformacoesDIV select{
+        position: relative;
+        height: 50px;
+        width: 70%;
+        float: right;
+        right: 5%;
+        border: 1px solid rgb(0, 162, 255);
+    }
     #Botao{
         position: relative;
         width: 200px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,24 +30,38 @@
             $Modelo=mysqli_real_escape_string($mysqli,$_POST['ModeloTXT']);
             $NSerie=mysqli_real_escape_string($mysqli,$_POST['NSTXT']);
             $Horimetro=$_POST['HorimetroTXT'];
+            $Secao=$_POST['SecaoTXT'];
 
-            $SQLInsert="INSERT INTO aeronavescadastradas(Marca,Nome,Fabricante,Modelo,NSerie) VALUES ('$Prefixo','$Nome','$Fabricante','$Modelo','$NSerie')";
-            $RequisicaoInsert=mysqli_query($mysqli,$SQLInsert);
-
-            $SQLData="SELECT * FROM disponibilidade ORDER BY Data DESC LIMIT 1";
-            $RequisicaoData=mysqli_query($mysqli,$SQLData);
-            $Resultado=$RequisicaoData->fetch_assoc();
-            $UltimaData=$Resultado['Data'];
-
-            $SQLInsert="INSERT INTO disponibilidade(Placa,Status,Data,Horimetro) VALUES ('$Prefixo','Disponível','$UltimaData','$Horimetro')";
+            $SQLInsert="INSERT INTO aeronavescadastradas(Marca,Nome,Fabricante,Modelo,NSerie,Secao) VALUES ('$Prefixo','$Nome','$Fabricante','$Modelo','$NSerie','$Secao')";
             $RequisicaoInsert=mysqli_query($mysqli,$SQLInsert);
 
             $Data=date('Y-m-d');
+
+            $SQLDispInsert='SELECT * FROM disponibilidade WHERE Secao="'.$Secao.'" LIMIT 1';
+            $RequisicaoDispInsert=mysqli_query($mysqli,$SQLDispInsert);
+            $QTDDisp=$RequisicaoDispInsert->num_rows;
+            echo $QTDDisp;
+
+            if($QTDDisp>0){
+                $SQLUltimaData='SELECT * FROM disponibilidade WHERE Secao="'.$Secao.'" ORDER BY Data DESC LIMIT 1';
+                $RequisicaoUltimaData=mysqli_query($mysqli,$SQLUltimaData);
+                $UltimoRegistro=$RequisicaoUltimaData->fetch_assoc();
+                $UltimaData=$UltimoRegistro['Data'];
+
+                echo $UltimaData;
+
+                $SQLDisp="INSERT INTO disponibilidade (Placa,Status,Data,Horimetro,Secao) VALUES ('$Prefixo','Disponível','$UltimaData','$Horimetro','$Secao')";
+            }else{
+                $SQLDisp="INSERT INTO disponibilidade (Placa,Status,Data,Horimetro,Secao) VALUES ('$Prefixo','Disponível','$Data','$Horimetro','$Secao')";
+            }
+
+            $RequisicaoDispo=mysqli_query($mysqli,$SQLDisp);
+
             $HorasProxRev=$Horimetro+100;
             $Disp=100;
             $CVA=$_POST['CVATXT'];
 
-            $SQLHorimetro="INSERT INTO horimetro(Placa,Data,HorasAtuais,HorasProxRev,HorasDisp,CVA,TBORH,TBOLH,TBOHorasDispLH,TBOHorasDispRH) VALUES ('$Prefixo','$Data','$Horimetro','$HorasProxRev','$Disp','$CVA',0,0,0,0)";
+            $SQLHorimetro="INSERT INTO horimetro(Placa,Data,HorasAtuais,HorasProxRev,HorasDisp,TipoProxRev,CVA,TBORH,TBOLH,TBOHorasDispLH,TBOHorasDispRH,Secao) VALUES ('$Prefixo','$Data','$Horimetro','$HorasProxRev','$Disp','50 Horas','$CVA',0,0,0,0,'$Secao')";
             $RequisicaoHorimetro=mysqli_query($mysqli,$SQLHorimetro);
 
             $Mensagem='Aeronave Cadastrada com sucesso.';
@@ -65,7 +79,7 @@
         <?php
             if(!empty($_SESSION['Nome'])||isset($_SESSION['Nome'])){
 
-            echo '    <form action="" method="post" id="Formulario">
+            echo '<form action="" method="post" id="Formulario">
                         <div class="PesquisarDIV">
                             <input type="text" name="PesquisarTXT" id="" placeholder="Placa"><br>
                             <input type="submit" value="Pesquisar" style="width:10%;color:white;background-color:rgb(43, 255, 0);border-radius:10px;border:none;">
@@ -83,6 +97,14 @@
     
                     echo "<label>Horimetro Atual</label><input type='text' value='' name='HorimetroTXT' id='HorimetroTXT'></input><br>";
                     echo "<label>Nome</label><input type='text' value='' name='NomeTXT' id='NomeTXT'></input><br>";
+                    echo "<label>Seção</label><select name='SecaoTXT'>";
+                            $SQLSecao='SELECT * FROM secoes';
+                            $RequisicaoSecao=mysqli_query($mysqli,$SQLSecao);
+
+                            while($Secao=$RequisicaoSecao->fetch_assoc()){
+                                echo '<option>'.$Secao['Secao'].'</option>';
+                            }
+                    echo "</select><br>";
                     echo "<label>Proprietário Atual:</label><input value='".$Linha['PROPRIETARIO']."' readonly></input><br>";
                     echo "<label>Estado:</label><input value='".$Linha['SG_UF']."' readonly></input><br>";
                     echo "<label>Modelo:</label><input value='".$Linha['DS_MODELO']."' readonly name='ModeloTXT'></input><br>";

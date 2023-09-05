@@ -23,13 +23,14 @@
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
             echo '<input id="MecanicoDia" value="'.$_SESSION['Nome'].'" disabled>';
+            echo '<input id="Secao" value="'.$_SESSION['Secao'].'" style="visibility:hidden;position:absolute;" disabled>';
         echo '</select>';
         echo '</div>';
         
         $Data=date('Y-m-d');
         echo '<div class="Data"><input type="date" id="DataTXT" value="'.$Data.'"></div>';
 
-        $SQL='SELECT * FROM aeronavescadastradas';
+        $SQL='SELECT * FROM aeronavescadastradas WHERE Secao="'.$_SESSION['Secao'].'"';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
 
         echo '<select style="visibility: hidden" id="Aeronaves">';
@@ -38,16 +39,17 @@
         }
         echo '</select>';
 
-        $SQL='SELECT * FROM aeronavescadastradas';
+        $SQL='SELECT * FROM aeronavescadastradas WHERE Secao="'.$_SESSION['Secao'].'"';
         $AeronavesCad=mysqli_query($mysqli,$SQL);
-
-        echo '<div class="Part1">';
+        $QTD=$AeronavesCad->num_rows;
+        if($QTD>0){
+            echo '<div class="Part1">';
         echo '<div class="Aeronaves" id="AeronavesDIV">';
         
         $i=0;
 
         while($Linha1=$AeronavesCad->fetch_assoc()){
-            $SQL='SELECT * FROM disponibilidade ORDER BY Data Desc LIMIT 1';
+            $SQL='SELECT * FROM disponibilidade WHERE Secao="'.$_SESSION['Secao'].'" ORDER BY Data Desc LIMIT 1';
             $Requisicao=mysqli_query($mysqli,$SQL);
             $Resultado=$Requisicao->fetch_assoc();
             $UltimaData=$Resultado['Data'];
@@ -100,9 +102,9 @@
             echo'</div>';
 
             $i++;
-        }
-        echo '</div>';
-    
+            }
+            echo '</div>';
+
             $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
             $QTD=$Requisicao->num_rows;
@@ -203,7 +205,7 @@
             <button onClick='RemoverIntervencao()'><img src='Imgs/lixo.png' title='Remover Intervenção'></button>
             </div>";
 
-            $SQLInt="SELECT * FROM intervencao WHERE Data='$UltimaData'";
+            $SQLInt="SELECT * FROM intervencao WHERE Data='$UltimaData' AND Secao='".$_SESSION['Secao']."'";
             $RequisicaoInt=mysqli_query($mysqli,$SQLInt);
 
         echo "</div>";
@@ -229,6 +231,7 @@
         <button class="SalvarBTN" onclick="AbrirAviso()">Salvar</button>
         </div>';
     }
+    }
     ?>
     <div id='FormularioDIV'></div>
     
@@ -239,7 +242,7 @@
             <label style='font-weight: bold;'>Prefixo da Aeronave: </label>
             <select id='Aeronave'>
             <?php
-                $SQL='SELECT * FROM aeronavescadastradas';
+                $SQL='SELECT * FROM aeronavescadastradas WHERE Secao="'.$_SESSION['Secao'].'"';
                 $Requisicao1=mysqli_query($mysqli,$SQL);
 
                 while($Aeronaves=$Requisicao1->fetch_assoc()){

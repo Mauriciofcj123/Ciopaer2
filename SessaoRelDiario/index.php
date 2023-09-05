@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../Cabecalho/style.css">
     <script src="script.js" defer></script>
     <title>Seçao</title>
 </head>
 <body id='Corpo'>
+    <?php
+        require_once('../Cabecalho/Cabecalho.php');
+    ?>
     <div class='Menu'>
     <h1>Por favor escolha a seção desejada.</h1><br>
     <img src="imgs/Fixa.jpg" class='Fixa' id='Fixa'>

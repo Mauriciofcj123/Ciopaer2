@@ -15,7 +15,8 @@
     
     <ul id="MenuRel">
         <li><a href="../SessaoRelDiario/index.php"><img id="Imagem1" src="Imgs/relatorio_diario.png" alt=""><a href="../RelatorioDiarioLib/index.php">Relatório Diário</a></li>
-        <li><a href="../RelatorioInt/index.php"><img src="Imgs/Intervencoes.png"><a href="../RelatorioInt/index.php">Relatório de Intervenções</a></li>
+        <li><a href="../RelatorioInt/index.php"><img src="Imgs/Intervencoes.png"><a href="../RelatorioInt/index.php">Relatório de Intervenções Realizadas</a></li>
+        <li><a href="../RelatorioDisc/index.php"><img src="Imgs/Intervencoes.png"><a href="../RelatorioInt/index.php">Relatório de Anormalidades Pendentes</a></li>
     </ul>
     
 </body>

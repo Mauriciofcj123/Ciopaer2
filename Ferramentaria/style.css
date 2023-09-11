@@ -153,10 +153,11 @@
     top: 55%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 60%;
+    width: 80%;
     height: 80vh;
     background-color: rgba(255, 255, 255, 0.938);
     border: 1px solid black;
+    padding: 20px;
 }
 #Fechar{
     float: right;
@@ -186,6 +187,12 @@
     height: 50px;
     font-weight: bold;
     text-align: center;
+}
+.SubmitBTN{
+    background-color: rgb(184, 238, 255);
+    border-radius: 5px;
+    border: none;
+    color: rgb(26, 26, 26);
 }
 #AdicionarForm select{
     width: 100%;

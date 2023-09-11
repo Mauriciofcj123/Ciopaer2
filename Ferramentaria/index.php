@@ -132,7 +132,7 @@
             <button id='Fechar' onclick='FecharModal()'><img src="imgs/Fechar.png" alt=""></button>
                 <form action="Salvar.php" method="post" id='AdicionarForm'>
                 <label>Código:</label><input type="text" name='Codigo'>
-                <label>Descrição do Produto*:</label><input type="text" name='Descricao'>
+                <label>Descrição do Produto:*</label><input type="text" name='Descricao' style="height:200px">
                 <label>Local Atual:*</label><input type="text" name='Local'>
                 <label>Quantidade:*</label><input type="number" name='QTD'>
 
@@ -153,7 +153,7 @@
                                 }
                             ?>
                         </select>
-                    <input type="submit" value="Adicionar" name='Adicionar'>
+                    <input type="submit" value="Adicionar" name='Adicionar' class="SubmitBTN">
                 </form>
         </div>
     </div>

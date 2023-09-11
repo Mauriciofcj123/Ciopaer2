@@ -1,5 +1,8 @@
 <?php
     include_once('../Conexao.php');
+    if(isset($_POST['VerificarAssinatura'])){
+
+    }
 
     if(isset($_POST['SalvarBTN'])){
 
@@ -8,9 +11,9 @@
             $MecanicoDia=$_POST['MecanicoDia'];
             $Secao=$_POST['Secao'];
 
-        $Registros='SELECT * FROM `registrodisp` WHERE Data="'.$Data.'" LIMIT 1';
-        $Requisicaoreg=mysqli_query($mysqli,$Registros);
-        $QTDReg=$Requisicaoreg->num_rows;
+            $Registros='SELECT * FROM `registrodisp` WHERE Data="'.$Data.'" LIMIT 1';
+            $Requisicaoreg=mysqli_query($mysqli,$Registros);
+            $QTDReg=$Requisicaoreg->num_rows;
 
         if($QTDReg>0){
             $SQLReg="UPDATE registrodisp SET Mecanico='$MecanicoDia', Secao='$Secao' WHERE Data='$Data'";

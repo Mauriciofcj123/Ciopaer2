@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Relatório Diário</title>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -308,8 +309,18 @@
     <div class="Aviso" id='Aviso'>
         <img src="Imgs/Aviso.png"><br>
         <label>Verificou tudo?</label><br>
-        <button onClick='Salvar()'><img src="Imgs/Like.png"></button>
+        <button onClick='AbrirAssinar()'><img src="Imgs/Like.png"></button>
         <button onClick='FecharAviso()'><img src="Imgs/Unlike.png"></button>
+    </div>
+    <div id="AssinarDIV">
+        <form action="VerificarAssinatura.php" method='post'>
+            <input type="password" placeholder='Senha' id='SenhaTXT' name='SenhaTXT'>
+            <button type='submit' id='AssinarBTN'>Assinar</button>
+            <button onClick='FecharAssinar()'>Cancelar</button>
+        </form>
+    </div>
+    <div id="Fundo">
+
     </div>
 </body>
 </html>

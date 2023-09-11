@@ -61,6 +61,7 @@
                     while($Linha=$Requisicao->fetch_assoc()){
                     $Data=date('d/m/Y',strtotime($Linha['Data']));
                     echo "<form action='../RelatorioDiario/index.php' method='post'>
+                        <input name='Secao' value='".$_SESSION['Secao']."' style='display: none;' readonly>
                         <table id='" . $Linha['ID'] . "' class='Tabela'>
                             <tr>
                                 <td>" . $Linha['Mecanico'] . "</td>
@@ -82,6 +83,8 @@
                         while($Linha=$Requisicao->fetch_assoc()){
                             $Data=date('d/m/Y',strtotime($Linha['Data']));
                             echo "<form action='../RelatorioDiario/index.php' method='post'>
+                                <input name='Secao' value='".$_SESSION['Secao']."' style='display: none;' readonly>
+                                <input name='Secao' value='".$_SESSION['Secao']."' style='display: none;' readonly>
                                 <table id='" . $Linha['ID'] . "' class='Tabela'>
                                     <tr>
                                         <td>" . $Linha['Mecanico'] . "</td>
@@ -105,6 +108,7 @@
                         while($Linha=$Requisicao->fetch_assoc()){
                             $Data=date('d/m/Y',strtotime($Linha['Data']));
                             echo "<form action='../RelatorioDiario/index.php' method='post'>
+                                <input name='Secao' value='".$_SESSION['Secao']."' style='display: none;' readonly>
                                 <table id='" . $Linha['ID'] . "' class='Tabela'>
                                     <tr>
                                         <td>" . $Linha['Mecanico'] . "</td>
@@ -147,6 +151,7 @@
                     while($Linha=$Requisicao->fetch_assoc()){
                     $Data=date('d/m/Y',strtotime($Linha['Data']));
                     echo "<form action='../RelatorioDiario/index.php' method='post'>
+                        <input name='Secao' value='".$_SESSION['Secao']."' style='display: none;' readonly>
                         <table id='" . $Linha['ID'] . "' class='Tabela'>
                             <tr>
                                 <td>" . $Linha['Mecanico'] . "</td>

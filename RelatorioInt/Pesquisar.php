@@ -1,25 +1,40 @@
 <?php
-     require_once('../Conexao.php');
+     require('../Conexao.php');
+
+     function GerarPlanilhaData($SecaoTXT,$DeTXT,$AteTXT){
+     }
+
+     function GerarPlanilha($SecaoTXT){
+        require('../Conexao.php');
+
+        $SQLTotalInt="SELECT * FROM intervencao WHERE Secao='".$SecaoTXT."' ORDER BY Data Desc";
+        $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
+
+        return $RequisicaoTotalInt;
+
+     }
+
 
     if(isset($_POST['GerarBTN'])){
         $De=$_POST['De'];
         $Ate=$_POST['Ate'];
+        $Secao=$_POST['SecaoTXT'];
+
 
         if(!empty($De)&&!empty($Ate)){
-            $SQLSecoes='SELECT * FROM secoes';
-            $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
 
-            while($Secao=$RequisicaoSecoes->fetch_assoc()){
-                
-                echo '<input name="Secoes" value="'.$Secao['Secao'].'">';
+            echo '<input name="Secoes" value="'.$Secao.'" style="position:relative;visibility:hidden;">';
 
-            $SQLAeronaves='SELECT * FROM horimetro';
+            $SQLAeronaves="SELECT * FROM horimetro WHERE Secao='".$Secao."'";
             $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
+
+            $SQLTotalInt="SELECT * FROM intervencao WHERE Secao='$Secao' AND Data BETWEEN '$De' AND '$Ate'  ORDER BY Data ASC";
+            $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
 
             $HorasTotal=0;
 
                 while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
-                    $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Data BETWEEN '$De' AND '$Ate' AND Secao='".$Secao['Secao']."'";
+                    $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Data BETWEEN '$De' AND '$Ate' AND Secao='".$Secao."'";
                     $Requisicao=mysqli_query($mysqli,$SQL);
 
                     $HorasQTD=0;
@@ -32,22 +47,61 @@
                     }
                     $HorasTotal+=ceil($HorasQTD*420);
 
-                    echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao['Secao'].'" id="'.$Aeronave['Placa'].'" style="position:absolute;visibility:hidden;"></input>';
-                    echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao['Secao'].'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                    echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                    echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
                 }
 
                 
-                echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao['Secao'].'" id="QTDTotal" style="position:absolute;visibility:hidden;"></input>';
+                echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao.'" id="QTDTotal/'.$Secao.'" style="position:relative;visibility:hidden;"></input><br>';
 
-        }
     }else{
-            $SQLAeronaves='SELECT * FROM horimetro';
+
+
+                echo '<input name="Secoes" value="'.$Secao.'" style="position:relative;visibility:hidden;">';
+
+                $SQLAeronaves="SELECT * FROM horimetro WHERE Secao='".$Secao."'";
+                $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
+
+                $SQLTotalInt="SELECT * FROM intervencao WHERE Secao='".$Secao."' ORDER BY Data Asc";
+                $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
+
+                $HorasTotal=0;
+
+                while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
+                    $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Secao='".$Secao."'";
+                    $Requisicao=mysqli_query($mysqli,$SQL);
+
+                    $HorasQTD=0;
+
+                    while($IntervencaoHRS=$Requisicao->fetch_assoc()){
+                        $Tempo=explode(':',$IntervencaoHRS['TempoInter']);
+                        $Horas=$Tempo[0];
+                        $Minutos=$Tempo[1]/60;
+                        $HorasQTD+=$Horas+$Minutos;
+                        
+                    }
+                    $HorasTotal+=ceil($HorasQTD*420);
+
+                    echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                    echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                }
+
+                echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao.'" id="QTDTotal/'.$Secao.'" style="position:relative;visibility:hidden;"></input>';
+    }
+}else{
+            $Secao='Tecnica Asa Fixa';
+            echo '<input name="Secoes" value="'.$Secao.'" style="position:relative;visibility:hidden;">';
+
+            $SQLAeronaves="SELECT * FROM horimetro WHERE Secao='".$Secao."'";
             $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
+
+            $SQLTotalInt="SELECT * FROM intervencao WHERE Secao='".$Secao."' ORDER BY Data ASC";
+            $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
 
             $HorasTotal=0;
 
             while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
-                $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' WHERE Secao='".$Secao['Secao']."'";
+                $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Secao='".$Secao."'";
                 $Requisicao=mysqli_query($mysqli,$SQL);
 
                 $HorasQTD=0;
@@ -61,41 +115,12 @@
                 }
                 $HorasTotal+=ceil($HorasQTD*420);
 
-                echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao['Secao'].'" id="'.$Aeronave['Placa'].'" style="position:absolute;visibility:hidden;"></input>';
-                echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao['Secao'].'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
+                echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
             }
 
-            echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao['Secao'].'" id="QTDTotal" style="position:absolute;visibility:hidden;"></input>';
-        }
-        
-    }else{
-        $SQLAeronaves='SELECT * FROM horimetro';
-            $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
-
-            $HorasTotal=0;
-
-            while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
-                $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."'";
-                $Requisicao=mysqli_query($mysqli,$SQL);
-
-                $HorasQTD=0;
-
-                while($IntervencaoHRS=$Requisicao->fetch_assoc()){
-                    $Tempo=explode(':',$IntervencaoHRS['TempoInter']);
-                    $Horas=$Tempo[0];
-                    $Minutos=$Tempo[1]/60;
-                    $HorasQTD+=$Horas+$Minutos;
-                    
-                }
-                $HorasTotal+=ceil($HorasQTD*420);
-
-                echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo" id="'.$Aeronave['Placa'].'" style="position:absolute;visibility:hidden;"></input>';
-                echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
-            }
-
-            echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal" id="QTDTotal" style="position:absolute;visibility:hidden;"></input>';
-
-        }
+            echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao.'" id="QTDTotal/'.$Secao.'" style="position:relative;visibility:hidden;"></input>';
+    }
 
         
 ?>

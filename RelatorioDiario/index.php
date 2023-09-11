@@ -31,6 +31,7 @@
             $SQLMecanicoDia="SELECT * FROM registrodisp WHERE Data='".$_SESSION['Data']."' LIMIT 1";
             $RequisicaoMecanico=mysqli_query($mysqli,$SQLMecanicoDia);
             $MecanicoDia=$RequisicaoMecanico->fetch_assoc();
+            $Secao=$_POST['Secao'];
             echo '<input id="MecanicoNome" value="'.$MecanicoDia['Mecanico'].'" disabled style="visibility: hidden;"></input>';
 
             if(isset($_SESSION['Nome'])){
@@ -65,7 +66,7 @@
         echo "<a href='../RelatorioDiarioObs/index.php'><img src='Imgs/papel.png' title='Observações'></a>";
         echo "</div>";
 
-        $SQL='SELECT * FROM aeronavescadastradas';
+        $SQL="SELECT * FROM aeronavescadastradas WHERE Secao='$Secao'";
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         while($Aeronaves=$Requisicao->fetch_assoc()){

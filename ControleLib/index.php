@@ -13,9 +13,7 @@
 
         if(isset($_SESSION['Nome'])){
             echo "<li class='Menu'>
-            <ul><a href='../CadAeronave/index.php'><img src='Imgs/CadOperacional.png'> Cadastrar Operacional</a></ul>
             <ul><a href='../Horimetro/index.php'><img src='Imgs/Horimetro.png'>Consultar Horimetros</a></ul>
-            <ul><a href=''><img src='Imgs/CadEmpresa.png'>Cadastrar Empresa</a></ul>
             <ul><a href='../CadAeronave/index.php'><img src='Imgs/CadAeronave.png'>Cadastrar Aeronave</a></ul>
             <ul><a href='../Aerodromos/index.php'><img src='Imgs/CadAeronave.png'>Pesquisar Aeródromos</a></ul>
             <ul><a href='../Ferramentaria/index.php'><img src='imgs/inventario.png'>Inventário</a></ul>

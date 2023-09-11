@@ -19,9 +19,6 @@
     ?>
     <div class='DIVFormulario'>
     <form action="" method='post' id='Formulario'>
-        <input type="date"  name="De">
-        <input type="date"  name="Ate">
-        <input type="submit" value="Gerar" name='GerarBTN' class="FormularioBTN" style='width:100px'><br>
         <select name="SecaoTXT" class='SecaoTXT'>
             <?php
                 $SQLSecoes='SELECT * FROM secoes';
@@ -32,6 +29,27 @@
                 }
             ?>
         </select>
+
+        <?php
+
+            if(isset($_POST['GerarBTN'])){
+                $Secao=$_POST['SecaoTXT'];
+                
+                echo '<select name="Aeronave" id="AeronaveTXT">';
+
+                    $SQLAeronaves="SELECT * FROM aeronavescadastradas WHERE Secao='$Secao'";
+                    $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
+    
+                    echo "<option>Todas</option>";
+    
+                    while($Aeronaves=$RequisicaoAeronaves->fetch_assoc()){
+                        echo "<option>".$Aeronaves["Marca"]."</option>";
+                    }
+                echo '</select>';
+            }
+        ?>
+
+        <input type="submit" value="Gerar" name='GerarBTN' class="FormularioBTN" style='width:100px'><br>
     </form>
     </div>
     <div class='VerDIV'>
@@ -50,31 +68,18 @@
         $SQLSecoes='SELECT * FROM secoes';
         $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
 
-        if(isset($RequisicaoTotalInt)){
+        if(isset($RequisicaoTotalDisc)){
             echo "<table id='Tabela'>";
             echo "<thead>";
-            echo "<th>Data</th>";
             echo "<th>Prefixo</th>";
             echo "<th>Descrição</th>";
-            echo "<th>Responsável</th>";
-            echo "<th>Tipo</th>";
-            echo "<th>Tempo</th>";
             echo "</thead>";
-            while($IntervencaoTotal=$RequisicaoTotalInt->fetch_assoc()){
+            while($DiscrepanciasTotal=$RequisicaoTotalDisc->fetch_assoc()){
                 echo "<tr>";
-                echo "<td name='Data'>".date('d/m/Y',strtotime($IntervencaoTotal['Data']))."'</td>";
-                echo "<td name='Placa'>".$IntervencaoTotal['Placa']."</td>";
-                echo "<td name='Descricao'>".$IntervencaoTotal['DescIntervencao']."</td>";
-                echo "<td name='Responsavel'>".$IntervencaoTotal['RealizadoPor']."</td>";
-                echo "<td name='Tipo'>".$IntervencaoTotal['TipoIntervencao']."</td>";
-                echo "<td name='Tempo'>".date('h:i:s',strtotime($IntervencaoTotal['TempoInter']))."hrs</td>";
+                echo "<td name='Placa'>".$DiscrepanciasTotal['Placa']."</td>";
+                echo "<td name='Descricao'>".$DiscrepanciasTotal['DescDiscrepancias']."</td>";
                 echo "</tr>";
             }
-            echo "<tr>";
-            echo "<td colspan='4'>Total Economizado</td>";
-            echo "<td colspan='2'>".number_format($HorasTotal,2,",",".")."</td>";
-            echo "</tr>";
-            echo "</table>";
         }
     ?>
         </div>

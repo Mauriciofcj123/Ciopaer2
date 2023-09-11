@@ -25,3 +25,13 @@
 .Rotativa:hover{
     filter: grayscale(0%);
 }
+@media (max-width:580px) {
+    .Menu img{
+        position: relative;
+        width: 40%;
+        height: 300px;
+        cursor: pointer;
+        filter: grayscale(100%);
+        transition-duration: 1s;
+    }
+}

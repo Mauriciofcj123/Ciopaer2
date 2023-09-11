@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <?php
@@ -29,11 +30,13 @@
 
                         $_SESSION["Nome"]=$Linha['Nome']." ".$Linha['Sobrenome'];
                         $_SESSION['ADM']=$Linha['Admin'];
+                        $_SESSION['Loggin']=$Linha['Loggin'];
 
                         }else{
 
                         $_SESSION["Nome"]=$Linha['Sobrenome'];
                         $_SESSION['ADM']=$Linha['Admin'];
+                        $_SESSION['Loggin']=$Linha['Loggin'];
 
                         }
                         header('location: ../index.php');
@@ -65,7 +68,7 @@
             }
         ?></p>
 
-        <input type="submit" value="Logar" class="LogarBTN" name='LogarBTN'>
+        <input type="submit" value="Logar" class="LogarBTN" name='LogarBTN' id='LogarBTN'>
         <input type="button" value="Criar uma Conta" class="CriarBTN" onclick="window.location.href='../Cadastrar/index.php'">
     </form>
 

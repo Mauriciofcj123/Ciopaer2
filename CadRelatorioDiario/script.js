@@ -799,6 +799,56 @@ function AbrirAviso(){
     AvisoDIV.style.visibility='visible';
     AvisoDIV.style.opacity='100%';
 }
+function AbrirAssinar(){
+    let AssinarDIV=document.getElementById('AssinarDIV');
+    let Fundo=document.getElementById('Fundo');
+    let Aviso=document.getElementById('Aviso');
+
+    AssinarDIV.style.visibility='visible';
+    AssinarDIV.style.opacity='100%';
+
+    Fundo.style.visibility='visible';
+    Fundo.style.opacity='100%';
+
+    Aviso.style.visibility='hidden';
+    Aviso.style.opacity='0%';
+}
+function FecharAssinar(){
+    let AssinarDIV=document.getElementById('AssinarDIV');
+    let Fundo=document.getElementById('Fundo');
+    let Aviso=document.getElementById('Aviso');
+
+    AssinarDIV.style.visibility='hidden';
+    AssinarDIV.style.opacity='0%';
+
+    Fundo.style.visibility='hidden';
+    Fundo.style.opacity='0%';
+
+    Aviso.style.visibility='hidden';
+    Aviso.style.opacity='0%';
+}
+
+let AssinatBTN=document.getElementById('AssinarBTN');
+
+AssinatBTN.addEventListener('click',(e)=>{
+    //e.preventDefault();
+
+    let SenhaTXT=document.getElementById('SenhaTXT');
+
+
+    $.ajax({
+        url:"VerificarAssinatura.php",
+        method:'POST',
+        data:{
+            SenhaTXT: SenhaTXT.value,
+        },
+        dataType:'json'
+    }).done((resposta)=>{
+        console.log(resposta);
+    });
+});
+
+
 function Salvar(){
 
     let DIV=document.getElementById('FormularioDIV');

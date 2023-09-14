@@ -25,8 +25,7 @@
                 <ul id="Menu">
                     <li><a href="../Inicial/index.php">Inicio</a></li>
                     <li><a href= "../Relatorios/index.php">Relatórios</a></li>
-                    <li><a href= "../ControleLib/index.php">Controle</a></li>
-                    <li><a href="../Deshboards/index.php">DeshBoard</a></li>
+                    <li><a href= "../ControleLib/index.php">Controles</a></li>
                 </ul>
                 </nav>
                 </div>';

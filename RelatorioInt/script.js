@@ -235,9 +235,11 @@ function BaixarTabela(){
 
     let Total=['Total','Teste'];
       
-    const sheets=XLSX.utils.aoa_to_sheet(Dados);
+    const sheets=XLSX.utils.json_to_sheet(Dados);
 
     Book.Sheets['Relatório 1']=sheets;
+
+    worksheet["!cols"]=[{wch: '400'}];
 
     XLSX.writeFile(Book,'Relatório de Produtividade.xlsx',{
         bookType: 'xlsx',

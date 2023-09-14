@@ -70,6 +70,27 @@
     position: relative;
     width: 100%;
 }
+.Tabela td:nth-child(1){
+    width: 1%;
+}
+.Tabela td:nth-child(2){
+    width: 10%;
+}
+.Tabela th:nth-child(3){
+    width: 10%;
+}
+.Tabela td:nth-child(5){
+    width: 20%;
+}
+.Tabela th:nth-child(6){
+    width: 5%;
+}
+.Tabela th:nth-child(7){
+    width: 15%;
+}
+.Tabela td:nth-child(8){
+    width: 15%;
+}
 .Tabela tr{
     box-sizing: border-box;
     transition-duration: 500ms;

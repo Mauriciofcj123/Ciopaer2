@@ -16,7 +16,7 @@
     $SQLSecoes='SELECT * FROM secoes';
     $RequisicaoSecoes=mysqli_query($mysqli,$SQLSecoes);
 
-    echo '<form method="post" action="" class="Formulario">';
+    echo '<form method="post" action="" class="Formulario" class="Formulario">';
     echo '<select id="Secoes" name="SecaoTXT">';
             while($Secao=$RequisicaoSecoes->fetch_assoc()){
                 echo "<option>".$Secao['Secao']."</option>";
@@ -91,14 +91,14 @@
                                 echo "<td class='Indisponivel' rowspan=2>".$ResultadoDisp['Status']."</td>";
                             }
                             echo "<td rowspan=2>".$ResultadoDisp['Causa']."</td>
-                            <td rowspan=2><input type='text' value='".$Linha['TipoProxRev']."'></td>
-                            <td rowspan=2><input type='date' value='".$Linha['CVA']."'></td>
-                            <td><input type='number' value='".$Linha['TBORH']."' name='TBO$LinhasID'></td>
+                            <td rowspan=2><input type='text' name='ProxRev' value='".$Linha['TipoProxRev']."'></td>
+                            <td rowspan=2><input type='date' name='CVA' value='".$Linha['CVA']."'></td>
+                            <td><input type='number' name='TBORH' value='".$Linha['TBORH']."' name='TBO'></td>
                             <td><input type='number' name='TBODisp' value='$HorasDispMotorRH' readonly></td>
                         </tr>
                         <tr name='Linha' style='$Fundo'>
-                        <td><input type='number' value='".$Linha['TBOLH']."' name='TBO$LinhasID'></td>
-                        <td name='TBODisp$LinhasID'><input type='number' name='HorasDisp' value='$HorasDispMotorLH' readonly></td>
+                        <td><input type='number' value='".$Linha['TBOLH']."' name='TBOLH'></td>
+                        <td name='TBODisp'><input type='number' name='HorasDisp' value='$HorasDispMotorLH' readonly></td>
                         </tr>";
                 }else{
                     $HorasDispMotor=$Linha['TBORH']-$Linha['HorasAtuais'];
@@ -117,15 +117,19 @@
                                 echo "<td class='Indisponivel'>".$ResultadoDisp['Status']."</td>";
                             }
                             echo "<td>".$ResultadoDisp['Causa']."</td>
-                            <td><input type='text' value='".$Linha['TipoProxRev']."'></td>
-                            <td><input type='date' value='".$Linha['CVA']."'></td>
-                            <td><input type='number' value='".$Linha['TBORH']."' name='TBO$LinhasID'></td>
+                            <td><input type='text' name='ProxRev' value='".$Linha['TipoProxRev']."'></td>
+                            <td><input type='date' name='CVA' value='".$Linha['CVA']."'></td>
+                            <td><input type='number' value='".$Linha['TBORH']."' name='TBORH'></td>
                             <td name='TBODisp$LinhasID'><input type='number' name='HorasDisp' value='$HorasDispMotor' readonly></td>
-                        </tr>";
+                            </tr>
+                            <tr name='Linha' style='$Fundo'>
+                            <td><input type='number' value='' name='TBOLH' style='display:none; border:none;'></td>
+                            </tr>";
                 }
                 
             }
             echo "</table>";
+            echo "<button >Salvar</button>";
     echo "</div>";
     ?>
 </body>

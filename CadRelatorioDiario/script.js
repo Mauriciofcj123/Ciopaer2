@@ -856,7 +856,7 @@ function Salvar(){
     Formulario.setAttribute('method','post');
     Formulario.setAttribute('action','Salvar.php');
     Formulario.setAttribute('name','FormularioGeral');
-    Formulario.style.visibility='visible';
+    Formulario.style.visibility='hidden';
     DIV.appendChild(Formulario);
 
     ListarDisponibilidade(Formulario);
@@ -877,19 +877,13 @@ function Salvar(){
     InputMec.setAttribute('value',MecanicoDia.value);
     Formulario.appendChild(InputMec);
 
-    let Secao=document.getElementById('Secao');
-    let SecaoInput=document.createElement('input');
-    SecaoInput.setAttribute('name','Secao');
-    SecaoInput.setAttribute('value',Secao.value);
-    Formulario.appendChild(SecaoInput);
-
     let Submit=document.createElement('input');
     Submit.setAttribute('type','submit');
     Submit.setAttribute('name','SalvarBTN');
     Formulario.appendChild(Submit);
     
     if(VerificarDisponibilidade()){
-        //Submit.click();
+        Submit.click();
     }else{
         alert('Todas as causas são obrigatórias.');
     }

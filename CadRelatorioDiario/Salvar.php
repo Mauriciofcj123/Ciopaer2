@@ -9,9 +9,9 @@
         if(isset($_POST['Data'])){
             $Data=$_POST['Data'];
             $MecanicoDia=$_POST['MecanicoDia'];
-            $Secao=$_POST['Secao'];
+            $Secao=$_SESSION['Secao'];
 
-            $Registros='SELECT * FROM `registrodisp` WHERE Data="'.$Data.'" LIMIT 1';
+            $Registros="SELECT * FROM `registrodisp` WHERE Data='".$Data."' AND Secao='$Secao' LIMIT 1";
             $Requisicaoreg=mysqli_query($mysqli,$Registros);
             $QTDReg=$Requisicaoreg->num_rows;
 
@@ -104,9 +104,18 @@
                 $Status=$_POST['StatusDisp'];
                 $Causa=$_POST['CausaDisp'];
                 $Previsao=$_POST['PrevisaoDisp'];
+
                 for($i=0;$i<count($Placa);$i++){
 
-                    $SQLDisp="INSERT INTO disponibilidade(Placa,Status,Causa,TipoCausa,Data) VALUES('".$Placa[$i]."','".$Status[$i]."','".$Causa[$i]."','".$Previsao[$i]."','".$Data."')";
+                    $SQLHorimetro="SELECT * FROM horimetro WHERE Placa='".$Placa[$i]."' LIMIT 1";
+                    $RequisicaoHorimetro=mysqli_query($mysqli,$SQLHorimetro);
+                    $HorimetroTXT=$RequisicaoHorimetro->fetch_assoc()['HorasAtuais'];
+                    $Horimetro=$HorimetroTXT['HorasAtuais'];
+
+                    echo $HorimetroTXT;
+
+
+                    $SQLDisp="INSERT INTO disponibilidade(Placa,Status,Causa,TipoCausa,Data,Horimetro,Secao) VALUES('".$Placa[$i]."','".$Status[$i]."','".$Causa[$i]."','".$Previsao[$i]."','$Data','$Horimetro','$Secao')";
                     $Requisicao=mysqli_query($mysqli,$SQLDisp);
                 }
             }

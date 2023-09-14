@@ -31,6 +31,30 @@
     }
 }
 @media (min-width: 600px) {
+    #PesquisaForm{
+        position: relative;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+    }
+    #PesquisaForm select{
+        position: relative;
+        height: 50px;
+        width: 20%;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        margin-right: 10px;
+
+    }
+    #PesquisaForm button{
+        position: relative;
+        height: 50px;
+        width: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
     .Quadro{
         position: relative;
         width: 80%;
@@ -210,6 +234,12 @@
         height: 50px;
         font-weight: bold;
     }
+    #Formulario select{
+        position: relative;
+        width: 50%;
+        height: 50px;
+        text-align: center;
+    }
     #DestinatarioDIV{
         position: relative;
         width: 20%;
@@ -312,6 +342,31 @@
     }
 }
 @media (max-width: 600px) {
+    #PesquisaForm{
+        position: relative;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+    }
+    #PesquisaForm select{
+        position: relative;
+        height: 30px;
+        width: 150px;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        margin-right: 10px;
+
+    }
+    #PesquisaForm button{
+        position: relative;
+        height: 30px;
+        width: 75px;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
+
     .Quadro{
         position: relative;
         width: 80%;
@@ -478,6 +533,11 @@
         width: 100%;
         top: 2%;
         text-align: center;
+    }
+    #Formulario select{
+        position: relative;
+        width: 80%;
+        height: 50px;
     }
     #Formulario label{
         position: relative;

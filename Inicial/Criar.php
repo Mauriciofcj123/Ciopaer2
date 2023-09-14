@@ -13,12 +13,13 @@
                 $Tarefa=$_POST['Tarefa'];
                 $Remetente=$_SESSION['Nome'];
                 $Status='Pendente';
+                $Secao=$_POST['SecaoTXT'];
 
                 if(isset($_POST['Data'])){
                     $Data=$_POST['Data'];
-                    $SQLTarefa="INSERT INTO tarefas(Remetente,Destinatario,Tarefa,Titulo,Status,DataLimite) VALUES ('$Remetente','$Destinatario','$Tarefa','$Titulo','$Status','$Data')";
+                    $SQLTarefa="INSERT INTO tarefas(Remetente,Destinatario,Tarefa,Titulo,Secao,Status,DataLimite) VALUES ('$Remetente','$Destinatario','$Tarefa','$Titulo','$Secao','$Status','$Data')";
                 }else{
-                    $SQLTarefa="INSERT INTO tarefas(Remetente,Destinatario,Tarefa,Titulo,Status) VALUES ('$Remetente','$Destinatario','$Tarefa','$Titulo','$Status')";
+                    $SQLTarefa="INSERT INTO tarefas(Remetente,Destinatario,Tarefa,Titulo,Secao,Status) VALUES ('$Remetente','$Destinatario','$Tarefa','$Titulo','$Secao','$Status')";
                 }
                 $RequisicaoTarefa=mysqli_query($mysqli,$SQLTarefa);
             }

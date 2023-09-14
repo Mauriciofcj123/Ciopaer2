@@ -100,7 +100,7 @@
         }
         echo '</div>';
     
-            $SQL="SELECT * FROM discrepancias WHERE Data='".$Data."'";
+            $SQL="SELECT * FROM discrepancias WHERE Data='".$Data."' AND Secao='".$_SESSION['Secao']."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
             $QTD=$Requisicao->num_rows;
     
@@ -223,7 +223,7 @@
         echo "</div>";
         echo "</div>";
 
-        $SQL='SELECT * FROM observacoes WHERE data="'.$Data.'"';
+        $SQL='SELECT * FROM observacoes WHERE data="'.$Data.'" AND Secao="'.$_SESSION['Secao'].'"';
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         echo "<div class='Observacoes'>";

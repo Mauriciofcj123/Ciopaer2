@@ -32,6 +32,7 @@
             $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
 
             $HorasTotal=0;
+            $HorasQTDTotal=0;
 
                 while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
                     $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Data BETWEEN '$De' AND '$Ate' AND Secao='".$Secao."'";
@@ -46,10 +47,12 @@
                         $HorasQTD+=$Horas+$Minutos;
                     }
                     $HorasTotal+=ceil($HorasQTD*420);
+                    $HorasQTDTotal+=$HorasQTD;
 
                     echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
                     echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
                 }
+                    
 
                 
                 echo '<input value="'.number_format($HorasTotal,2,",",".").'" name="QTDTotal/'.$Secao.'" id="QTDTotal/'.$Secao.'" style="position:relative;visibility:hidden;"></input><br>';
@@ -66,6 +69,7 @@
                 $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
 
                 $HorasTotal=0;
+                $HorasQTDTotal=0;
 
                 while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
                     $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Secao='".$Secao."'";
@@ -81,6 +85,7 @@
                         
                     }
                     $HorasTotal+=ceil($HorasQTD*420);
+                    $HorasQTDTotal+=$HorasQTD;
 
                     echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
                     echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
@@ -99,12 +104,14 @@
             $RequisicaoTotalInt=mysqli_query($mysqli,$SQLTotalInt);
 
             $HorasTotal=0;
+            $HorasQTDTotal=0;
 
             while($Aeronave=$RequisicaoAeronaves->fetch_assoc()){
                 $SQL="SELECT * FROM intervencao WHERE Placa='".$Aeronave['Placa']."' AND Secao='".$Secao."'";
                 $Requisicao=mysqli_query($mysqli,$SQL);
 
                 $HorasQTD=0;
+                
 
                 while($IntervencaoHRS=$Requisicao->fetch_assoc()){
                     $Tempo=explode(':',$IntervencaoHRS['TempoInter']);
@@ -114,6 +121,7 @@
                     
                 }
                 $HorasTotal+=ceil($HorasQTD*420);
+                $HorasQTDTotal+=$HorasQTD;
 
                 echo '<input value="'.ceil($HorasQTD).'" name="QTDTempo/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';
                 echo '<input value="'.$Requisicao->num_rows.'" name="QTDInt/'.$Secao.'" id="'.$Aeronave['Placa'].'" style="position:relative;visibility:hidden;"></input>';

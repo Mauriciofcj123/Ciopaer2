@@ -5,7 +5,7 @@ let Linhas=document.getElementsByName('Linha');
 
 document.addEventListener('keyup',()=>{
     for(i=0;i<HorasAtuais.length;i++){
-        HorasDisp[i].value=(HorasProxRev[i].value-HorasAtuais[i].value).toFixed(2);
+        HorasDisp[i].value=(HorasProxRev[i-1].value-HorasAtuais[i-1].value).toFixed(2);
 
         if(HorasDisp[i].value>20){
             HorasDisp[i].style.backgroundColor='white';
@@ -40,7 +40,10 @@ document.addEventListener('keyup',()=>{
 
 document.addEventListener('click',()=>{
     for(i=0;i<HorasAtuais.length;i++){
-        HorasDisp[i].value=(HorasProxRev[i].value-HorasAtuais[i].value).toFixed(2);
+        HorasDisp[i].value=(HorasProxRev[i-1].value-HorasAtuais[i-1].value).toFixed(2);
+        console.log(i+" - "+HorasProxRev[i].value);
+        console.log(i+" - "+HorasAtuais[i].value);
+        console.log(i+" - "+HorasDisp[i].value);
 
         if(HorasDisp[i].value>20){
             HorasDisp[i].style.backgroundColor='white';

@@ -1,0 +1,190 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+@media (min-width: 580px) {
+    .LogTexto{
+        position: relative;
+        width: fit-content;
+        text-align: center;
+        color: rgb(8, 243, 0);
+        text-shadow: 2px 2px 6px rgba(9, 255, 0, 0.336);
+        font-weight: bold;
+        float: right;
+        margin-top: 20px;
+    }
+    .Sair{
+        position: absolute;
+        float: right;
+        right: 10px;
+        margin-top: 10px;
+        color: rgb(8, 243, 0);
+        font-weight: bold;
+        padding: 10px;
+        border: 2px rgb(8, 243, 0) solid;
+        background-color: rgb(255, 255, 255);
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    .cabecalho{
+        position: relative;
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(to right,rgb(0, 0, 0),rgb(17, 17, 17));
+        z-index: 2;
+    }
+    .cabecalho img{
+        position: absolute;
+        height: 60px;
+        left: 10%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        padding: 5px;
+    }
+    #BTNMobile{
+        visibility: hidden;
+        cursor: pointer;
+    }
+    #header{
+        width: 100%;
+        height: 50px;
+        background-color: rgb(0, 153, 255);
+    }
+    #Menu{
+        position: relative;
+        width: fit-content;
+        height: 50px;
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #Menu a{
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        text-decoration: none;
+        height: 100%;
+        transition-duration: 1s;
+        cursor: pointer;
+        padding: 10px;
+    }
+    #Menu a:hover{
+        background-color: rgb(126, 197, 255);
+        border-radius: 10px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.753);
+    }
+    .Selecionado{
+        padding: 10px;
+        border-radius: 10px;
+    
+        border: 2px solid rgb(0, 255, 42);
+        background-color: rgb(255, 255, 255);
+    }
+    .Selecionado a{
+        color: rgb(0, 255, 42);
+    }
+}
+@media (max-width: 580px) {
+    .LogTexto{
+        position: relative;
+        width: 50%;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        float: right;
+        margin-top: 20px;
+        background-color: aqua;
+    }
+    .Sair{
+        position: absolute;
+        float: right;
+        right: 10px;
+        top: 50%;
+        color: rgb(0, 68, 255);
+        font-weight: bold;
+        padding: 10px;
+        border: 2px rgb(0, 68, 255) solid;
+        background-color: rgb(255, 255, 255);
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    .cabecalho{
+        position: relative;
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(to right,rgb(0, 195, 255),white);
+        z-index: 2;
+    }
+    .cabecalho img{
+        position: relative;
+        height: 40px;
+        left: 1%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #header{
+        height: 50px;
+        width: 100%;
+        background-color: rgb(0, 153, 255);
+    
+    }
+
+    #Menu{
+        display: block;
+        list-style: none;
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        top: 150px;
+        right: 0px;
+        background-color: rgba(0, 153, 255, 1);
+        z-index: 1000;
+        transition-duration: 1s;
+        overflow: hidden;
+    }
+    #Menu a{
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        margin: 0px 10px;
+        text-decoration: none;
+        display: block;
+        padding: 10px 0px;
+        transition-duration: 1s;
+        cursor: pointer;
+        border-bottom: 1px rgb(0, 60, 100) solid;
+
+    }
+    #Menu a:hover{
+        background-color: rgb(126, 197, 255);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.322);
+    }
+    #nav.active>#Menu{
+        height: calc(100vh - 150px);
+    }
+    #BTNMobile{
+        margin: 5px 5px;
+        padding: 10px;
+        border: 1px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+
+    }
+    .Selecionado{
+        padding: 10px;
+        border-radius: 10px;
+    
+        border: 2px solid rgb(0, 255, 42);
+        background-color: rgb(255, 255, 255);
+    }
+    .Selecionado a{
+        color: rgb(0, 255, 42);
+    }
+}

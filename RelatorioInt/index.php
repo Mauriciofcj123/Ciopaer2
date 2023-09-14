@@ -54,25 +54,29 @@
             echo "<table id='Tabela'>";
             echo "<thead>";
             echo "<th>Data</th>";
-            echo "<th>Prefixo</th>";
-            echo "<th>Descrição</th>";
+            echo "<th>Aeronave</th>";
             echo "<th>Responsável</th>";
-            echo "<th>Tipo</th>";
+            echo "<th>Descrição</th>";
             echo "<th>Tempo</th>";
             echo "</thead>";
+
             while($IntervencaoTotal=$RequisicaoTotalInt->fetch_assoc()){
                 echo "<tr>";
                 echo "<td name='Data'>".date('d/m/Y',strtotime($IntervencaoTotal['Data']))."'</td>";
                 echo "<td name='Placa'>".$IntervencaoTotal['Placa']."</td>";
-                echo "<td name='Descricao'>".$IntervencaoTotal['DescIntervencao']."</td>";
                 echo "<td name='Responsavel'>".$IntervencaoTotal['RealizadoPor']."</td>";
-                echo "<td name='Tipo'>".$IntervencaoTotal['TipoIntervencao']."</td>";
+                echo "<td name='Descricao'>".$IntervencaoTotal['DescIntervencao']."</td>";
                 echo "<td name='Tempo'>".date('h:i:s',strtotime($IntervencaoTotal['TempoInter']))."hrs</td>";
                 echo "</tr>";
             }
-            echo "<tr>";
-            echo "<td colspan='4'>Total Economizado</td>";
-            echo "<td colspan='2'>".number_format($HorasTotal,2,",",".")."</td>";
+            echo "<tr style='background-color: rgb(133, 231, 133);'>";
+            echo "<td colspan='4'>TAXA H/H = R$ 420,00  consideramos nesta tabela o minimo para execução de qualquer serviço que são 02 homens/hora:</td>";
+            echo "<td>".number_format($HorasQTDTotal)." horas</td>";
+            echo "</tr>";
+
+            echo "<tr style='background-color: rgb(133, 231, 133);'>";
+            echo "<td colspan='4'>TOTAL ECONOMIZADO:</td>";
+            echo "<td> R$ ".number_format($HorasTotal,2,",",".")."</td>";
             echo "</tr>";
             echo "</table>";
         }

@@ -16,6 +16,7 @@
     <?php
         include('../Cabecalho/Cabecalho.php');
         include('../Conexao.php');
+
         if(isset($_POST['AcessarBTN'])){
             $Data=date('dd/mm/YY');
             $_SESSION['Data']=$Data;
@@ -24,7 +25,6 @@
         if(isset($_SESSION['Data'])){
             echo '<div class="NomeMec">';
             echo '<input id="MecanicoDia" value="'.$_SESSION['Nome'].'" disabled>';
-            echo '<input id="Secao" value="'.$_SESSION['Secao'].'" style="visibility:hidden;position:absolute;" disabled>';
         echo '</select>';
         echo '</div>';
         
@@ -106,7 +106,7 @@
             }
             echo '</div>';
 
-            $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."'";
+            $SQL="SELECT * FROM discrepancias WHERE Data='".$UltimaData."' AND Secao='".$_SESSION['Secao']."'";
             $Requisicao=mysqli_query($mysqli,$SQL);
             $QTD=$Requisicao->num_rows;
     
@@ -212,7 +212,7 @@
         echo "</div>";
         echo "</div>";
 
-        $SQL='SELECT * FROM observacoes WHERE data="'.$UltimaData.'"';
+        $SQL='SELECT * FROM observacoes WHERE data="'.$UltimaData.'" AND Secao="'.$_SESSION['Secao'].'"';
         $Requisicao=mysqli_query($mysqli,$SQL);
 
         echo "<div class='Observacoes'>";
@@ -309,7 +309,7 @@
     <div class="Aviso" id='Aviso'>
         <img src="Imgs/Aviso.png"><br>
         <label>Verificou tudo?</label><br>
-        <button onClick='AbrirAssinar()'><img src="Imgs/Like.png"></button>
+        <button onClick='Salvar()'><img src="Imgs/Like.png"></button>
         <button onClick='FecharAviso()'><img src="Imgs/Unlike.png"></button>
     </div>
     <div id="AssinarDIV">

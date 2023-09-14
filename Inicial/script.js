@@ -90,6 +90,7 @@ function Salvar(){
     let DestinatariosCB=document.getElementsByName('checkbox');
     let DestinatariosTXT=document.getElementsByName('DestinatarioTXT');
     let Titulo=document.getElementById('TituloTXT');
+    let Secao=document.getElementById('SecaoTXT');
     let Tarefa=document.getElementById('Tarefa');
     let Data=document.getElementById('DataTXT');
 
@@ -97,7 +98,7 @@ function Salvar(){
     let Formulario=document.createElement('form');
     Formulario.setAttribute('method','post');
     Formulario.setAttribute('action','Criar.php');
-    Formulario.style.position='fixed';
+    Formulario.style.display='none';
     Formulario.style.visibility='hidden';
     DIV.appendChild(Formulario);
 
@@ -121,9 +122,14 @@ function Salvar(){
     Formulario.appendChild(input2);
 
     let input3=document.createElement('input');
-    input3.setAttribute('name','Tarefa');
-    input3.value=Tarefa.value;
+    input3.setAttribute('name','SecaoTXT');
+    input3.value=Secao.options[Secao.selectedIndex].value;
     Formulario.appendChild(input3);
+
+    let input4=document.createElement('input');
+    input4.setAttribute('name','Tarefa');
+    input4.value=Tarefa.value;
+    Formulario.appendChild(input4);
 
     if(DataTXT.value!=''){
         let input4=document.createElement('input');
@@ -136,13 +142,16 @@ function Salvar(){
     Botao.setAttribute('type','submit');
     Botao.setAttribute('name','EnviarBTN');
     Formulario.appendChild(Botao);
+
     Botao.click();
 }
 function CriarTarefaCompleta(idLinha){
     let CompletasDIV=document.getElementById('Completas');
     let Tarefas=document.getElementsByClassName('CartaoTarefa');
     let Clone=Tarefas[idLinha-1].cloneNode(true);
-    Clone.removeChild(Clone.childNodes[9]);
+
+    Clone.removeChild(Clone.childNodes[10]);
+    Clone.style.backgroundColor='white';
 
 
     let CartaoTarefa=document.createElement('div');
@@ -153,23 +162,7 @@ function CriarTarefaCompleta(idLinha){
 
 function Resolver(id,idLinha){
     let Linhas=document.getElementsByClassName('CartaoTarefa');
-    let DIV=document.getElementById('body');
-    let Formulario=document.createElement('form');
-    Formulario.setAttribute('method','post');
-    Formulario.setAttribute('action','salvar.php');
-    Formulario.style.position='fixed';
-    DIV.appendChild(Formulario);
-
-    let input1=document.createElement('input');
-    input1.setAttribute('name','ID');
-    input1.value=id;
-    Formulario.appendChild(input1);
-
     let NomeUsuario=document.getElementById('NomeUsuario');
-    let input2=document.createElement('input');
-    input2.setAttribute('name','Realizador');
-    input2.value=NomeUsuario.value;
-    Formulario.appendChild(input2);
 
     let Data=new Date();
     let Dia=String(Data.getDate()).padStart(2,'0');
@@ -177,34 +170,20 @@ function Resolver(id,idLinha){
     let Ano=String(Data.getFullYear());
     let DataRealizacao=Ano+'-'+Mes+'-'+Dia;
 
-    let input3=document.createElement('input');
-    input3.setAttribute('name','DataRealizacao');
-    input3.value=DataRealizacao;
-    Formulario.appendChild(input3);
-
-    let Botao=document.createElement('button');
-    Botao.setAttribute('type','submit');
-    Botao.setAttribute('name','ResolverBTN');
-    Formulario.appendChild(Botao);
-
     $.ajax({
         url:'Resolver.php',
         method:'POST',
         data:{
-            ID:input1.value=id,
+            ID:id,
             Realizador: NomeUsuario.value,
             DataRealizacao:DataRealizacao,
         },
         dataTyoe: 'json'
     }).done((Resultado)=>{
-
-
         if(Resultado){
             CriarTarefaCompleta(idLinha);
             Linhas[idLinha-1].style.animation='0.5s Sumir Linear forwards';
             Swal.fire('Sucesso','Missão Cumprida','success');
         }
     });
-
-    //Botao.click();
 }

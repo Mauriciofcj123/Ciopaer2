@@ -66,6 +66,27 @@
             }
 
             if($_SESSION['Nome']!=""){
+                echo '<form method="post" action="" id="PesquisaForm" >';
+                echo '<select name="SecaoTXT">';
+                    $SQLSecao='SELECT * FROM secoes';
+                    $RequisicaoSecao=mysqli_query($mysqli,$SQLSecao);
+
+                    while($Secao=$RequisicaoSecao->fetch_assoc()){
+                        echo "<option>".$Secao['Secao']."</option>";
+                    }
+                echo '</select>';
+                echo '<button type="submit" name="PesquisarBTN">Pesquisar</button>';
+                echo '</form>';
+
+                if(isset($_POST['PesquisarBTN'])){
+                    $Secao=$_POST['SecaoTXT'];
+                }else{
+                    $SQLSecao='SELECT * FROM secoes LIMIT 1';
+                    $RequisicaoSecao=mysqli_query($mysqli,$SQLSecao);
+                    $SecaoLinha=$RequisicaoSecao->fetch_assoc();
+
+                    $Secao=$SecaoLinha['Secao'];
+                }
 
                 echo '<button onclick="AbrirModal()" class="AddTarefa">+</button><br>';
                 echo '<div class="Quadro">';
@@ -74,7 +95,7 @@
                     
                     $id=0;
                     
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite!='' AND Secao='$Secao' ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
@@ -95,12 +116,13 @@
                         </div>";
                     }
 
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND DataLimite IS null";
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario = 'Todos' AND Status!='Completo' AND Secao='$Secao' AND DataLimite IS null";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
 
                         $id++;
+
                         echo "<div class='CartaoTarefa' style='background-color:".CorFundo($Tarefas['DataLimite'])."'>
                             <div class='Selo'>
                                 <img src='Imgs/Todos.png'>
@@ -112,7 +134,8 @@
                             echo "<button onclick='Resolver(".$Tarefas['id'].",".$id.")' class='Resolvido'><img src='Imgs/Confirmar.png'></button>
                         </div>";
                     }
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite!='' ORDER BY DataLimite ASC";
+                    
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite!='' AND Secao='$Secao' ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
@@ -129,7 +152,7 @@
                         </div>";
                     }
 
-                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite IS NULL ORDER BY DataLimite ASC";
+                    $SQLIncompletas="SELECT * FROM tarefas WHERE Destinatario LIKE '%".$_SESSION['Nome']."%' AND Status!='Completo' AND DataLimite IS NULL AND Secao='$Secao' ORDER BY DataLimite ASC";
                     $RequisicaoIncompletas=mysqli_query($mysqli,$SQLIncompletas);
 
                     while($Tarefas=$RequisicaoIncompletas->fetch_assoc()){
@@ -151,7 +174,7 @@
                     echo '<label class="Titulo">Tarefas Completas</label>';
 
 
-                    $SQLCompletas="SELECT * FROM tarefas WHERE Status='Completo' LIMIT 10";
+                    $SQLCompletas="SELECT * FROM tarefas WHERE Status='Completo' AND Secao='$Secao' LIMIT 10";
                     $RequisicaoCompletas=mysqli_query($mysqli,$SQLCompletas);
 
                     while($Tarefas=$RequisicaoCompletas->fetch_assoc()){
@@ -171,54 +194,73 @@
                     echo '<div class="CardBoxOBS" style="background-color:rgb(255, 172, 172);box-shadow: -2px 2px 3px rgba(255, 184, 52, 0.5);">';
                     echo '<label class="Titulo">Discrepancias Pendentes</label>';
 
-                    $SQLData="SELECT * FROM discrepancias ORDER BY Data DESC LIMIT 1";
+                    $SQLData="SELECT * FROM registrodisp WHERE Secao='$Secao' ORDER BY Data DESC LIMIT 1";
                     $RequisicaoData=mysqli_query($mysqli,$SQLData);
-                    $UltimaData=$RequisicaoData->fetch_assoc()['Data'];
+                    $QTDReg=$RequisicaoData->num_rows;
 
-                    $SQLOBS="SELECT * FROM discrepancias WHERE Data='$UltimaData'";
-                    $RequisicaoOBS=mysqli_query($mysqli,$SQLOBS);
+                    if($QTDReg>0){
+                        $UltimaData=$RequisicaoData->fetch_assoc()['Data'];
 
-                    while($OBS=$RequisicaoOBS->fetch_assoc()){
-                        echo "<div class='CartaoOBS'>
-                            <label name='OBSTXT'>Prefixo: ".$OBS['Placa']."</label><br>
-                            <label name='OBSTXT'>".$OBS['DescDiscrepancias']."</label>
-                        </div>";
+                        $SQLDisc="SELECT * FROM discrepancias WHERE Data='$UltimaData'";
+                        $RequisicaoDisc=mysqli_query($mysqli,$SQLDisc);
+                        $QTD=$RequisicaoDisc->num_rows;
+
+                        if($QTD>0){
+                            while($Disc=$RequisicaoDisc->fetch_assoc()){
+                                echo "<div class='CartaoOBS'>
+                                    <label name='OBSTXT'>Prefixo: ".$Disc['Placa']."</label><br>
+                                    <label name='OBSTXT'>".$Disc['DescDiscrepancias']."</label>
+                                </div>";
+                            }
+                        }
                     }
-                    echo '</div>';
+                    
+                echo '</div>';
                 echo '</div>';
 
-                    echo "<div id='ModalTarefa'>
-                        <div id='FormularioDIV'>
-                        <button onclick='FecharModal()' id='FecharBTN'>X</button>
+                echo "<div id='ModalTarefa'>
+                <div id='FormularioDIV'>
+                <button onclick='FecharModal()' id='FecharBTN'>X</button>
 
-                            <form action='' method='post' id='Formulario'>
-                                <label>Destinatário </label>
-                                <div id='DestinatarioDIV'>
-                                <input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='Todos'><br>";
-                                $SQLUser='SELECT * FROM cadastros';
-                                $RequisicaoUser=mysqli_query($mysqli,$SQLUser);
-                                while($Users=$RequisicaoUser->fetch_assoc()){
-                                    if($Users['Patente']=='Sem Patente'){
-                                        echo "<input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='".$Users['Nome']." ".$Users['Sobrenome']."'><br>";
-                                    }else{
-                                        echo "<input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='".$Users['Patente']." ".$Users['Sobrenome']."'><br>";
-                                    }
-                                    
-                                }
-                                    
-                                echo "</div>
-                                <input type='text' placeholder='Título' id='TituloTXT' name='Titulo'><br>
-                                <textarea name='Tarefa' id='Tarefa' placeholder='Tarefa'></textarea><br>
-                                <label>Data Limite:</label> <input type='date' name='Data' id='DataTXT'><br>
-                                <button type='button' onclick='Salvar()' class='EnviarBTN' id='EnviarBTN' style='visibility: hidden;'>Salvar</button>
-                            </form>
-                        </div>
-                    </div>";
+                    <form action='' method='post' id='Formulario'>
+                        <label>Destinatário </label>
+                        <div id='DestinatarioDIV'>
+                        <input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='Todos'><br>";
+                        $SQLUser='SELECT * FROM cadastros';
+                        $RequisicaoUser=mysqli_query($mysqli,$SQLUser);
+                        while($Users=$RequisicaoUser->fetch_assoc()){
+                            if($Users['Patente']=='Sem Patente'){
+                                echo "<input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='".$Users['Nome']." ".$Users['Sobrenome']."'><br>";
+                            }else{
+                                echo "<input type='checkbox' name='checkbox' id='checkbox'><input type='text' id='DestinatarioTXT' name='DestinatarioTXT' value='".$Users['Patente']." ".$Users['Sobrenome']."'><br>";
+                            }
+                            
+                        }
+                            
+                        echo "</div>
+                        <input type='text' placeholder='Título' id='TituloTXT' name='Titulo'><br>
+                        <select id='SecaoTXT'>";
+
+                        $SQLSecao="SELECT * FROM secoes";
+                        $RequisicaoSecao=mysqli_query($mysqli,$SQLSecao);
+                        while($Secao=$RequisicaoSecao->fetch_assoc()){
+                            echo "<option>".$Secao['Secao']."</option>";
+                        }
+
+                        echo "</select><br>
+                        <textarea name='Tarefa' id='Tarefa' placeholder='Tarefa'></textarea><br>
+                        <label>Data Limite:</label> <input type='date' name='Data' id='DataTXT'><br>
+                        <button type='button' onclick='Salvar()' class='EnviarBTN' id='EnviarBTN' style='visibility: hidden;'>Salvar</button>
+                    </form>
+                </div>
+            </div>";
+
+
             }
         }else{
             echo '<h1 style="width=100%;text-align: center;margin:50px;">Acesso rápido</h1>
                     <li class="Menu">
-                        <ul><a href="../RelatorioDiarioLib/index.php">Relatórios Diário</a></ul>
+                        <ul><a href="../SessaoRelDiario/index.php">Relatórios Diário</a></ul>
                         <ul><a href="../Horimetro/index.php">Horímetros</a></ul>
                         <ul><a href="../Erro/index.php">Boletim Informativo</a></ul>
                     </li>';

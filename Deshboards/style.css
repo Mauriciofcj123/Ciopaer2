@@ -29,16 +29,20 @@ body{
     font-family: serif;
     margin-left: 1%;
 }
-.Menu ul img{
-    width: 75px;
-    margin-bottom: 10px;
-    filter: saturate(10%);
+.Menu ul a{
+    filter: saturate(0%);
 }
-.Menu ul img:hover{
+.Menu ul a:hover{
     filter: saturate(100%);
 }
 .Menu ul:hover{
-    animation: 10s 'Luz' forwards linear;
+    background-image: radial-gradient(rgb(4, 117, 0),black,black);
+    background-position: -5px -30px;
+    background-repeat: no-repeat;
+}
+.Menu ul img{
+    width: 75px;
+    margin-bottom: 10px;
 }
 @keyframes Luz {
     0%{

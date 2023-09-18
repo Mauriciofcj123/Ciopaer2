@@ -95,9 +95,14 @@
                 <th>Secao</th>
             </thead>
             <?php
+
                 if(isset($RequisicaoPesquisa)){
                     while($Pesquisar=$RequisicaoPesquisa->fetch_assoc()){
-                        echo '<tr name="Linha">';
+                        if($Pesquisar['QTD']>=5){
+                            echo '<tr name="Linha" style="background:white;">';
+                        }else if($Pesquisar['QTD']<5 && $Pesquisar['Tipo']=='Consumíveis'){
+                            echo '<tr name="Linha" style="background:rgb(251, 255, 195);">';
+                        }
                             echo "<td><input type='checkbox' name='LinhaCB'></td>";
                             echo "<td><input type='text' value='".$Pesquisar['ID']."' name='LinhaID' readonly></td>";
                             echo "<td><input type='text' value='".$Pesquisar['Codigo']."' name='LinhaCOD' readonly></td>";

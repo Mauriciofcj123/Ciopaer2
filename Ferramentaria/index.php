@@ -34,15 +34,74 @@
 
                 if($Grupo=='Todas' && $Secao=='Todas'){
                     $SQLPesquisa="SELECT * FROM ferramentaria WHERE Descricao LIKE '%$PesquisarTXT%'";
+                    $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                    $QTD=$RequisicaoPesquisa->num_rows;
+
+                    if($QTD==0){
+                        $SQLPesquisa="SELECT * FROM ferramentaria WHERE Codigo LIKE '%$PesquisarTXT%'";
+                        $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                        $QTD=$RequisicaoPesquisa->num_rows;
+
+                            if($QTD==0){
+                                $SQLPesquisa="SELECT * FROM ferramentaria WHERE Local LIKE '%$PesquisarTXT%'";
+                                $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+
+                            }
+                    }
+                    
                 }else if($Grupo!='Todas' && $Secao=='Todas'){
                     $SQLPesquisa="SELECT * FROM ferramentaria WHERE Descricao LIKE '%$PesquisarTXT%' AND Tipo LIKE '%$Grupo%' ";
+                    $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                    $QTD=$RequisicaoPesquisa->num_rows;
+
+                    if($QTD==0){
+                        $SQLPesquisa="SELECT * FROM ferramentaria WHERE Codigo LIKE '%$PesquisarTXT%' AND Tipo LIKE '%$Grupo%' ";
+                        $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                        $QTD=$RequisicaoPesquisa->num_rows;
+
+                        if($QTD==0){
+                            $SQLPesquisa="SELECT * FROM ferramentaria WHERE Local LIKE '%$PesquisarTXT%' AND Tipo LIKE '%$Grupo%' ";
+                            $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+
+                        }
+                    }
+                    
                 }else if($Grupo=='Todas' && $Secao!='Todas'){
                     $SQLPesquisa="SELECT * FROM ferramentaria WHERE Descricao LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%'";
+                    $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                    $QTD=$RequisicaoPesquisa->num_rows;
+
+                    if($QTD==0){
+                        $SQLPesquisa="SELECT * FROM ferramentaria WHERE Codigo LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%'";
+                        $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                        $QTD=$RequisicaoPesquisa->num_rows;
+
+                        if($QTD==0){
+                            $SQLPesquisa="SELECT * FROM ferramentaria WHERE Local LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%'";
+                            $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+
+                        }
+                    }
+                    
                 }else if($Grupo!='Todas' && $Secao!='Todas'){
                     $SQLPesquisa="SELECT * FROM ferramentaria WHERE Descricao LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%' AND Tipo LIKE '%$Grupo%' ";
+                    $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                    $QTD=$RequisicaoPesquisa->num_rows;
+
+                    if($QTD==0){
+                        $SQLPesquisa="SELECT * FROM ferramentaria WHERE Codigo LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%' AND Tipo LIKE '%$Grupo%' ";
+                        $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+                        $QTD=$RequisicaoPesquisa->num_rows;
+
+                        if($QTD==0){
+                            $SQLPesquisa="SELECT * FROM ferramentaria WHERE Local LIKE '%$PesquisarTXT%' AND Secao LIKE '%$Secao%' AND Tipo LIKE '%$Grupo%' ";
+                            $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
+
+                        }
+                    }
+                    
                 }
 
-                $RequisicaoPesquisa=mysqli_query($mysqli,$SQLPesquisa);
 
     
         }else{

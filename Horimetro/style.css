@@ -186,12 +186,43 @@
         top: 50%;
         transform: translate(-50%,-50%);
         background-color: white;
-        text-align: center;
         justify-content: space-between;
     }
-    #Modal input{
-        width: 50%;
+    #Formulario{
+        position: relative;
+        width: 80%;
+        height: fit-content;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        padding-top: 10px;
+        text-align: center;
     }
-    #Modal label{
-        width: 50%;
+    #Formulario input{
+        width: 80%;
+        height: 50px;
+        text-align: left;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding-left: 10px;
+    }
+    #Formulario label{
+        position: relative;
+        width: 20%;
+        line-height: 50px;
+        float: left;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    #Formulario button{
+        width: 200px;
+        height: 50px;
+        margin-top: 20px;
+        background-color: rgb(255, 255, 255);
+        font-weight: bold;
+        border: 1px solid rgb(0, 255, 0);
+        color: rgb(0, 255, 0);
+        border-radius: 10px;
+        float: right;
+        right: 10px;
     }

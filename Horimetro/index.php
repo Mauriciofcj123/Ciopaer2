@@ -135,7 +135,7 @@
 
         <div id='Fundo'>
             <div id='Modal'>
-            <form>
+            <form id='Formulario'>
                 <label>Prefixo:</label><input type="text" id='Prefixo'><br>
                 <label>Horas Atuais:</label><input type="number" id='HAtual'>
                 <label>Horas da Proxima Revisão:</label><input type="number" id='HorasProxRev'>

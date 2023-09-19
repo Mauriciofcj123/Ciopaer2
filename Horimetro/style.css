@@ -177,6 +177,7 @@
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.363);
         z-index: 4;
+        visibility: hidden;
     }
     #Modal{
         position: relative;

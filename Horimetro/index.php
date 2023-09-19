@@ -6,6 +6,7 @@
     <title>Atualizar Horimetros</title>
     <link rel="stylesheet" href="../Cabecalho/style.css">
     <link rel="stylesheet" href="style.css">
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
     <script src='script.js' defer></script>
 </head>
 <body>
@@ -37,16 +38,18 @@
         $SQLHorimetro="SELECT * FROM horimetro WHERE Secao = '".$Secao['Secao']."'";
         $RequisicaoHorimetro=mysqli_query($mysqli,$SQLHorimetro);
     }
-    echo "<li class='MenuHorimetro'>
+    
+    if(isset($_SESSION['Loggin'])){
+        echo "<li class='MenuHorimetro'>
             <ul><a onClick='AbrirModal()'><img src='Imgs/Atualizar.png'></a></ul>
             <ul><a href='../CadAeronave/index.php'><img src='Imgs/Cadastrar.png'></a></ul>
         </li>";
+    }
     echo "<div class='TabelaDIV'>";
         echo '<h1 class="Titulo">Tabela de Horimetros</h1>';
         echo "<table id='Tabela'>
                 <thead>
                     <th>Prefixo</th>
-                    <th>Ultima Atualização</th>
                     <th>Horímetro Atual</th>
                     <th>Horas da Proxima Revisão</th>
                     <th>Horas Disp.</th>
@@ -54,8 +57,10 @@
                     <th>Causa</th>
                     <th>Proxima Revisão</th>
                     <th>C.V.A.</th>
-                    <th>TBO</th>
-                    <th>Horas Disponíveis do Motor</th>
+                    <th>TBO RH</th>
+                    <th>TBO LH</th>
+                    <th>Disp Motor RH</th>
+                    <th>Disp Motor LH</th>
                 </thead>";
 
                 $LinhasID=0;
@@ -76,43 +81,16 @@
                     $Fundo="background-color: white;";
                 }
 
-                if($Linha['TBOLH']>0){
+                if($Linha['TBOLH']>1){
 
                     $HorasDispMotorRH=$Linha['TBORH']-$Linha['HorasAtuais'];
                     $HorasDispMotorLH=$Linha['TBOLH']-$Linha['HorasAtuais'];
 
                     echo "<tr name='Linha' style='$Fundo'>
-                            <td rowspan=2>".$Linha['Placa']."</td>
-                            <td rowspan=2>".date('d/m/Y',strtotime($ResultadoDisp['Data']))."</td>
-                            <td rowspan=2><input type='number' name='HorasAtuais' value='".$Linha['HorasAtuais']."' readonly></td>
-                            <td rowspan=2><input type='number' name='HorasProxRev' value='".$Linha['HorasProxRev']."' readonly></td>
-                            <td rowspan=2><input type='number' name='HorasDisp' value='$HorasDisp' readonly></td>";
-                            if($ResultadoDisp['Status']=='Disponível'){
-                                echo "<td class='Disponivel' rowspan=2>".$ResultadoDisp['Status']."</td>";
-                            }else if($ResultadoDisp['Status']=='Despachada'){
-                                echo "<td class='Despachada' rowspan=2>".$ResultadoDisp['Status']."</td>";
-                            }else{
-                                echo "<td class='Indisponivel' rowspan=2>".$ResultadoDisp['Status']."</td>";
-                            }
-                            echo "<td rowspan=2>".$ResultadoDisp['Causa']."</td>
-                            <td rowspan=2><input type='text' name='ProxRev' value='".$Linha['TipoProxRev']."' readonly></td>
-                            <td rowspan=2><input type='date' name='CVA' value='".$Linha['CVA']."' readonly></td>
-                            <td><input type='number' name='TBORH' value='".$Linha['TBORH']."' name='TBO' readonly></td>
-                            <td><input type='number' name='TBODisp' value='$HorasDispMotorRH' readonly></td>
-                        </tr>
-                        <tr name='Linha' style='$Fundo'>
-                        <td><input type='number' value='".$Linha['TBOLH']."' name='TBOLH'></td>
-                        <td name='TBODisp'><input type='number' name='HorasDisp' value='$HorasDispMotorLH' readonly></td>
-                        </tr>";
-                }else{
-                    $HorasDispMotor=$Linha['TBORH']-$Linha['HorasAtuais'];
-
-                    echo "<tr name='Linha' style='$Fundo'>
-                            <td>".$Linha['Placa']."</td>
-                            <td>".date('d/m/Y',strtotime($ResultadoDisp['Data']))."</td>
+                            <td><input type='text' name='PrefixoTXT' value='".$Linha['Placa']."' style='font-weight:bold;' readonly></td>
                             <td><input type='number' name='HorasAtuais' value='".$Linha['HorasAtuais']."' readonly></td>
                             <td><input type='number' name='HorasProxRev' value='".$Linha['HorasProxRev']."' readonly></td>
-                            <td><input type='number' name='HorasDisp' value='$HorasDisp' readonly></td>";
+                            <td><input type='number' value='$HorasDisp' readonly></td>";
                             if($ResultadoDisp['Status']=='Disponível'){
                                 echo "<td class='Disponivel'>".$ResultadoDisp['Status']."</td>";
                             }else if($ResultadoDisp['Status']=='Despachada'){
@@ -121,11 +99,36 @@
                                 echo "<td class='Indisponivel'>".$ResultadoDisp['Status']."</td>";
                             }
                             echo "<td>".$ResultadoDisp['Causa']."</td>
-                            <td><input type='text' name='ProxRev' value='".$Linha['TipoProxRev']."' readonly></td>
+                            <td><input type='text' name='TipoProxRev' value='".$Linha['TipoProxRev']."' readonly></td>
                             <td><input type='date' name='CVA' value='".$Linha['CVA']."' readonly></td>
-                            <td><input type='number' value='".$Linha['TBORH']."' name='TBORH' readonly></td>
-                            <td name='TBODisp$LinhasID'><input type='number' name='HorasDisp' value='$HorasDispMotor' readonly></td>
+                            <td><input type='number' name='TBORH' value='".$Linha['TBORH']."' name='TBO' readonly></td>
+                            <td><input type='number' value='".$Linha['TBOLH']."' name='TBOLH'></td>
+                            <td><input type='number'  value='$HorasDispMotorRH' readonly></td>
+                            <td name='TBODisp'><input type='number' value='$HorasDispMotorLH' readonly></td>
                             </tr>";
+                }else{
+                    $HorasDispMotorRH=$Linha['TBORH']-$Linha['HorasAtuais'];
+
+                    echo "<tr name='Linha' style='$Fundo'>
+                    <td><input type='text' name='PrefixoTXT' value='".$Linha['Placa']."' style='font-weight:bold;' readonly></td>
+                    <td><input type='number' name='HorasAtuais' value='".$Linha['HorasAtuais']."' readonly></td>
+                    <td><input type='number' name='HorasProxRev' value='".$Linha['HorasProxRev']."' readonly></td>
+                    <td><input type='number' value='$HorasDisp' readonly></td>";
+                    if($ResultadoDisp['Status']=='Disponível'){
+                        echo "<td class='Disponivel'>".$ResultadoDisp['Status']."</td>";
+                    }else if($ResultadoDisp['Status']=='Despachada'){
+                        echo "<td class='Despachada'>".$ResultadoDisp['Status']."</td>";
+                    }else{
+                        echo "<td class='Indisponivel'>".$ResultadoDisp['Status']."</td>";
+                    }
+                    echo "<td>".$ResultadoDisp['Causa']."</td>
+                    <td><input type='text' name='TipoProxRev' value='".$Linha['TipoProxRev']."' readonly></td>
+                    <td><input type='date' name='CVA' value='".$Linha['CVA']."' readonly></td>
+                    <td><input type='number' name='TBORH' value='".$Linha['TBORH']."' name='TBO' readonly></td>
+                    <td><input type='number' value='0' name='TBOLH'></td>
+                    <td><input type='number'  value='$HorasDispMotorRH' readonly></td>
+                    <td name='TBODisp'><input type='number' value='0' readonly></td>
+                    </tr>";
                 }
                 
             }

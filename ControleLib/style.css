@@ -6,9 +6,11 @@
 }
 .Menu ul a{
     position: relative;
+    width: 100%;
     text-decoration: none;
     list-style: none;
     color: black;
+    
 }
 .Menu ul{
     width: 150px;
@@ -22,10 +24,23 @@
     margin-left: 1%;
 }
 .Menu ul img{
-    width: 75px;
-    margin-bottom: 10px;
+    width: 60%;
+    height: 60%;
 }
 .Menu ul:hover{
     box-shadow: 2px 2px 6px rgba(43, 255, 0, 0.137);
     border: 0.5px solid rgba(51, 255, 0, 0.219);
+}
+#Titulo{
+    position: relative;
+    width: 100%;
+    text-align: left;
+    margin-top: 50px;
+    left: 10%;
+    color: rgb(61, 61, 61);
+    font-size: 1.5rem;
+}
+.Desativado{
+    opacity: 60%;
+    filter: grayscale();
 }

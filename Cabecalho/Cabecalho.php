@@ -24,9 +24,8 @@
                 <button id="BTNMobile">Menu</button>
                 <ul id="Menu">
                     <li><a href="../Inicial/index.php">Inicio</a></li>
-                    <li><a href= "../Relatorios/index.php">Relatórios</a></li>
                     <li><a href= "../ControleLib/index.php">Controle</a></li>
-                    <li><a href="../Deshboards/index.php">DeshBoard</a></li>
+                    <li><a href="../Erro/index.php">DeshBoard</a></li>
                 </ul>
                 </nav>
                 </div>';
@@ -37,7 +36,6 @@
                 <button id="BTNMobile">Menu</button>
                 <ul id="Menu">
                     <li><a href="../Inicial/index.php">Inicio</a></li>
-                    <li><a href= "../Relatorios/index.php">Relatórios</a></li>
                     <li><a href= "../ControleLib/index.php">Controle</a></li>
                 </ul>
                 </nav>
@@ -50,7 +48,6 @@
             <button id="BTNMobile">Menu</button>
             <ul id="Menu">
                 <li><a href="../Inicial/index.php">Inicio</a></li>
-                <li><a href= "../Relatorios/index.php">Relatórios</a></li>
                 <li><a href= "../ControleLib/index.php">Controle</a></li>
             </ul>
             </nav>

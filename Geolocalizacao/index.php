@@ -18,11 +18,15 @@
 <body>
     <?php
      require_once('../Cabecalho/Cabecalho.php');
+     require_once('../Conexao.php');
+
+     $SQLAeronavesTotal="SELECT * FROM gps";
+     $RequisicaoAeronavesTotal=mysqli_query($mysqli,$SQLAeronavesTotal);
+     
     ?>
     <form>
         <select name="Aeronaves" id="AeronaveTXT">
             <?php
-                require_once('../Conexao.php');
                 $SQLAeronaves="SELECT * FROM gps";
                 $RequisicaoAeronaves=mysqli_query($mysqli,$SQLAeronaves);
 
@@ -37,6 +41,17 @@
     </div>
     <button type="button" id='MenuBTN'><img src="imgs/Menu.png"></button>
     <div id='MenuMapa'>
+        <?php
+            if($RequisicaoAeronavesTotal->num_rows > 0){
+                echo "<table id=TabelaAeronaves>";
+                while($Linha=$RequisicaoAeronavesTotal->fetch_assoc()){
+                    echo "<tr>
+                            <td>".$Linha["Veiculo"]."<td>
+                        </tr>";
+                }
+                echo "</table>";
+            }
+        ?>
         <label>Velocidade Atual: </label><br><input type="text" id="VelocidadeTXT" readonly>
         <label>Velocidade Máxima Registrada: </label><br><input type="text" id="VelocidadeMaxTXT" readonly>
         <label>Altitude: </label><br><input type="text" id="AltitudeTXT" readonly>

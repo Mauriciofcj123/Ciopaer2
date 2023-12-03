@@ -32,12 +32,12 @@ MenuBTN.addEventListener('click',()=>{
     if(MenuAtivo==true){
         Menu.style.transform='translateX(0%)';
         Menu.style.opacity='100%';
-        Menu.style.boxShadow='6px 0px 2px rgba(0, 0, 0, 0.5)'
+        Menu.style.boxShadow='6px 0px 2px rgba(0, 0, 0, 0.5)';
     
     }else{
         Menu.style.transform='translateX(-90%)';
         Menu.style.opacity='50%';
-        Menu.style.boxShadow='0px 0px'
+        Menu.style.boxShadow='0px 0px';
     }
 });
 

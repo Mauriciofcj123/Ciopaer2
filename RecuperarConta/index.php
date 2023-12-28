@@ -17,17 +17,16 @@
     <form action="" method="post" class="Box">
         
         <input type="text" placeholder="Usuario" name="Usuario" class="Campo">
-        <input type="password" placeholder="Senha" name="Senha" class="Campo">
         <p><?php
             require_once('Logar.php');
+            $_SESSION['QTD']=3;
             
             if(!empty($Erro)){
                 echo "<script>Swal.fire('Erro','$Erro','error')</script>";
             }
         ?></p>
 
-        <input type="submit" value="Logar" class="LogarBTN" name='LogarBTN' id='LogarBTN'>
-        <input type="button" value="Criar uma Conta" class="CriarBTN" onclick="window.location.href='../Cadastrar/index.php'">
+        <input type="submit" value="Enviar Código" class="LogarBTN" name='LogarBTN' id='LogarBTN'>
     </form>
 
 </body>

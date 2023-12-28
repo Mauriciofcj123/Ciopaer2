@@ -1,6 +1,6 @@
 ﻿
 <?php
-        function SalvarPosicao(){
+        /*function SalvarPosicao(){
             require_once('../Conexao.php');
             $curl=curl_init();
 
@@ -35,7 +35,7 @@
 
         $SQLSalvar="INSERT INTO posicao (Latitude,Longitude,Velocidade,Altura,Veiculo,Data) VALUES ('$Latitude','$Longitude','$Velocidade','$Altitude','$Veiculo','$Data')";
         $RequisicaoSalvar=mysqli_query($mysqli,$SQLSalvar);
-        }
+        }*/
 
         function PegarGPS($Veiculo){
             require_once('../Conexao.php');
@@ -46,8 +46,10 @@
 
             if($RequisicaoDevice->num_rows>=1){
                 $curl=curl_init();
+                $flespi=$Device['Flespi'];
 
-                $Localizacao="https://flespi.io/gw/devices/".$Device['Flespi']."/messages?data=%7B%22count%22%3A100%2C%22reverse%22%3Atrue%7D";
+                //$Localizacao="https://flespi.io/gw/devices/".$Device['Flespi']."/messages?data=%7B%22count%22%3A100%2C%22reverse%22%3Atrue%7D";
+                $Localizacao="https://flespi.io/gw/devices/$flespi/messages?data=%7B%22count%22%3A1%2C%22reverse%22%3Afalse%7D";
 
                 $header=[
                     'Authorization: FlespiToken Fw073bXRHSEWEsOpDIXmIqZSVDEysK2X6QSXSFEpn89RpM4SkR2Q5QyQj2cBA4mw',
@@ -77,7 +79,7 @@
             }
         }
 
-        $Aeronave=$_POST['Aeronaves'];
+        $Aeronave=mysqli_real_escape_string($mysqli,$_POST['Aeronaves']);
 
         PegarGPS($Aeronave);
 

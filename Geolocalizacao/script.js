@@ -1,19 +1,4 @@
-﻿
-document.addEventListener('DOMContentLoaded',()=>{
-    PesquisarBTN.click();
-});
-
-var posicao=[-15.679801, -56.033401];
-var map = L.map('map').setView(posicao,19);
-
-var MapaNormal = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
-
-MapaNormal.addTo(map);
-
-var PesquisarBTN=document.getElementById('PesquisarBTN');
+﻿var PesquisarBTN=document.getElementById('PesquisarBTN');
 var Aeronave=document.getElementById('AeronaveTXT');
 var Velocidade=document.getElementById('VelocidadeTXT');
 var VelocidadeMax=document.getElementById('VelocidadeMaxTXT');
@@ -25,6 +10,24 @@ var Bateria=document.getElementById('Bateria');
 let MenuBTN=document.getElementById('MenuBTN');
 let Menu=document.getElementById('MenuMapa');
 let MenuAtivo=false;
+
+function IniciarMapa(){
+    var posicao=[-15.657082062569849, -56.117756734111275];
+    var map = L.map('map').setView(posicao,19);
+
+    var MapaNormal = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    MapaNormal.addTo(map);
+}
+
+function Pesquisar(Placa){
+    Aeronave.value=Placa;
+    PesquisarBTN.click();
+    MandarRequisicao();
+}
 
 MenuBTN.addEventListener('click',()=>{
     MenuAtivo=!MenuAtivo;
@@ -48,7 +51,7 @@ PesquisarBTN.addEventListener('click',(e)=>{
         url:'Pegar.php',
         method:'POST',
         data:{
-            Aeronaves: Aeronave.options[Aeronave.selectedIndex].value
+            Aeronaves: Aeronave.value
         },
         dataType:'json'
     }).done((resposta)=>{
@@ -137,7 +140,8 @@ PesquisarBTN.addEventListener('click',(e)=>{
     });
 });
 
-MandarRequisicao();
+IniciarMapa();
+
 
 function MandarRequisicao(){
     let ValorVelocidade=Velocidade.value.replace(' Km/h','');

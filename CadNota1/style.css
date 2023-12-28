@@ -1,0 +1,68 @@
+﻿body{
+    background-color: black;
+}
+#PesquisarForm{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    top: 20px;
+    text-align: center;
+}
+#PesquisarForm input{
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    border: 1px solid rgb(43, 255, 0);
+    border-radius: 20px 0px 20px 0px;
+    box-shadow: 0px 2px 3px rgb(131, 255, 106);
+    outline: none;
+}
+#TabelaDIV{
+    position: relative;
+    width: 50%;
+    height: 80vh;
+    margin-top: 100px;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: rgb(26, 26, 26);
+    border-radius: 10px;
+
+}
+#EmpresaTB{
+    width: 100%;
+    color: rgb(43, 255, 0);
+}
+#EmpresaTB thead{
+    text-align: center;
+    cursor: default;
+    line-height: 50px;
+}
+#EmpresaTB td{
+    text-align: center;
+    border-top: 1px dashed rgb(43, 255, 0);
+    cursor: default;
+    padding: 10px;
+}
+#EmpresaTB button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#EmpresaTB button img{
+    height: 30px;
+}
+
+@keyframes Luz{
+    0%{
+        box-shadow: 0px 5px 6px rgb(43, 255, 0);
+    }
+    25%{
+        box-shadow: 5px 0px 6px rgb(43, 255, 0);
+    }
+    75%{
+        box-shadow: 0px -5px 6px rgb(43, 255, 0);
+    }
+    100%{
+        box-shadow: -5px 0px 6px rgb(43, 255, 0);
+    }
+}

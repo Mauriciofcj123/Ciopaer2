@@ -13,12 +13,10 @@
 
         if(isset($_SESSION['Nome'])){
             echo "<li class='Menu'>
-            <ul><a href='../Horimetro/index.php'><img src='Imgs/NotaNeon.png'>Consultar Notas</a></ul>
+            <ul><a href='../CadNota1/index.php'><img src='Imgs/NotaNeon.png'>Cadastrar Notas</a></ul>
             </li>";
         }else{
             echo "<li class='Menu'>
-            <ul><a href='../Horimetro/index.php'><img src='Imgs/Horimetro.png'>Consultar Horimetros</a></ul>
-            <ul><a href='../Aerodromos/index.php'><img src='Imgs/CadAeronave.png'>Pesquisar Aeródromos</a></ul>
             </li>";
         }
     ?>

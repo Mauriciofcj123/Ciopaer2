@@ -12,7 +12,8 @@
                 $Codigo=$_POST['CodigoTXT'];
 
                 if($_SESSION['Cod']===$Codigo){
-                        $_SESSION['Cod']=='';
+                        $_SESSION['Cod']='';
+                        $_SESSION['Valido']=true;
                         header('Location: ../RecuperarConta3/index.php');
                 }else{
                         $Erro='Código de verficação incorreto';

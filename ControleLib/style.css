@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .Menu{
     width: 100%;
     padding: 0px 100px;
@@ -10,6 +13,7 @@
     text-decoration: none;
     list-style: none;
     color: black;
+    z-index: 1;
     
 }
 .Menu ul{
@@ -33,12 +37,14 @@
 }
 #Titulo{
     position: relative;
-    width: 100%;
+    width: 80%;
     text-align: left;
-    margin-top: 50px;
     left: 10%;
     color: rgb(61, 61, 61);
     font-size: 1.5rem;
+    box-sizing: border-box;
+    z-index: 1;
+    
 }
 .Desativado{
     opacity: 60%;

@@ -5,17 +5,10 @@
     margin: 0%;
 
 }
-
 .Desativado{
+    color: rgb(126, 126, 126);
     pointer-events: none;
-    text-decoration: none;
-    color: rgb(87, 87, 87);
-}
-.Ativado{
-    pointer-events: all;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
+    cursor: default;
 }
 @media (max-width:600px) {
     .Logo{
@@ -35,9 +28,9 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        background-image: url('Imgs/5177180.jpg');
-        background-size: cover;
-        border: 1px solid black;
+        background-image: linear-gradient(to bottom left,white,rgb(228, 228, 255));
+        border: 1px solid rgb(153, 153, 153);
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.452);
     }
 
     .Campo{
@@ -94,9 +87,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        background-image: url('Imgs/5177180.jpg');
-        background-size: cover;
-        border: 1px solid black;
+        background-image: linear-gradient(to bottom left,white,rgb(228, 228, 255));
+        border: 1px solid rgb(153, 153, 153);
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.452);
+        border-radius: 10px;
     }
     .Campo{
         position: relative;

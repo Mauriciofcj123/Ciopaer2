@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +20,7 @@
         <p><?php
             require_once('Logar.php');
             $_SESSION['QTD']=3;
+            $_SESSION['Valido']=false;
             
             if(!empty($Erro)){
                 echo "<script>Swal.fire('Erro','$Erro','error')</script>";

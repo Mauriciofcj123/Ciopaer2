@@ -4,7 +4,7 @@
     margin: 0px;
 }
 @media (min-width: 580px) {
-    .LogTexto{
+    ._LogTexto{
         position: relative;
         width: fit-content;
         text-align: center;
@@ -13,7 +13,7 @@
         float: right;
         margin-top: 20px;
     }
-    .Sair{
+    ._Sair{
         position: absolute;
         float: right;
         right: 10px;
@@ -28,14 +28,14 @@
         cursor: pointer;
     }
     
-    .cabecalho{
+    ._cabecalho{
         position: relative;
         height: 100px;
         width: 100%;
         background-image: linear-gradient(to right,rgb(0, 195, 255),white);
         z-index: 2;
     }
-    .cabecalho img{
+    ._cabecalho img{
         position: absolute;
         height: 60px;
         left: 10%;
@@ -43,16 +43,17 @@
         transform: translate(-50%,-50%);
         padding: 5px;
     }
-    #BTNMobile{
+    #_BTNMobile{
         visibility: hidden;
         cursor: pointer;
     }
-    #header{
+    #_header{
         width: 100%;
         height: 50px;
         background-color: rgb(0, 153, 255);
+
     }
-    #Menu{
+    #_Menu{
         position: relative;
         width: fit-content;
         height: 50px;
@@ -62,7 +63,7 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    #Menu a{
+    #_Menu a{
         color: rgb(255, 255, 255);
         font-weight: bold;
         text-decoration: none;
@@ -71,24 +72,24 @@
         cursor: pointer;
         padding: 10px;
     }
-    #Menu a:hover{
+    #_Menu a:hover{
         background-color: rgb(126, 197, 255);
         border-radius: 10px;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.753);
     }
-    .Selecionado{
+    ._Selecionado{
         padding: 10px;
         border-radius: 10px;
     
         border: 2px solid rgb(0, 255, 42);
         background-color: rgb(255, 255, 255);
     }
-    .Selecionado a{
+    ._Selecionado a{
         color: rgb(0, 255, 42);
     }
 }
 @media (max-width: 580px) {
-    .LogTexto{
+    ._LogTexto{
         position: relative;
         width: 50%;
         text-align: center;
@@ -97,7 +98,7 @@
         float: right;
         margin-top: 20px;
     }
-    .Sair{
+    ._Sair{
         position: absolute;
         float: right;
         right: 10px;
@@ -112,28 +113,27 @@
         cursor: pointer;
     }
     
-    .cabecalho{
+    ._cabecalho{
         position: relative;
         height: 100px;
         width: 100%;
         background-image: linear-gradient(to right,rgb(0, 195, 255),white);
-        z-index: 2;
     }
-    .cabecalho img{
+    ._cabecalho img{
         position: relative;
         height: 40px;
         left: 1%;
         top: 50%;
         transform: translateY(-50%);
     }
-    #header{
+    #_header{
         height: 50px;
         width: 100%;
         background-color: rgb(0, 153, 255);
-    
+        z-index: 2;
     }
 
-    #Menu{
+    #_Menu{
         display: block;
         list-style: none;
         position: absolute;
@@ -142,11 +142,11 @@
         top: 150px;
         right: 0px;
         background-color: rgba(0, 153, 255, 1);
-        z-index: 1000;
+        z-index: 10;
         transition-duration: 1s;
         overflow: hidden;
     }
-    #Menu a{
+    #_Menu a{
         color: rgb(255, 255, 255);
         font-weight: bold;
         margin: 0px 10px;
@@ -158,14 +158,14 @@
         border-bottom: 1px rgb(0, 60, 100) solid;
 
     }
-    #Menu a:hover{
+    #_Menu a:hover{
         background-color: rgb(126, 197, 255);
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.322);
     }
-    #nav.active>#Menu{
+    #_nav.active>#_Menu{
         height: calc(100vh - 150px);
     }
-    #BTNMobile{
+    #_BTNMobile{
         margin: 5px 5px;
         padding: 10px;
         border: 1px white solid;
@@ -173,16 +173,15 @@
         color: white;
         font-weight: bold;
         cursor: pointer;
-
     }
-    .Selecionado{
+    ._Selecionado{
         padding: 10px;
         border-radius: 10px;
     
         border: 2px solid rgb(0, 255, 42);
         background-color: rgb(255, 255, 255);
     }
-    .Selecionado a{
+    ._Selecionado a{
         color: rgb(0, 255, 42);
     }
 }
